@@ -7,7 +7,7 @@ depends = [
     'Shougo/pum.vim',
 
     # Matcher
-    'tani/ddc-fuzzy'
+    'tani/ddc-fuzzy',
 
     # Sources
     'Shougo/ddc-around',
