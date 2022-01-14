@@ -1,0 +1,13 @@
+[[plugins]]
+repo = 'JuliaEditorSupport/julia-vim'
+on_ft = 'julia'
+
+[[plugins]]
+repo ='jpalardy/vim-slime' 
+on_ft = 'julia'
+hook_source = '''
+    let g:slime_target = 'neovim'
+    let g:slime_no_mappings = 1
+    xmap <LocalLeader><CR> <Plug>SlimeRegionSend
+    nmap <LocalLeader><CR> <Plug>SlimeParagraphSend
+'''

@@ -1,0 +1,6 @@
+[[plugins]]
+repo = 'ellisonleao/glow.nvim'
+on_ft = 'markdown'
+hook_source = '''
+    nnoremap <LocalLeader>p :Glow<CR>
+'''

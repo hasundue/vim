@@ -1,0 +1,35 @@
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+# on_ft = [
+#     'julia',
+#     'dart',
+# ]
+
+hook_add = '''
+
+lua << EOF
+
+require'lspconfig'.julials.setup{
+    handlers = {
+        ["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+                virtual_text = false,
+                signs = false,
+                underline = false,
+                update_in_insert = true,
+            }
+        )
+    }
+}
+
+require'lspconfig'.dartls.setup{}
+
+EOF
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+
+'''
+
+[[plugins]]
+repo = 'kabouzeid/nvim-lspinstall' 

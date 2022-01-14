@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'sainnhe/gruvbox-material'
+hook_add = '''
+    autocmd Init VimEnter * nested colorscheme gruvbox-material
+'''
