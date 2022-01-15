@@ -18,8 +18,6 @@ require'lspconfig'.julials.setup{
     }
 }
 
-require'lspconfig'.dartls.setup{}
-
 EOF
 
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -37,16 +35,14 @@ local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
     local opts = {}
 
-    if server.name == "denols" then
-        opts.handlers = {
-            ["textDocument/publishDiagnostics"] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics, {
-                    signs = false,
-                    update_in_insert = true,
-                }
-            )
-        }
-    end
+    opts.handlers = {
+        ["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+                signs = false,
+                update_in_insert = true,
+            }
+        )
+    }
 
     server:setup(opts)
 end)
