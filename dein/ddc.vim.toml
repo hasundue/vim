@@ -17,7 +17,7 @@ depends = [
     'LumaKernel/ddc-file',
 ]
 
-hook_post_source = '''
+hook_add = '''
     call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
     call ddc#custom#patch_global('sources', [
