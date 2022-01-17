@@ -2,31 +2,12 @@
 repo = 'neovim/nvim-lspconfig'
 
 hook_add = '''
-
-lua << EOF
-
-require'lspconfig'.julials.setup{
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-                virtual_text = false,
-                signs = false,
-                underline = false,
-                update_in_insert = true,
-            }
-        )
-    }
-}
-
-EOF
-
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-
 '''
 
 [[plugins]]
 repo = 'hasundue/nvim-lsp-installer'
-depends = 'neovim/nvim-lspconfig'
+depends = ['neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim']
 
 hook_add = '''
 lua << EOF
@@ -48,3 +29,6 @@ lsp_installer.on_server_ready(function(server)
 end)
 EOF
 '''
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
