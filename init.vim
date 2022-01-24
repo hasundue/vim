@@ -108,4 +108,7 @@ endif
 filetype plugin indent on
 syntax on
 
+" Keymap
+nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
+
 " }
