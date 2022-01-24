@@ -1,2 +1,7 @@
 [[plugins]]
 repo = 'hasundue/vim-pluto'
+on_ft = 'julia'
+hook_source = '''
+nnoremap <silent> <LocalLeader>O :call pluto#insert_cell_above()<CR>
+nnoremap <silent> <LocalLeader>o :call pluto#insert_cell_below()<CR>
+'''
