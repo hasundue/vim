@@ -13,7 +13,7 @@ lsp_installer.on_server_ready(function(server)
         ["textDocument/publishDiagnostics"] = vim.lsp.with(
             vim.lsp.diagnostic.on_publish_diagnostics, {
                 signs = false,
-                update_in_insert = true,
+                update_in_insert = false,
             }
         )
     }
