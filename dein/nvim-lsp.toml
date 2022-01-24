@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'hasundue/nvim-lsp-installer'
+repo = 'williamboman/nvim-lsp-installer'
 depends = ['neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim']
 
 hook_add = '''
@@ -17,6 +17,17 @@ lsp_installer.on_server_ready(function(server)
             }
         )
     }
+
+    if server.name == "julials" then
+        opts.handlers = {
+            ["textDocument/publishDiagnostics"] = vim.lsp.with(
+                vim.lsp.diagnostic.on_publish_diagnostics, {
+                    underline = false,
+                    virtual_text = false,
+                }
+            )
+        }
+    end
 
     server:setup(opts)
 end)
