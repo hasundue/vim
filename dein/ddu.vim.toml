@@ -15,9 +15,14 @@ call ddu#custom#patch_global({
     \   }
     \ })
 
+" Source options
+call ddu#custom#patch_global('sourceParams', {
+    \   'file_rec': {'path': expand(".")},
+    \   })
+
 " Set default sources
 call ddu#custom#patch_global({
-    \   'sources': [{'name': 'file', 'params': {}}],
+    \   'sources': [{'name': 'file_rec', 'params': {}}],
     \   })
 
 " Keymappings
@@ -48,9 +53,8 @@ function! s:ddu_filter_my_settings() abort
 endfunction
 '''
 
-
 [[plugins]]
-repo = 'Shougo/ddu-source-file'
+repo = 'Shougo/ddu-source-file_rec'
 
 [[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
