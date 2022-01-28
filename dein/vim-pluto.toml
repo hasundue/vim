@@ -4,4 +4,5 @@ on_ft = 'julia'
 hook_source = '''
 nnoremap <silent> <LocalLeader>O :call pluto#insert_cell_above()<CR>
 nnoremap <silent> <LocalLeader>o :call pluto#insert_cell_below()<CR>
+nnoremap <silent> <LocalLeader>t :call pluto#toggle_code()<CR>
 '''
