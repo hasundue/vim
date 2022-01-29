@@ -1,4 +1,4 @@
-[[Plugins]]
+[[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 hook_add = '''
 lua <<EOF
@@ -11,3 +11,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 '''
+
+[[plugins]]
+repo = 'nvim-treesitter/playground'
+depends = 'nvim-treesitter/nvim-treesitter'
