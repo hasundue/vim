@@ -11,6 +11,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 '''
+merged = '0'
 
 [[plugins]]
 repo = 'nvim-treesitter/playground'
