@@ -27,7 +27,6 @@ let g:netrw_liststyle=3
 " Keymaps {
 "
 let mapleader = ' '
-let maplocalleader = ' '
 
 nnoremap <C-p> :cp<CR>
 nnoremap <C-n> :cn<CR>

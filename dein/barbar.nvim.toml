@@ -21,10 +21,10 @@ hook_add = '''
     nnoremap <silent> <leader>7 :BufferGoto 7<CR>
     nnoremap <silent> <leader>8 :BufferGoto 8<CR>
     nnoremap <silent> <leader>9 :BufferGoto 9<CR>
-    nnoremap <silent> <leader>j :BufferPick<CR>
-    nnoremap <silent> <leader>p :BufferPin<CR>
-    nnoremap <silent> <leader>c :BufferClose<CR>
-    nnoremap <silent> <leader>C :BufferCloseAllButPinned<CR>
+    nnoremap <silent> <leader>bj :BufferPick<CR>
+    nnoremap <silent> <leader>bp :BufferPin<CR>
+    nnoremap <silent> <leader>bc :BufferClose<CR>
+    nnoremap <silent> <leader>bC :BufferCloseAllButPinned<CR>
 '''
 
 [[plugins]]
