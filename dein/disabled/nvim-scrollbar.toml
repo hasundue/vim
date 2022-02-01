@@ -1,0 +1,13 @@
+[[plugins]]
+repo = 'petertriho/nvim-scrollbar'
+depends = 'kevinhwang91/nvim-hlslens'
+hook_add = '''
+lua << EOF
+require("scrollbar").setup()
+require("scrollbar.handlers.search").setup()
+EOF
+'''
+
+[[plugins]]
+repo = 'kevinhwang91/nvim-hlslens'
+
