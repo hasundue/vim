@@ -107,7 +107,11 @@ endif
 filetype plugin indent on
 syntax on
 
+" GitHub personal access token for check_update()
+runtime token.vim
+
 " Keymap
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
+nnoremap <leader>du :call dein#check_update(v:true)<CR>
 
 " }
