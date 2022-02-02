@@ -13,8 +13,8 @@ set number
 set nowrap
 
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 set clipboard+=unnamedplus
 
@@ -27,6 +27,7 @@ let g:netrw_liststyle=3
 " Keymaps {
 "
 let mapleader = ' '
+let maplocalleader = ' '
 
 nnoremap <C-p> :cp<CR>
 nnoremap <C-n> :cn<CR>
