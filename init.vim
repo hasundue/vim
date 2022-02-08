@@ -18,7 +18,9 @@ set shiftwidth=2
 
 set clipboard+=unnamedplus
 
-let g:netrw_liststyle=3
+set termguicolors
+set pumblend=30
+set winblend=30
 
 " }
 

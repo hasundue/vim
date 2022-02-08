@@ -3,3 +3,18 @@ repo = 'sainnhe/gruvbox-material'
 hook_add = '''
     autocmd Init VimEnter * nested colorscheme gruvbox-material
 '''
+
+[[plugins]]
+repo = 'xiyaowong/nvim-transparent'
+hook_add = '''
+lua << EOF
+require("transparent").setup({
+  enable = true,
+  extra_groups = "all",
+  exclude = {
+    "StatusLine",
+    "Visual",
+  },
+})
+EOF
+'''
