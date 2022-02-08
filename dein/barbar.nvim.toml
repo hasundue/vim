@@ -1,7 +1,8 @@
 [[plugins]]
 repo = 'romgrk/barbar.nvim'
-depends = 'kyazdani42/nvim-web-devicons' 
-hook_add = '''
+depends = 'nvim-web-devicons' 
+on_event = 'VimEnter'
+hook_source = '''
     let bufferline = get(g:, 'bufferline', {})
 
     let bufferline.auto_hide = v:true
