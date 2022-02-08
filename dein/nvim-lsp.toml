@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-depends = ['neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim']
+depends = ['nvim-lspconfig', 'plenary.nvim']
 
 hook_add = '''
 lua << EOF
@@ -8,9 +8,7 @@ local nvim_lsp = require('lspconfig')
 local lsp_installer = require("nvim-lsp-installer")
 
 local node_root_dir = nvim_lsp.util.root_pattern("package.json", "node_modules")
-local buf_name = vim.api.nvim_buf_get_name(0)
-local current_buf = vim.api.nvim_get_current_buf()
-local is_node_repo = node_root_dir(buf_name, current_buf) ~= nil
+local is_node_repo = node_root_dir ~= nil
 
 lsp_installer.on_server_ready(function(server)
     local opts = {}
