@@ -1,23 +1,13 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 
-depends = [
-    # Essentials
-    'vim-denops/denops.vim',
-    'Shougo/pum.vim',
+depends = ['denops.vim', 'pum.vim']
 
-    # Matcher
-    'tani/ddc-fuzzy',
+on_source = 'denops.vim'
 
-    # Sources
-    'Shougo/ddc-around',
-    'Shougo/ddc-cmdline',
-    'Shougo/ddc-cmdline-history',
-    'Shougo/ddc-nvim-lsp',
-    'LumaKernel/ddc-file',
-]
+on_event = ['InsertEnter', 'CmdlineEnter']
 
-hook_post_source = '''
+hook_source = '''
     call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
     call ddc#custom#patch_global('sources', [
