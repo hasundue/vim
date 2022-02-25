@@ -47,7 +47,7 @@ end)
 EOF
 
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> d? <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> d? <cmd>lua vim.diagnostic.open_float()<CR>
 '''
 
 [[plugins]]
