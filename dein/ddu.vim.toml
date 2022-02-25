@@ -22,6 +22,7 @@ call ddu#custom#patch_global({
     \   'sourceParams': {
     \     'file_rec': {
     \       'path': expand("."),
+    \       'ignoredDirectories': ['.git', '.cache', '.mf', 'node_modules', 'build'],
     \     },
     \   },
     \   'sourceOptions': {
