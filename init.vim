@@ -72,7 +72,7 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 " Options
-let g:dein#install_check_diff  = v:false
+let g:dein#install_check_diff  = v:true
 
 " Setting up dein
 if dein#load_state(s:dein_dir)
