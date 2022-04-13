@@ -1,8 +1,10 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
-depends = 'vim-denops/denops.vim'
+depends = 'denops.vim'
 hook_add = '''
-" UI
+nnoremap <silent> <leader>u <cmd>call ddu#start({})<CR>
+'''
+hook_source = '''
 call ddu#custom#patch_global({
     \   'ui': 'ff',
     \   'uiParams': {
@@ -31,13 +33,11 @@ call ddu#custom#patch_global({
     \     },
     \   },
     \ })
-
-" Keymappings
-nnoremap <silent> <leader>u <cmd>call ddu#start({})<CR>
 '''
 
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
+on_source = 'ddu.vim'
 hook_add = '''
 autocmd FileType ddu-ff call s:ddu_my_settings()
 function! s:ddu_my_settings() abort

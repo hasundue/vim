@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'hasundue/vim-pluto'
-depends = 'vim-denops/denops.vim'
+depends = 'denops.vim'
 on_ft = 'julia'
 hook_source = '''
 nnoremap <silent> <LocalLeader>O :call pluto#insert_cell_above()<CR>

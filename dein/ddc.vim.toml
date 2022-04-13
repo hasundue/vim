@@ -1,12 +1,8 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-
 depends = ['denops.vim', 'pum.vim']
-
 on_source = 'denops.vim'
-
 on_event = ['InsertEnter', 'CmdlineEnter']
-
 hook_source = '''
     call ddc#custom#patch_global('completionMenu', 'pum.vim')
 

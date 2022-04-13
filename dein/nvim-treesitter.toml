@@ -3,7 +3,6 @@ repo = 'nvim-treesitter/nvim-treesitter'
 hook_post_source = '''
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
   highlight = {
     enable = true,
     disable = {},
@@ -11,7 +10,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 '''
-merged = '0'
 
 [[plugins]]
 repo = 'nvim-treesitter/playground'

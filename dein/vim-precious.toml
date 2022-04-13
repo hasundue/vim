@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-depends = 'Shougo/context_filetype.vim'
+depends = 'context_filetype.vim'
+on_ft = ['toml', 'markdown']
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'

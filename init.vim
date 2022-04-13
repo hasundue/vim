@@ -16,8 +16,6 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 
-set clipboard+=unnamedplus
-
 set termguicolors
 set pumblend=30
 set winblend=30
@@ -72,7 +70,7 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 " Options
-let g:dein#install_check_diff  = v:true
+let g:dein#install_check_diff = v:true
 
 " Setting up dein
 if dein#load_state(s:dein_dir)
