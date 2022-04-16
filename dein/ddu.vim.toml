@@ -37,7 +37,6 @@ call ddu#custom#patch_global({
 
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
-on_source = 'ddu.vim'
 hook_add = '''
 autocmd FileType ddu-ff call s:ddu_my_settings()
 function! s:ddu_my_settings() abort
