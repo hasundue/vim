@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'romgrk/barbar.nvim'
 depends = 'nvim-web-devicons' 
+on_event = 'VimEnter'
 hook_add = '''
 nnoremap <silent> <leader>1 :BufferGoto 1<CR>
 nnoremap <silent> <leader>2 :BufferGoto 2<CR>
@@ -16,6 +17,12 @@ nnoremap <silent> <leader>bp :BufferPin<CR>
 nnoremap <silent> <leader>bc :BufferClose<CR>
 nnoremap <silent> <leader>bC :BufferCloseAllButPinned<CR>
 nnoremap <silent> <leader>bo :BufferOrderByLanguage<CR>
+'''
+hook_source = '''
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.closable = v:false
+let bufferline.icons = 'numbers'
+let bufferline.icon_pinned = 'P'
 '''
 
 [[plugins]]
