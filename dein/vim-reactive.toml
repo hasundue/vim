@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'hasundue/vim-reactive'
+merged = 'v:false'
