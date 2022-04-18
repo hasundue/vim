@@ -17,6 +17,17 @@ lsp_installer.on_server_ready(function(server)
   elseif server.name == "denols" then
     opts.root_dir = nvim_lsp.util.root_pattern("denops")
     opts.init_options = { lint = true, unstable = true, }
+  elseif server.name == "sumneko_lua" then
+    opts.settings = {
+      lua = {
+        diagnostics = {
+          globals = {'vim'},
+        },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+    }
   end
 
   opts.handlers = {
