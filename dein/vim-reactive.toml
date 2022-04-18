@@ -1,3 +1,7 @@
 [[plugins]]
 repo = 'hasundue/vim-reactive'
 merged = 'v:false'
+hook_add = '''
+nnoremap <silent> <LocalLeader>ra :call reactive#attach()<CR>
+nnoremap <silent> <LocalLeader>rd :call reactive#debug()<CR>
+'''
