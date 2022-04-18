@@ -91,17 +91,10 @@ if dein#load_state(s:dein_dir)
     call dein#save_state()
 endif
 
-" Install plugins if not
-if dein#check_install()
-    call dein#install()
-    call dein#recache_runtimepath()
-endif
-
 " Uninstall unused plugins
 let s:removed_plugins = dein#check_clean()
 if len(s:removed_plugins) > 0
     call map(s:removed_plugins, "delete(v:val, 'rf')")
-    call dein#recache_runtimepath()
 endif
 
 " Required
@@ -114,5 +107,6 @@ runtime token.vim
 " Keymap
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
 nnoremap <leader>du :call dein#check_update(v:true)<CR>
+nnoremap <leader>di :call dein#install()<CR>
 
 " }
