@@ -1,0 +1,12 @@
+[[plugins]]
+repo = 'ichyny/lightline.vim'
+hook_add = '''
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'material',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ }
+'''
