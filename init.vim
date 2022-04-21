@@ -20,6 +20,8 @@ set termguicolors
 set pumblend=30
 set winblend=30
 
+set updatetime=1000
+
 " }
 
 
