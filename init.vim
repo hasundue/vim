@@ -100,7 +100,11 @@ filetype plugin indent on
 syntax on
 
 " GitHub personal access token for check_update()
-runtime token.vim
+if has('nvim')
+  runtime token.vim
+else
+  runtime config/token.vim
+endif
 
 " Keymap
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
