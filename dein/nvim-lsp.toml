@@ -15,7 +15,7 @@ lsp_installer.on_server_ready(function(server)
   elseif server.name == "eslint" then
     opts.root_dir = nvim_lsp.util.root_pattern(".eslintrc.*")
   elseif server.name == "denols" then
-    opts.root_dir = nvim_lsp.util.root_pattern("denops")
+    opts.root_dir = nvim_lsp.util.root_pattern("denops", "deno.json", "deno.jsonc")
     opts.init_options = { lint = true, unstable = true, }
   elseif server.name == "sumneko_lua" then
     opts.settings = {
