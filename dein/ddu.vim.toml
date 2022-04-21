@@ -10,9 +10,6 @@ call ddu#custom#patch_global({
     \   'uiParams': {
     \     'ff': {
     \       'startFilter': v:true,
-    \       'split': 'floating',
-    \       'filterFloatingPosition': 'top',
-    \       'filterSplitDirection': 'floating',
     \     },
     \   },
     \   'kindOptions': {
@@ -33,6 +30,17 @@ call ddu#custom#patch_global({
     \     },
     \   },
     \ })
+if has('nvim')
+  call ddu#custom#patch_global({
+    \   'uiParams': {
+    \     'ff': {
+    \       'split': 'floating',
+    \       'filterFloatingPosition': 'top',
+    \       'filterSplitDirection': 'floating',
+    \     },
+    \   }
+    \ })
+endif
 '''
 
 [[plugins]]

@@ -1,8 +1,14 @@
 [[plugins]]
+repo = 'sainnhe/gruvbox-material'
+hook_add = '''
+autocmd Init VimEnter * nested colorscheme gruvbox-material
+'''
+
+[[plugins]]
 repo = 'tpope/vim-commentary'
 hook_add = '''
-    nmap <C-_> gcc
-    vmap <C-_> gc
+nmap <C-_> gcc
+vmap <C-_> gc
 '''
 
 [[plugins]]
