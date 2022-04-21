@@ -50,9 +50,9 @@ else
 endif
 
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-let s:toml_dir = expand('~/.config/nvim/dein')
-let s:toml_dir_vim = expand('~/.config/nvim/dein/vim')
-let s:toml_dir_nvim = expand('~/.config/nvim/dein/nvim')
+let s:toml_dir = expand('~/.config/vim/dein')
+let s:toml_dir_vim = expand('~/.config/vim/dein/vim')
+let s:toml_dir_nvim = expand('~/.config/vim/dein/nvim')
 
 " Install dein if not
 if &runtimepath !~# '/dein.vim'
