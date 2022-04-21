@@ -114,7 +114,7 @@ nnoremap <leader>di :call dein#install()<CR>
 " NeoVim {
 "
 if has('nvim')
-  runtime nvim.vim
+  runtime nvim.lua
 endif
 
 " }
