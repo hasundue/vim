@@ -1,8 +1,6 @@
 [[plugins]]
 repo = 'xiyaowong/nvim-transparent'
 hook_add = '''
-set pumblend=30
-set winblend=30
 lua << EOF
 require("transparent").setup({
   enable = true,

@@ -1,3 +1,11 @@
+--
+-- Appearance {
+--
+vim.go.pumblend = 30
+vim.go.winblend = 30
+
+-- }
+
 -- 
 -- Terminal {
 -- 
