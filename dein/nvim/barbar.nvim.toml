@@ -21,6 +21,7 @@ let bufferline.auto_hide = v:true
 let bufferline.closable = v:false
 let bufferline.icons = 'numbers'
 let bufferline.icon_pinned = 'P'
+autocmd Init BufAdd * BufferOrderByLanguage
 '''
 
 [[plugins]]
