@@ -1,12 +1,12 @@
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 depends = 'denops.vim'
+on_source = 'denops.vim'
 hook_add = '''
 nnoremap <silent> <leader>u <cmd>call ddu#start({})<CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global({
-    \   'ui': 'ff',
     \   'uiParams': {
     \     'ff': {
     \       'startFilter': v:true,
@@ -32,6 +32,7 @@ call ddu#custom#patch_global({
     \ })
 if has('nvim')
   call ddu#custom#patch_global({
+    \   'ui': 'ff',
     \   'uiParams': {
     \     'ff': {
     \       'split': 'floating',
@@ -45,33 +46,33 @@ endif
 
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
-hook_add = '''
-autocmd FileType ddu-ff call s:ddu_my_settings()
-function! s:ddu_my_settings() abort
-  nnoremap <buffer><silent> <CR>
-  \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> <Space>
-  \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
-  nnoremap <buffer><silent> i
-  \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
-  nnoremap <buffer><silent> q
-  \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
-endfunction
-
-autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
-function! s:ddu_filter_my_settings() abort
-  inoremap <buffer><silent> <CR>
-  \ <Esc><Cmd>close<CR>
-  nnoremap <buffer><silent> <CR>
-  \ <Cmd>close<CR>
-endfunction
+on_source = 'ddu.vim'
+[plugins.ftplugin]
+ddu-ff = '''
+nnoremap <buffer><silent> <CR>
+\ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+nnoremap <buffer><silent> <Space>
+\ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+nnoremap <buffer><silent> i
+\ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+nnoremap <buffer><silent> q
+\ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+'''
+ddu-ff-filter = '''
+inoremap <buffer><silent> <CR>
+\ <Esc><Cmd>close<CR>
+nnoremap <buffer><silent> <CR>
+\ <Cmd>close<CR>
 '''
 
 [[plugins]]
 repo = 'Shougo/ddu-source-file_rec'
+on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
+on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
+on_source = 'ddu.vim'

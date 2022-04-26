@@ -1,11 +1,13 @@
 [[plugins]]
 repo = 'hasundue/vim-keycasty'
 depends = 'denops.vim'
+# on_source = 'denops.vim'
 merged = 'v:false'
 
 [[plugins]]
 repo = 'hasundue/vim-reactive'
 depends = 'denops.vim'
+on_source = 'denops.vim'
 merged = 'v:false'
 hook_add = '''
 nnoremap <silent> <LocalLeader>ra :call reactive#attach()<CR>
