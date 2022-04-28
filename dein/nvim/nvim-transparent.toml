@@ -5,7 +5,20 @@ lua << EOF
 require("transparent").setup({
   enable = true,
   extra_groups = {
+    -- barbar.nvim
+    "BufferCurrent",
+    "BufferCurrentIndex",
+    "BufferCurrentSign",
+    "BufferVisible",
+    "BufferVisibleIndex",
+    "BufferVisibleSign",
+    "BufferInactive",
+    "BufferInactiveIndex",
+    "BufferInactiveSign",
+    "BufferTabpages",
     "BufferTabpageFill",
+
+    -- vim-gitgutter
     "GitGutterAdd",
     "GitGutterDelete",
     "GitGutterChange",
