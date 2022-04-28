@@ -4,11 +4,11 @@ hook_add = '''
 lua << EOF
 require("transparent").setup({
   enable = true,
-  extra_groups = "all",
-  exclude = {
-    "StatusLine",
-    "Visual",
-    "Search",
+  extra_groups = {
+    "GitGutterAdd",
+    "GitGutterDelete",
+    "GitGutterChange",
+    "GitGutterChangeDelete",
   },
 })
 EOF

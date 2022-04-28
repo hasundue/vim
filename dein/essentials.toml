@@ -1,7 +1,9 @@
 [[plugins]]
-repo = 'sainnhe/gruvbox-material'
+repo = 'sonph/onehalf'
+rtp = 'vim'
 hook_add = '''
-autocmd Init VimEnter * nested colorscheme gruvbox-material
+autocmd Init VimEnter * nested colorscheme onehalfdark
+autocmd ColorScheme * hi Pmenu guifg=#dcdfe4 guibg=#282c34
 '''
 
 [[plugins]]
