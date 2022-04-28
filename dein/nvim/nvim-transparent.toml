@@ -5,6 +5,7 @@ lua << EOF
 require("transparent").setup({
   enable = true,
   extra_groups = {
+    "BufferTabpageFill",
     "GitGutterAdd",
     "GitGutterDelete",
     "GitGutterChange",
