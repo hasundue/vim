@@ -1,69 +1,60 @@
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-depends = ['nvim-lspconfig', 'plenary.nvim']
-
+depends = 'nvim-lspconfig'
 hook_add = '''
 lua << EOF
-local nvim_lsp = require('lspconfig')
 local lsp_installer = require("nvim-lsp-installer")
 
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
+lsp_installer.setup {
+  ensure_installed = {
+    "bashls",
+    "vimls",
+    "denols",
+    "tsserver",
+    "eslint",
+    "cssls",
+    -- "julials",
+    -- "dartls",
+    "sumneko_lua",
+  },
+}
 
-  if server.name == "tsserver" then
-    opts.root_dir = nvim_lsp.util.root_pattern("package.json")
-  elseif server.name == "eslint" then
-    opts.root_dir = nvim_lsp.util.root_pattern(".eslintrc.*")
-  elseif server.name == "denols" then
-    opts.root_dir = nvim_lsp.util.root_pattern("denops", "deno.json", "deno.jsonc")
-    opts.init_options = { lint = true, unstable = true, }
-  elseif server.name == "sumneko_lua" then
-    opts.settings = {
-      lua = {
-        diagnostics = {
-          globals = {'vim'},
-        },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    }
-  end
+local lspconfig = require("lspconfig")
 
-  opts.handlers = {
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      signs = false,
-      update_in_insert = false,
-    }
-    )
-  }
+lspconfig.bashls.setup{}
+lspconfig.vimls.setup{}
 
-  if server.name == "julials" then
-    opts.handlers = {
-      ["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          signs = false,
-          underline = false,
-          virtual_text = false,
-          update_in_insert = false,
-        }
-      )
-    }
-  end
+lspconfig.denols.setup {
+  root_dir = lspconfig.util.root_pattern("denops", "deno.json", "deno.jsonc"),
+  init_options = { lint = true, unstable = true, },
+}
 
-  server:setup(opts)
-end)
+lspconfig.tsserver.setup {
+  root_dir = lspconfig.util.root_pattern("package.json"),
+}
+
+lspconfig.eslint.setup {
+  root_dir = lspconfig.util.root_pattern(".eslintrc.*"),
+}
+
+lspconfig.sumneko_lua.setup {
+  lua = {
+    diagnostics = {
+      globals = {"vim"},
+    },
+  },
+  workspace = {
+    library = vim.api.nvim_get_runtime_file("", true),
+  },
+}
 EOF
+'''
 
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+hook_add = '''
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> d? <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 '''
-
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
-
-[[plugins]]
-repo = 'nvim-lua/plenary.nvim'
