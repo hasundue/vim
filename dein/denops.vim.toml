@@ -6,6 +6,3 @@ hook_add = '''
         execute '!curl -fsSL https://deno.land/x/install/install.sh | sh'
     endif
 '''
-hook_post_update = '''
-    execute '!deno upgrade'
-'''
