@@ -119,11 +119,6 @@ nnoremap <leader>di :call dein#install()<CR>
 "
 if has('nvim')
   runtime init.nvim.lua
-
-  augroup nvim_terminal
-    autocmd!
-    autocmd TermOpen * :setlocal nonumber norelativenumber
-  augroup END
 endif
 
 " }
