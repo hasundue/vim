@@ -2,7 +2,7 @@
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
 on_source = 'denops.vim'
-on_event = ['InsertEnter', 'CmdlineEnter']
+on_event = ['InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineEnter', 'CmdlineChanged', 'CursorHold']
 hook_source = '''
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
@@ -11,6 +11,10 @@ call ddc#custom#patch_global('sources', [
 \   'file',
 \   'around',
 \ ])
+
+call ddc#custom#patch_global('cmdlineSources',
+      \ ['cmdline', 'cmdline-history', 'file', 'around']
+      \ )
 
 call ddc#custom#patch_global('sourceOptions', {
 \   '_': {
@@ -58,29 +62,36 @@ call ddc#custom#patch_global('autoCompleteEvents', [
 nnoremap : <Cmd>call CommandlinePre()<CR>:
 
 function! CommandlinePre() abort
-    cnoremap <silent><expr> <TAB>
+  cnoremap <silent><expr> <TAB>
         \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
         \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
         \ '<TAB>' : ddc#manual_complete()
 
-    cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
 
-    " Overwrite sources
-    let s:prev_buffer_config = ddc#custom#get_buffer()
-    call ddc#custom#patch_buffer('sources',
-                \ ['cmdline', 'cmdline-history', 'file', 'around'])
+  " Overwrite sources
+  let s:prev_buffer_config = ddc#custom#get_buffer()
+  call ddc#custom#patch_buffer('cmdlineSources',
+        \ ['cmdline', 'cmdline-history', 'file', 'around'])
 
-    autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+  autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+  autocmd InsertEnter <buffer> ++once call CommandlinePost()
 
-    " Enable command line completion
-    call ddc#enable_cmdline_completion()
-    call ddc#enable()
+  " Enable command line completion
+  call ddc#enable_cmdline_completion()
 endfunction
 
 function! CommandlinePost() abort
-    " Restore sources
-    call ddc#custom#set_buffer(s:prev_buffer_config)
-    cunmap <Tab>
+  cunmap <Tab>
+  cunmap <S-Tab>
+
+  " Restore sources
+  if exists('b:prev_buffer_config')
+    call ddc#custom#set_buffer(b:prev_buffer_config)
+    unlet b:prev_buffer_config
+  else
+    call ddc#custom#set_buffer({})
+  endif
 endfunction
 
 " }
