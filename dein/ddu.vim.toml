@@ -3,21 +3,30 @@ repo = 'Shougo/ddu.vim'
 depends = 'denops.vim'
 on_source = 'denops.vim'
 hook_add = '''
-nnoremap <silent> <leader>u <cmd>call ddu#start({})<CR>
+function! s:ddu_rg() abort
+  call ddu#start({
+    \ 'volatile': v:true,
+    \ 'sources': [{'name': 'rg'}],
+    \ })
+endfunction
+
+function! s:ddu_file() abort
+  call ddu#start({
+    \ 'sources': [{'name': 'file_external'}],
+    \ })
+endfunction
+
+nnoremap <silent> <leader>ug <cmd>call <SID>ddu_rg()<CR>
+nnoremap <silent> <leader>uf <cmd>call <SID>ddu_file()<CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global({
     \   'ui': 'ff',
-    \   'volatile': v:true,
     \   'uiParams': {
     \     'ff': {
     \       'startFilter': v:true,
     \     },
     \   },
-    \   'sources': [
-    \     {'name': 'file_external'},
-    \     {'name': 'rg'},
-    \    ],
     \   'sourceOptions': {
     \     'file_external': {
     \       'matchers': ['matcher_fzf'],
@@ -31,7 +40,7 @@ call ddu#custom#patch_global({
     \       'cmd': ['git', 'ls-files', '-co', '--exclude-standard'],
     \     },
     \     'rg': {
-    \       'args': ['--ignore-case', '--column', '--no-heading', '--color', 'never'],
+    \       'args': ['--column', '--no-heading', '--color', 'never'],
     \     },
     \   },
     \   'kindOptions': {
