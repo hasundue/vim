@@ -1,13 +1,4 @@
 [[plugins]]
-repo = 'sonph/onehalf'
-rtp = 'vim'
-hook_add = '''
-autocmd Init VimEnter * nested colorscheme onehalfdark
-set termguicolors
-autocmd ColorScheme * hi Pmenu guifg=#dcdfe4 guibg=#282c34
-'''
-
-[[plugins]]
 repo = 'tpope/vim-commentary'
 hook_add = '''
 nmap <C-_> gcc
