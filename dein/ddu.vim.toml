@@ -7,9 +7,31 @@ nnoremap <silent> <leader>u <cmd>call ddu#start({})<CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global({
+    \   'ui': 'ff',
+    \   'volatile': v:true,
     \   'uiParams': {
     \     'ff': {
     \       'startFilter': v:true,
+    \     },
+    \   },
+    \   'sources': [
+    \     {'name': 'file_external'},
+    \     {'name': 'rg'},
+    \    ],
+    \   'sourceOptions': {
+    \     'file_external': {
+    \       'matchers': ['matcher_fzf'],
+    \     },
+    \     'rg': {
+    \       'matchers': [],
+    \     },
+    \   },
+    \   'sourceParams': {
+    \     'file_external': {
+    \       'cmd': ['git', 'ls-files', '-co', '--exclude-standard'],
+    \     },
+    \     'rg': {
+    \       'args': ['--ignore-case', '--column', '--no-heading', '--color', 'never'],
     \     },
     \   },
     \   'kindOptions': {
@@ -17,22 +39,10 @@ call ddu#custom#patch_global({
     \       'defaultAction': 'open',
     \     },
     \   },
-    \   'sources': [{'name': 'file_rec', 'params': {}}],
-    \   'sourceParams': {
-    \     'file_rec': {
-    \       'path': expand("."),
-    \       'ignoredDirectories': ['.git', '.cache', '.mf', 'node_modules', 'build'],
-    \     },
-    \   },
-    \   'sourceOptions': {
-    \     '_': {
-    \       'matchers': ['matcher_fzf'],
-    \     },
-    \   },
     \ })
+
 if has('nvim')
   call ddu#custom#patch_global({
-    \   'ui': 'ff',
     \   'uiParams': {
     \     'ff': {
     \       'split': 'floating',
@@ -66,13 +76,17 @@ nnoremap <buffer><silent> <CR>
 '''
 
 [[plugins]]
-repo = 'Shougo/ddu-source-file_rec'
-on_source = 'ddu.vim'
-
-[[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
 on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'matsui54/ddu-source-file_external'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'shun/ddu-source-rg'
 on_source = 'ddu.vim'
