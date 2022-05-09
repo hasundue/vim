@@ -1,12 +1,26 @@
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 merged = 'v:false'
-hook_post_source = '''
+hook_source = '''
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     disable = {},
+  },
+  ensure_installed = {
+    "bash",
+    "vim",
+    "regex",
+    "lua",
+    "julia",
+    "typescript",
+    "json",
+    "yaml",
+    "toml",
+    "markdown",
+    "html",
+    "css",
   },
 }
 EOF
