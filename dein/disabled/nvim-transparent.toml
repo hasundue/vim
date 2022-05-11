@@ -1,0 +1,11 @@
+[[plugins]]
+repo = 'xiyaowong/nvim-transparent'
+hook_post_source = '''
+lua << EOF
+require("transparent").setup({
+  enable = true,
+  extra_groups = {
+  },
+})
+EOF
+'''

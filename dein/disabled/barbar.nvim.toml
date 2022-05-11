@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'romgrk/barbar.nvim'
+on_source = 'lightline.vim'
 depends = 'nvim-web-devicons' 
 hook_add = '''
 nnoremap <silent> <leader>1 :BufferGoto 1<CR>
@@ -14,7 +15,7 @@ nnoremap <silent> <leader>9 :BufferGoto 9<CR>
 nnoremap <silent> <leader>bj :BufferPick<CR>
 nnoremap <silent> <leader>bp :BufferPin<CR>
 nnoremap <silent> <leader>bc :BufferClose<CR>
-nnoremap <silent> <leader>bC :BufferCloseAllButPinned<CR>
+nnoremap <silent> <leader>bC :BufferCloseAllButCurrentOrPinned<CR>
 nnoremap <silent> <leader>bo :BufferOrderByLanguage<CR>
 let bufferline = get(g:, 'bufferline', {})
 let bufferline.auto_hide = v:true

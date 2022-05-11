@@ -4,5 +4,8 @@ hook_add = '''
 set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'gruvbox_material',
+  \ 'enable': {
+  \   'tabline': 0
+  \ },
   \ }
 '''
