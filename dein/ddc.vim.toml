@@ -7,10 +7,16 @@ hook_source = '''
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
 call ddc#custom#patch_global('sources', [
-\   'nvim-lsp',
-\   'file',
-\   'around',
-\ ])
+      \   'file',
+      \   'around',
+      \ ])
+
+if has('nvim')
+  call ddc#custom#patch_filetype(
+        \ ['typescript'], 'sources',
+        \ ['nvim-lsp', 'around']
+        \ )
+endif
 
 call ddc#custom#patch_global('cmdlineSources',
       \ ['cmdline', 'cmdline-history', 'file', 'around']
