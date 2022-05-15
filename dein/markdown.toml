@@ -2,5 +2,10 @@
 repo = 'ellisonleao/glow.nvim'
 on_ft = 'markdown'
 hook_add = '''
-    nnoremap <LocalLeader>p :Glow<CR>
+nnoremap <LocalLeader>p :Glow<CR>
 '''
+
+[[plugins]]
+repo = 'psliwka/vim-dirtytalk'
+on_ft = 'markdown'
+hook_post_update = ':DirtytalkUpdate'
