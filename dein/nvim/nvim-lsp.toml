@@ -58,3 +58,16 @@ nnoremap <silent> d? <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 '''
+
+[[plugins]]
+repo = 'matsui54/denops-signature_help'
+depends = 'denops.vim'
+hook_add = '''
+let g:signature_help_config = {
+  \ 'border': v:false,
+  \ }
+'''
+on_source = 'ddc.vim'
+hook_source = '''
+call signature_help#enable()
+'''
