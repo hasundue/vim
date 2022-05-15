@@ -63,14 +63,13 @@ inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
 nnoremap : <Cmd>call CommandlinePre()<CR>:
 
 function! CommandlinePre() abort
-  set wildchar=<C-t>
+  set wildcharm=<C-t>
 
-  cnoremap <expr><buffer> <TAB>
+  cnoremap <expr> <Tab>
         \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-        \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-        \ '<TAB>' : ddc#manual_complete()
-
-  cnoremap <expr><buffer> <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+        \ exists('b:ddc_cmdline_completion') ?
+        \ ddc#manual_complete() : nr2char(&wildcharm)
+  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
 
   " Overwrite sources
   let s:prev_buffer_config = ddc#custom#get_buffer()
@@ -86,7 +85,6 @@ endfunction
 
 function! CommandlinePost() abort
   silent! cunmap <buffer> <TAB>
-  silent! cunmap <buffer> <S-Tab>
 
   " Restore sources
   if exists('b:prev_buffer_config')
@@ -96,7 +94,7 @@ function! CommandlinePost() abort
     call ddc#custom#set_buffer({})
   endif
 
-  set wildchar=<Tab>
+  set wildcharm=<Tab>
 endfunction
 
 " }
