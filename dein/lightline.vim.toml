@@ -2,10 +2,39 @@
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 set laststatus=2
+set showtabline=2
+
 let g:lightline = {
   \ 'colorscheme': 'gruvbox_material',
-  \ 'enable': {
-  \   'tabline': 0
+  \ 'tabline': {
+  \   'left': [ ['buffers'] ],
+  \   'right': [],
+  \ },
+  \ 'component_expand': {
+  \   'buffers': 'lightline#bufferline#buffers'
+  \ },
+  \ 'component_type': {
+  \   'buffers': 'tabsel'
   \ },
   \ }
+'''
+
+[[plugins]]
+repo = 'mengelbrecht/lightline-bufferline'
+depends = 'lightline.vim'
+hook_add = '''
+let g:lightline#bufferline#min_buffer_count = 2
+let g:lightline#bufferline#show_number = 2
+let g:lightline#bufferline#margin_left = 1
+let g:lightline#bufferline#margin_right = 1
+nnoremap <Leader>1 <Plug>lightline#bufferline#go(1)
+nnoremap <Leader>2 <Plug>lightline#bufferline#go(2)
+nnoremap <Leader>3 <Plug>lightline#bufferline#go(3)
+nnoremap <Leader>4 <Plug>lightline#bufferline#go(4)
+nnoremap <Leader>5 <Plug>lightline#bufferline#go(5)
+nnoremap <Leader>6 <Plug>lightline#bufferline#go(6)
+nnoremap <Leader>7 <Plug>lightline#bufferline#go(7)
+nnoremap <Leader>8 <Plug>lightline#bufferline#go(8)
+nnoremap <Leader>9 <Plug>lightline#bufferline#go(9)
+nnoremap <Leader>0 <Plug>lightline#bufferline#go(10)
 '''

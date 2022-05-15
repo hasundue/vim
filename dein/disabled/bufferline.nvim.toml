@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'akinsho/bufferline.nvim'
 rev = 'v2.*'
-depends = 'nvim-web-devicons' 
+depends = 'nvim-web-devicons'
 
 hook_source = '''
 lua << EOF
@@ -12,15 +12,14 @@ require("bufferline").setup {
     show_buffer_close_icons = false,
     enforce_regular_tabs = true,
     always_show_bufferline = false,
-    sort_by = "extention",
   }
 }
 EOF
+
+autocmd Init BufAdd * BufferLineSortByExtension
 '''
 
 hook_add = '''
-autocmd Init BufAdd * BufferLineSortByExtension
-
 nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
 nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
 nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
@@ -30,4 +29,6 @@ nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
 nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
 nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+nnoremap <silent><C-j> :BufferLineCycleNext<CR>
+nnoremap <silent><C-k> :BufferLineCyclePrev<CR>
 '''

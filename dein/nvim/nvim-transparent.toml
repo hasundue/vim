@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'xiyaowong/nvim-transparent'
-hook_post_source = '''
+hook_source = '''
 lua << EOF
 require("transparent").setup({
   enable = true,
