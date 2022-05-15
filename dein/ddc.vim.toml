@@ -13,7 +13,7 @@ call ddc#custom#patch_global('sources', [
 
 if has('nvim')
   call ddc#custom#patch_filetype(
-        \ ['typescript'], 'sources',
+        \ ['bash', 'vim', 'typescript', 'lua'], 'sources',
         \ ['nvim-lsp', 'around']
         \ )
 endif
