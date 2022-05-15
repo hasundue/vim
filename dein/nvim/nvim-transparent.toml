@@ -1,7 +1,6 @@
 [[plugins]]
 repo = 'xiyaowong/nvim-transparent'
-on_source = 'gruvbox-material'
-hook_add = '''
+hook_source = '''
 lua << EOF
 require("transparent").setup({
   enable = true,
