@@ -22,7 +22,10 @@ lsp_installer.setup {
 local lspconfig = require("lspconfig")
 
 lspconfig.bashls.setup{}
-lspconfig.vimls.setup{}
+
+lspconfig.vimls.setup{
+  autostart = false,
+}
 
 lspconfig.denols.setup {
   root_dir = lspconfig.util.root_pattern("denops", "mod.ts", "deno.json", "deno.jsonc"),
