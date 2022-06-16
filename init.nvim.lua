@@ -1,8 +1,8 @@
 --
 -- Appearance {
 --
-vim.go.pumblend = 20
-vim.go.winblend = 20
+vim.go.pumblend = 10
+vim.go.winblend = 10
 
 -- }
 
