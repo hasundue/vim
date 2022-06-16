@@ -9,3 +9,20 @@ nnoremap <LocalLeader>p :Glow<CR>
 repo = 'psliwka/vim-dirtytalk'
 on_ft = 'markdown'
 hook_post_update = ':DirtytalkUpdate'
+
+[[plugins]]
+repo = 'tani/glance-vim'
+depends = 'denops.vim'
+on_ft = 'markdown'
+hook_add = '''
+let g:glance#stylesheet = '@import url("https://cdn.simplecss.org/simple.min.css");'
+'''
+
+[[plugins]]
+repo = 'skanehira/gyazo.vim'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'skanehira/denops-germanium.vim'
+depends = 'denops.vim'
+on_ft = 'markdown'
