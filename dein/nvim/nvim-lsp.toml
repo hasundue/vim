@@ -37,7 +37,7 @@ lspconfig.tsserver.setup {
 }
 
 lspconfig.eslint.setup {
-  root_dir = lspconfig.util.root_pattern(".eslintrc.*"),
+  root_dir = lspconfig.util.root_pattern(".eslintrc*"),
 }
 
 lspconfig.sumneko_lua.setup {
