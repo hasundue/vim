@@ -57,6 +57,7 @@ if has('nvim')
     \       'split': 'floating',
     \       'filterFloatingPosition': 'top',
     \       'filterSplitDirection': 'floating',
+    \       'floatingBorder': 'none',
     \     },
     \   }
     \ })
