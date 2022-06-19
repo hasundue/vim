@@ -20,6 +20,8 @@ set shiftwidth=2
 
 set updatetime=1000
 
+set mouse=a
+
 " }
 
 
