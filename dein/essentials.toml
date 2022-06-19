@@ -1,4 +1,16 @@
 [[plugins]]
+repo = 'vim-denops/denops.vim'
+hook_add = '''
+    let s:deno_bin = exepath('deno')
+    if !filereadable(s:deno_bin)
+        execute '!curl -fsSL https://deno.land/x/install/install.sh | sh'
+    endif
+'''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
+
+[[plugins]]
 repo = 'tpope/vim-commentary'
 hook_add = '''
 nmap <C-_> gcc

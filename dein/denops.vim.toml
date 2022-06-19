@@ -1,8 +1,0 @@
-[[plugins]]
-repo = 'vim-denops/denops.vim'
-hook_add = '''
-    let s:deno_bin = exepath('deno')
-    if !filereadable(s:deno_bin)
-        execute '!curl -fsSL https://deno.land/x/install/install.sh | sh'
-    endif
-'''
