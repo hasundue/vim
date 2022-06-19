@@ -28,8 +28,20 @@ lspconfig.vimls.setup{
 }
 
 lspconfig.denols.setup {
-  root_dir = lspconfig.util.root_pattern("denops", "mod.ts", "deno.json", "deno.jsonc"),
-  init_options = { lint = true, unstable = true, },
+  root_dir = lspconfig.util.root_pattern(
+    "denops",
+    "mod.ts",
+    "deno.json",
+    "deno.jsonc",
+    "import_map.json"
+  ),
+  init_options = {
+    lint = true,
+    unstable = true,
+    importMap = lspconfig.util.root_pattern("import_map.json")(
+      vim.api.nvim_eval('expand("%:p")')
+    ) ~= nil and "import_map.json" or nil,
+  },
 }
 
 lspconfig.tsserver.setup {
