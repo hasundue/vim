@@ -13,6 +13,8 @@ lsp_installer.setup {
     "tsserver",
     "eslint",
     "cssls",
+    -- "jsonls",
+    "yamlls",
     -- "julials",
     -- "dartls",
     "sumneko_lua",
@@ -50,6 +52,20 @@ lspconfig.tsserver.setup {
 
 lspconfig.eslint.setup {
   root_dir = lspconfig.util.root_pattern(".eslintrc*"),
+}
+
+lspconfig.cssls.setup{}
+
+-- lspconfig.jsonls.setup{}
+
+lspconfig.yamlls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        [ "https://json.schemastore.org/github-workflow.json" ] = "/.github/workflows/*",
+      },
+    },
+  },
 }
 
 lspconfig.sumneko_lua.setup {
