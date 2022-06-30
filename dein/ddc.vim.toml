@@ -14,13 +14,20 @@ call ddc#custom#patch_global('sources', [
 if has('nvim')
   call ddc#custom#patch_filetype(
         \ ['bash', 'vim', 'typescript', 'lua'], 'sources',
-        \ ['nvim-lsp', 'around']
+        \ ['nvim-lsp', 'file', 'around']
+        \ )
+
+  call ddc#custom#patch_filetype(
+        \ ['markdown'], 'sources',
+        \ ['nvim-lsp', 'emoji', 'around']
         \ )
 endif
 
 call ddc#custom#patch_global('cmdlineSources',
       \ ['cmdline', 'cmdline-history', 'file', 'around']
       \ )
+
+call ddc#custom#patch_global('keywordPattern', '[a-zA-Z_:]*')
 
 call ddc#custom#patch_global('sourceOptions', {
 \   '_': {
@@ -30,7 +37,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \   },
 \   'nvim-lsp': {
 \       'mark': 'L',
-\       'forceCompletionPattern': '\.',
+\       'forceCompletionPattern': '\w[\.\{\(]',
 \   },
 \   'around': {
 \       'mark': 'A',
@@ -39,6 +46,11 @@ call ddc#custom#patch_global('sourceOptions', {
 \       'mark': 'F',
 \       'isVolatile': v:true,
 \       'forceCompletionPattern': '\S/\S*'
+\   },
+\   'emoji': {
+\       'mark': 'E',
+\       'matchers': ['emoji'],
+\       'forceCompletionPattern': '\:\S',
 \   },
 \ })
 
@@ -131,4 +143,8 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-nvim-lsp'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'gamoutatsumi/ddc-emoji'
 on_source = 'ddc.vim'
