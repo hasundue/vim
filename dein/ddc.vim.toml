@@ -27,7 +27,7 @@ call ddc#custom#patch_global('cmdlineSources',
       \ ['cmdline', 'cmdline-history', 'file', 'around']
       \ )
 
-call ddc#custom#patch_global('keywordPattern', '[a-zA-Z_:]*')
+call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[\k:]*')
 
 call ddc#custom#patch_global('sourceOptions', {
 \   '_': {
