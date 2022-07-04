@@ -11,6 +11,9 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = false,
   },
+  yeti = {
+    enable = true,
+  },
   ensure_installed = {
     "bash",
     "vim",
@@ -31,4 +34,8 @@ EOF
 
 [[plugins]]
 repo = 'nvim-treesitter/playground'
+depends = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+repo = 'yioneko/nvim-yati'
 depends = 'nvim-treesitter/nvim-treesitter'
