@@ -16,8 +16,23 @@ function! s:ddu_file() abort
     \ })
 endfunction
 
+function! s:ddu_config() abort
+  call ddu#start({
+    \ 'sources': [{'name': 'file_external', 'params': {'path': expand('~/.config/vim')}}],
+    \ })
+endfunction
+
+function! s:ddu_home() abort
+  call ddu#start({
+    \ 'ui': 'filer',
+    \ 'sources': [{'name': 'file', 'params': {'path': expand('~')}}],
+    \ })
+endfunction
+
 nnoremap <silent> <leader>ug <cmd>call <SID>ddu_rg()<CR>
 nnoremap <silent> <leader>uf <cmd>call <SID>ddu_file()<CR>
+nnoremap <silent> <leader>uc <cmd>call <SID>ddu_config()<CR>
+nnoremap <silent> <leader>uh <cmd>call <SID>ddu_home()<CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global({
@@ -33,6 +48,9 @@ call ddu#custom#patch_global({
     \     },
     \     'rg': {
     \       'matchers': [],
+    \     },
+    \     'file' :{
+    \       'columns': ['filename'],
     \     },
     \   },
     \   'sourceParams': {
@@ -67,6 +85,7 @@ endif
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
 on_source = 'ddu.vim'
+
 [plugins.ftplugin]
 ddu-ff = '''
 nnoremap <buffer><silent> <CR>
@@ -86,6 +105,35 @@ nnoremap <buffer><silent> <CR>
 '''
 
 [[plugins]]
+repo = 'Shougo/ddu-ui-filer'
+on_source = 'ddu.vim'
+hook_source = '''
+call ddu#custom#patch_global({
+    \   'uiParams': {
+    \     'filer': {
+    \       'split': 'floating',
+    \     },
+    \   },
+    \ })
+'''
+[plugins.ftplugin]
+ddu-filer = '''
+nnoremap <buffer><silent> <CR>
+      \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+nnoremap <buffer><silent> <Space>
+      \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+nnoremap <buffer> o
+      \ <Cmd>call ddu#ui#filer#do_action('expandItem',
+      \ {'mode': 'toggle'})<CR>
+nnoremap <buffer><silent> q
+      \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/ddu-column-filename'
+on_source = 'ddu.vim'
+
+[[plugins]]
 repo = 'yuki-yano/ddu-filter-fzf'
 on_source = 'ddu.vim'
 
@@ -95,6 +143,10 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-file_external'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-file'
 on_source = 'ddu.vim'
 
 [[plugins]]

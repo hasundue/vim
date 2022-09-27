@@ -1,8 +1,7 @@
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 merged = 'v:false'
-hook_source = '''
-lua <<EOF
+lua_source = '''
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -11,7 +10,7 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = false,
   },
-  yeti = {
+  yati = {
     enable = true,
   },
   ensure_installed = {
@@ -27,9 +26,9 @@ require'nvim-treesitter.configs'.setup {
     "markdown",
     "html",
     "css",
+    "sql",
   },
 }
-EOF
 '''
 
 [[plugins]]

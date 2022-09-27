@@ -1,6 +1,6 @@
-[[plugins]]
-repo = 'JuliaEditorSupport/julia-vim'
-on_ft = 'julia'
+# [[plugins]]
+# repo = 'JuliaEditorSupport/julia-vim'
+# on_ft = 'julia'
 
 [[plugins]]
 repo ='jpalardy/vim-slime' 

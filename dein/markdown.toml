@@ -8,10 +8,10 @@ nnoremap <LocalLeader>p :Glow<CR>
 [[plugins]]
 repo = 'psliwka/vim-dirtytalk'
 on_ft = 'markdown'
-hook_post_update = ':DirtytalkUpdate'
+# hook_post_update = ':DirtytalkUpdate'
 
 [[plugins]]
-repo = 'hasundue/glance-vim'
+repo = 'tani/glance-vim'
 depends = 'denops.vim'
 on_ft = 'markdown'
 hook_add = '''

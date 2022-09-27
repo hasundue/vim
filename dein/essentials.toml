@@ -1,10 +1,28 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 hook_add = '''
-    let s:deno_bin = exepath('deno')
-    if !filereadable(s:deno_bin)
-        execute '!curl -fsSL https://deno.land/x/install/install.sh | sh'
-    endif
+let s:deno_bin = exepath('deno')
+'''
+
+[[plugins]]
+repo = 'vim-denops/denops-shared-server.vim'
+hook_add = '''
+let g:denops_server_addr = "localhost:3456"
+'''
+
+[[plugins]]
+repo='vim-skk/denops-skkeleton.vim'
+on_source='denops.vim'
+hook_add = '''
+imap <C-j> <Plug>(skkeleton-toggle)
+cmap <C-j> <Plug>(skkeleton-toggle)
+
+call skkeleton#config({
+  \ 'eggLikeNewline': v:true,
+  \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
+  \ })
+
+call skkeleton#config({'completionRankFile': '~/.cache/skkeleton/rank.json'})
 '''
 
 [[plugins]]

@@ -9,25 +9,26 @@ call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('sources', [
       \   'file',
       \   'around',
+      \   'skkeleton',
       \ ])
 
 if has('nvim')
   call ddc#custom#patch_filetype(
         \ ['bash', 'vim', 'typescript', 'lua'], 'sources',
-        \ ['nvim-lsp', 'file', 'around']
+        \ ['skkeleton', 'nvim-lsp', 'file', 'around']
         \ )
 
   call ddc#custom#patch_filetype(
         \ ['markdown'], 'sources',
-        \ ['nvim-lsp', 'emoji', 'around']
+        \ ['skkeleton', 'nvim-lsp', 'emoji', 'file', 'around']
         \ )
 endif
+
+call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[\k:]*')
 
 call ddc#custom#patch_global('cmdlineSources',
       \ ['cmdline', 'cmdline-history', 'file', 'around']
       \ )
-
-call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[\k:]*')
 
 call ddc#custom#patch_global('sourceOptions', {
 \   '_': {
@@ -37,7 +38,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \   },
 \   'nvim-lsp': {
 \       'mark': 'L',
-\       'forceCompletionPattern': '\w[\.\{\(]',
+\       'forceCompletionPattern': '\w[\.]',
 \   },
 \   'around': {
 \       'mark': 'A',
@@ -51,6 +52,12 @@ call ddc#custom#patch_global('sourceOptions', {
 \       'mark': 'E',
 \       'matchers': ['emoji'],
 \       'forceCompletionPattern': '\:\S',
+\   },
+\   'skkeleton': {
+\     'mark': 'S',
+\     'matchers': ['skkeleton'],
+\     'sorters': [],
+\     'minAutoCompleteLength': 1,
 \   },
 \ })
 
@@ -92,7 +99,7 @@ function! CommandlinePre() abort
   " Overwrite sources
   let s:prev_buffer_config = ddc#custom#get_buffer()
   call ddc#custom#patch_buffer('cmdlineSources',
-        \ ['cmdline', 'cmdline-history', 'file', 'around'])
+        \ ['cmdline', 'cmdline-history', 'file'])
 
   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
   autocmd InsertEnter <buffer> ++once call CommandlinePost()

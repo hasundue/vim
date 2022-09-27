@@ -9,3 +9,6 @@ repo = 'airblade/vim-gitgutter'
 hook_add = '''
 nnoremap <leader>gu :GitGutterUndoHunk<CR>
 '''
+
+[[plugins]]
+repo = 'skanehira/gh.vim'
