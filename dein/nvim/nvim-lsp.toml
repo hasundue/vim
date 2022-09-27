@@ -6,7 +6,7 @@ require("mason").setup()
 
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
-# on_source = 'mason.nvim'
+depends = 'mason.nvim'
 lua_source = '''
 require("mason-lspconfig").setup({
   automatic_installation = true,
@@ -15,7 +15,7 @@ require("mason-lspconfig").setup({
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-# on_source = 'mason-lspconfig.nvim'
+depends = ['mason.nvim', 'mason-lspconfig.nvim']
 lua_source = '''
 local lspconfig = require("lspconfig")
 
