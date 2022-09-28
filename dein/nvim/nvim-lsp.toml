@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'williamboman/mason.nvim'
+on_source = 'mason-lspconfig'
 lua_source = '''
 require("mason").setup()
 '''
@@ -7,6 +8,7 @@ require("mason").setup()
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
 depends = 'mason.nvim'
+on_source = 'nvim-lspconfig'
 lua_source = '''
 require("mason-lspconfig").setup({
   automatic_installation = true,
@@ -15,7 +17,7 @@ require("mason-lspconfig").setup({
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-depends = ['mason.nvim', 'mason-lspconfig.nvim']
+on_event = 'BufEnter'
 lua_source = '''
 local lspconfig = require("lspconfig")
 
@@ -33,6 +35,12 @@ lspconfig.sumneko_lua.setup({
     library = vim.api.nvim_get_runtime_file("", true),
   },
   autostart = true,
+})
+
+lspconfig.grammarly.setup({
+  init_options = {
+    clientId = 'client_BaDkMgx4X19X9UxxYRCXZo',
+  }
 })
 
 lspconfig.bashls.setup{}
