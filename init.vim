@@ -22,6 +22,8 @@ set updatetime=1000
 
 set mouse=a
 
+set cmdheight=0
+
 " }
 
 
