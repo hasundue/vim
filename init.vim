@@ -74,7 +74,7 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   " Let dein manage dein
-  call dein#add(s:dein_dir)
+  call dein#add('Shougo/dein.vim')
 
   " List of plugin toml files
   let tomls = glob(s:toml_dir . "/*.toml")
