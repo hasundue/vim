@@ -96,21 +96,6 @@ nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 autocmd Init BufWritePre * lua vim.lsp.buf.formatting_sync()
 '''
 
-# [[plugins]]
-# repo = 'jose-elias-alvarez/null-ls.nvim'
-# depends = ['plenary.nvim']
-# lua_source = '''
-# local null_ls = require("null-ls")
-
-# null_ls.setup({
-#   sources = {
-#     null_ls.builtins.diagnostics.textlint.with({
-#       filetypes = { "markdown" }
-#     }),
-#   }
-# })
-# '''
-
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
