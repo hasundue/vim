@@ -34,8 +34,24 @@ require'nvim-treesitter.configs'.setup {
 
 [[plugins]]
 repo = 'nvim-treesitter/playground'
-depends = 'nvim-treesitter/nvim-treesitter'
+depends = 'nvim-treesitter'
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-context'
+depends = 'nvim-treesitter'
+lua_source = '''
+require('treesitter-context').setup()
+'''
 
 [[plugins]]
 repo = 'yioneko/nvim-yati'
-depends = 'nvim-treesitter/nvim-treesitter'
+depends = 'nvim-treesitter'
+on_source = 'nvim-treesitter'
+
+[[plugins]]
+repo = 'AckslD/nvim-FeMaco.lua'
+depends = 'nvim-treesitter'
+on_event = 'BufEnter'
+lua_source = '''
+require('femaco').setup()
+'''
