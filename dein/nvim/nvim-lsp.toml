@@ -50,9 +50,7 @@ lspconfig.denols.setup({
   single_file_support = false,
   root_dir = lspconfig.util.root_pattern(
     "denops",
-    "mod.ts",
-    "deno.json",
-    "deno.jsonc"
+    "deno.json"
   ),
   init_options = {
     lint = false,
