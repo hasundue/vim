@@ -34,12 +34,3 @@ hook_add = '''
 nmap <C-_> gcc
 vmap <C-_> gc
 '''
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'gko/vim-coloresque'
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
