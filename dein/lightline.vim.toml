@@ -6,6 +6,24 @@ set showtabline=2
 
 let g:lightline = {
   \ 'colorscheme': 'gruvbox_material',
+  \
+  \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+  \
+  \ 'active': {
+  \   'left': [ 
+  \     [ 'mode', 'paste' ],
+  \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+  \   ],
+  \   'right': [
+  \     [ 'lineinfo' ],
+  \     [ 'fileformat', 'percent' ]
+  \   ],
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'FugitiveHead'
+  \ },
+  \
   \ 'tabline': {
   \   'left': [ ['buffers'] ],
   \   'right': [],
@@ -46,4 +64,10 @@ function! s:close_buf() abort
 endfunction
 
 nnoremap <Leader>- <cmd>call <SID>close_buf()<CR>
+'''
+
+[[plugins]]
+repo = 'vimpostor/vim-tpipeline'
+hook_add = '''
+let g:tpipeline_restore = 1
 '''
