@@ -17,7 +17,7 @@ let g:lightline = {
   \   ],
   \   'right': [
   \     [ 'lineinfo' ],
-  \     [ 'fileformat', 'percent' ]
+  \     [ 'filetype', 'percent' ]
   \   ],
   \ },
   \ 'component_function': {
