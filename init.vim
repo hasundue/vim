@@ -13,6 +13,7 @@ set background=dark
 
 set number
 set nowrap
+set signcolumn=number
 
 set expandtab
 set tabstop=2
