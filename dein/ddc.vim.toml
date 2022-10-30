@@ -1,86 +1,83 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-depends = ['denops.vim', 'pum.vim']
+depends = ['denops.vim']
 on_source = 'denops.vim'
-on_event = ['InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineEnter', 'CmdlineChanged', 'CursorHold']
+on_event = [
+  'InsertEnter',
+  'TextChangedI',
+  'TextChangedP',
+  'CmdlineEnter',
+  'CmdlineChanged',
+  'CursorHold',
+]
 hook_source = '''
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('ui', 'pum')
+
+call ddc#custom#patch_global('autoCompleteEvents', [
+  \   'InsertEnter',
+  \   'TextChangedI',
+  \   'TextChangedP',
+  \   'CmdlineEnter',
+  \   'CmdlineChanged',
+  \ ])
 
 call ddc#custom#patch_global('sources', [
-      \   'file',
-      \   'around',
-      \   'skkeleton',
-      \ ])
+  \   'file',
+  \   'around',
+  \   'skkeleton',
+  \ ])
 
 if has('nvim')
   call ddc#custom#patch_filetype(
-        \ ['bash', 'vim', 'typescript', 'lua'], 'sources',
-        \ ['skkeleton', 'nvim-lsp', 'file', 'around']
-        \ )
+    \   ['bash', 'vim', 'typescript', 'lua'], 'sources',
+    \   ['skkeleton', 'nvim-lsp', 'file', 'around']
+    \ )
 
   call ddc#custom#patch_filetype(
-        \ ['markdown'], 'sources',
-        \ ['skkeleton', 'nvim-lsp', 'emoji', 'file', 'around']
-        \ )
+    \   ['markdown'], 'sources',
+    \   ['skkeleton', 'nvim-lsp', 'file', 'around']
+    \ )
 endif
 
-call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[\k:]*')
-
 call ddc#custom#patch_global('cmdlineSources',
-      \ ['cmdline', 'cmdline-history', 'file', 'around']
-      \ )
+  \ ['cmdline', 'cmdline-history', 'file', 'around']
+  \ )
 
 call ddc#custom#patch_global('sourceOptions', {
-\   '_': {
-\       'matchers': ['matcher_fuzzy'],
-\       'sorters': ['sorter_fuzzy'],
-\       'converters': ['converter_fuzzy'],
-\   },
-\   'nvim-lsp': {
-\       'mark': 'L',
-\       'forceCompletionPattern': '\w[\.]',
-\   },
-\   'around': {
-\       'mark': 'A',
-\   },
-\   'file': {
-\       'mark': 'F',
-\       'isVolatile': v:true,
-\       'forceCompletionPattern': '\S/\S*'
-\   },
-\   'emoji': {
-\       'mark': 'E',
-\       'matchers': ['emoji'],
-\       'forceCompletionPattern': '\:\S',
-\   },
-\   'skkeleton': {
-\     'mark': 'S',
-\     'matchers': ['skkeleton'],
-\     'sorters': [],
-\     'minAutoCompleteLength': 1,
-\   },
-\ })
-
-call ddc#custom#patch_global('autoCompleteEvents', [
-\   'InsertEnter',
-\   'TextChangedI',
-\   'TextChangedP',
-\   'CmdlineEnter',
-\   'CmdlineChanged',
-\ ])
+  \ '_': {
+  \   'matchers': ['matcher_fuzzy'],
+  \   'sorters': ['sorter_fuzzy'],
+  \   'converters': ['converter_fuzzy'],
+  \ },
+  \ 'nvim-lsp': {
+  \   'mark': 'L',
+  \   'minAutoCompleteLength': 1,
+  \ },
+  \ 'around': {
+  \   'mark': 'A',
+  \ },
+  \ 'file': {
+  \   'mark': 'F',
+  \   'isVolatile': v:true,
+  \   'forceCompletionPattern': '\S/\S*'
+  \ },
+  \ 'skkeleton': {
+  \   'mark': 'S',
+  \   'matchers': ['skkeleton'],
+  \   'sorters': [],
+  \   'minAutoCompleteLength': 1,
+  \ },
+  \ })
 
 call ddc#enable()
 '''
 hook_add = '''
-inoremap <silent><expr> <TAB>
-    \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-    \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-    \ '<TAB>' : ddc#manual_complete()
-
+inoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-
-inoremap <C-n> <Cmd>call pum#map#select_relative(+1)<CR>
-inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
 
 "
 " Commandline completion {
@@ -88,18 +85,20 @@ inoremap <C-p> <Cmd>call pum#map#select_relative(-1)<CR>
 nnoremap : <Cmd>call CommandlinePre()<CR>:
 
 function! CommandlinePre() abort
-  set wildcharm=<C-t>
-
-  cnoremap <expr> <Tab>
-        \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-        \ exists('b:ddc_cmdline_completion') ?
-        \ ddc#manual_complete() : nr2char(&wildcharm)
+  cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
   cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+  cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+  cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+  cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+  cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
 
   " Overwrite sources
-  let s:prev_buffer_config = ddc#custom#get_buffer()
+  if !exists('b:prev_buffer_config')
+    let b:prev_buffer_config = ddc#custom#get_buffer()
+  endif
   call ddc#custom#patch_buffer('cmdlineSources',
-        \ ['cmdline', 'cmdline-history', 'file'])
+  \ ['cmdline', 'cmdline-history', 'file']
+  \ )
 
   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
   autocmd InsertEnter <buffer> ++once call CommandlinePost()
@@ -109,7 +108,12 @@ function! CommandlinePre() abort
 endfunction
 
 function! CommandlinePost() abort
-  silent! cunmap <buffer> <TAB>
+  silent! cunmap <Tab>
+  silent! cunmap <S-Tab>
+  silent! cunmap <C-n>
+  silent! cunmap <C-p>
+  silent! cunmap <C-y>
+  silent! cunmap <C-e>
 
   " Restore sources
   if exists('b:prev_buffer_config')
@@ -118,8 +122,6 @@ function! CommandlinePost() abort
   else
     call ddc#custom#set_buffer({})
   endif
-
-  set wildcharm=<Tab>
 endfunction
 
 " }
@@ -127,13 +129,19 @@ endfunction
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
+on_source = 'ddc-ui-pum'
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+depends = 'pum.vim'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-around'
+repo = 'Shougo/ddc-source-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -150,8 +158,4 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-nvim-lsp'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'gamoutatsumi/ddc-emoji'
 on_source = 'ddc.vim'
