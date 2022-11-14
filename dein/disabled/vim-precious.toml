@@ -1,4 +1,0 @@
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = 'context_filetype.vim'
-on_ft = ['toml', 'markdown']
