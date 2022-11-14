@@ -9,6 +9,9 @@ repo = 'vim-denops/denops-shared-server.vim'
 hook_add = '''
 let g:denops_server_addr = "localhost:3456"
 '''
+hook_done_update = '''
+call denops_shared_server#install()
+'''
 
 [[plugins]]
 repo='vim-skk/denops-skkeleton.vim'
@@ -34,3 +37,6 @@ hook_add = '''
 nmap <C-_> gcc
 vmap <C-_> gc
 '''
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'

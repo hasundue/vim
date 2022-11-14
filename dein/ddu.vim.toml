@@ -22,7 +22,7 @@ function! s:ddu_config() abort
     \ })
 endfunction
 
-function! s:ddu_home() abort
+function! s:ddu_tree() abort
   call ddu#start({
     \ 'ui': 'filer',
     \ 'sources': [{'name': 'file', 'params': {'path': expand('~')}}],
@@ -32,7 +32,7 @@ endfunction
 nnoremap <silent> <leader>ug <cmd>call <SID>ddu_rg()<CR>
 nnoremap <silent> <leader>uf <cmd>call <SID>ddu_file()<CR>
 nnoremap <silent> <leader>uc <cmd>call <SID>ddu_config()<CR>
-nnoremap <silent> <leader>uh <cmd>call <SID>ddu_home()<CR>
+nnoremap <silent> <leader>ut <cmd>call <SID>ddu_tree()<CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global({

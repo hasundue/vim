@@ -52,7 +52,8 @@ lspconfig.denols.setup({
   single_file_support = false,
   root_dir = lspconfig.util.root_pattern(
     "denops",
-    "deno.json*"
+    "deno.json",
+    "deno.jsonc"
   ),
   init_options = {
     lint = false,
@@ -93,7 +94,7 @@ nnoremap <silent> d? <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 
-autocmd Init BufWritePre * lua vim.lsp.buf.format()
+autocmd Init BufWritePre * silent! lua vim.lsp.buf.format()
 '''
 
 [[plugins]]

@@ -19,8 +19,6 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 
-set updatetime=1000
-
 set mouse=a
 
 set cmdheight=0
@@ -69,6 +67,7 @@ endif
 
 " Options
 let g:dein#install_check_diff = v:true
+let g:dein#auto_recache = v:true
 
 " Setting up dein
 if dein#load_state(s:dein_dir)
@@ -76,6 +75,9 @@ if dein#load_state(s:dein_dir)
 
   " Let dein manage dein
   call dein#add('Shougo/dein.vim')
+
+  " Add local plugins
+  call dein#local('~/vim-plugins')
 
   " List of plugin toml files
   let tomls = glob(s:toml_dir . "/*.toml")
