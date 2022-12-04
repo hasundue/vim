@@ -47,9 +47,9 @@ autocmd QuickFixCmdPost *vimgrep* cwindow
 
 " Directories
 if has('nvim')
-  let s:dein_dir = expand('~/.cache/dein')
+  let s:dein_dir = expand('~/.cache/dein/nvim')
 else
-  let s:dein_dir = expand('~/.vim/bundles')
+  let s:dein_dir = expand('~/.cache/dein/vim')
 endif
 
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
