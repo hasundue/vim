@@ -1,31 +1,24 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-hook_add = '''
-let s:deno_bin = exepath('deno')
-'''
+hook_add = 'let s:deno_bin = exepath("deno")'
 
 [[plugins]]
 repo = 'vim-denops/denops-shared-server.vim'
-hook_add = '''
-let g:denops_server_addr = "localhost:3456"
-'''
-hook_done_update = '''
-call denops_shared_server#install()
-'''
+hook_add = 'let g:denops_server_addr = "localhost:3456"'
+hook_done_update = 'call denops_shared_server#install()'
 
 [[plugins]]
-repo='vim-skk/denops-skkeleton.vim'
-on_source='denops.vim'
+repo = 'vim-skk/denops-skkeleton.vim'
+on_source = 'denops.vim'
 hook_add = '''
-imap <C-j> <Plug>(skkeleton-toggle)
-cmap <C-j> <Plug>(skkeleton-toggle)
+  imap <C-j> <Plug>(skkeleton-toggle)
+  cmap <C-j> <Plug>(skkeleton-toggle)
 
-call skkeleton#config({
-  \ 'eggLikeNewline': v:true,
-  \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
-  \ })
-
-call skkeleton#config({'completionRankFile': '~/.cache/skkeleton/rank.json'})
+  call skkeleton#config({
+    \ 'eggLikeNewline': v:true,
+    \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
+    \ 'completionRankFile': '~/.cache/skkeleton/rank.json',
+    \ })
 '''
 
 [[plugins]]
@@ -34,8 +27,8 @@ repo = 'lambdalisue/guise.vim'
 [[plugins]]
 repo = 'tpope/vim-commentary'
 hook_add = '''
-nmap <C-_> gcc
-vmap <C-_> gc
+  nmap <C-_> gcc
+  vmap <C-_> gc
 '''
 
 [[plugins]]

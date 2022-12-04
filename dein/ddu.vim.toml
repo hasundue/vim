@@ -5,27 +5,33 @@ on_source = 'denops.vim'
 hook_add = '''
 function! s:ddu_rg() abort
   call ddu#start({
-    \ 'volatile': v:true,
-    \ 'sources': [{'name': 'rg'}],
+    \   'volatile': v:true,
+    \   'sources': [{ 'name': 'rg' }],
     \ })
 endfunction
 
 function! s:ddu_file() abort
   call ddu#start({
-    \ 'sources': [{'name': 'file_external'}],
+    \   'sources': [{ 'name': 'file_external' }],
     \ })
 endfunction
 
 function! s:ddu_config() abort
   call ddu#start({
-    \ 'sources': [{'name': 'file_external', 'params': {'path': expand('~/.config/vim')}}],
+    \   'sources': [{
+    \     'name': 'file_external',
+    \     'params': { 'path': expand('~/.config/vim') },
+    \   }],
     \ })
 endfunction
 
 function! s:ddu_tree() abort
   call ddu#start({
-    \ 'ui': 'filer',
-    \ 'sources': [{'name': 'file', 'params': {'path': expand('~')}}],
+    \   'ui': 'filer',
+    \   'sources': [{
+    \     'name': 'file',
+    \     'params': { 'path': expand('~') }
+    \   }],
     \ })
 endfunction
 
