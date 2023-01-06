@@ -62,6 +62,7 @@ lspconfig.denols.setup({
 })
 
 lspconfig.tsserver.setup {
+  single_file_support = false,
   root_dir = lspconfig.util.root_pattern("package.json"),
 }
 
