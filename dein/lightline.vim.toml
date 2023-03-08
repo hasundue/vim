@@ -68,6 +68,7 @@ nnoremap <Leader>- <cmd>call <SID>close_buf()<CR>
 
 [[plugins]]
 repo = 'vimpostor/vim-tpipeline'
+rev = 'a61f610'
 hook_add = '''
 let g:tpipeline_restore = 1
 '''
