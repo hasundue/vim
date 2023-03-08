@@ -115,7 +115,7 @@ endif
 
 " Keymap
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
-nnoremap <leader>du :call dein#check_update(v:true)<CR>
+nnoremap <leader>du :call dein#update()<CR>
 nnoremap <leader>di :call dein#install()<CR>
 
 " }
