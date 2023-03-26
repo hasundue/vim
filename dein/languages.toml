@@ -1,0 +1,18 @@
+[[plugins]]
+repo = 'ziglang/zig.vim'
+on_ft = 'zig'
+hook_add = '''
+  let g:zig_fmt_autosave = 0
+  autocmd BufNewFile,BufRead *.zon setfiletype zig
+'''
+hook_source = '''
+  let g:quickrun_config = get(g:, 'quickrun_config')
+
+  let g:quickrun_config.zig = {
+    \ 'exec': 'zig test %s',
+    \ 'outputter': 'error',
+    \ 'outputter/error/success': 'message',
+    \ 'outputter/message': 1,
+    \ 'outputter/error/error': 'quickfix',
+    \ }
+'''

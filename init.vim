@@ -20,6 +20,7 @@ set tabstop=2
 set shiftwidth=2
 
 set mouse=a
+set clipboard+=unnamedplus
 
 set cmdheight=0
 
@@ -114,9 +115,8 @@ else
 endif
 
 " Keymap
-nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
-nnoremap <leader>du :call dein#update()<CR>
-nnoremap <leader>di :call dein#install()<CR>
+nnoremap <leader>pr :call dein#recache_runtimepath()<CR>
+nnoremap <leader>pi :call dein#install()<CR>
 
 " }
 

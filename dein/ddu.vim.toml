@@ -3,44 +3,20 @@ repo = 'Shougo/ddu.vim'
 depends = 'denops.vim'
 on_source = 'denops.vim'
 hook_add = '''
-function! s:ddu_rg() abort
-  call ddu#start(#{
-    \   volatile: v:true,
-    \   sources: [
-    \     #{ name: 'rg' },
-    \   ],
-    \ })
-endfunction
-
-function! s:ddu_file() abort
-  call ddu#start(#{
-    \   sources: [
-    \     #{ name: 'file_external' },
-    \   ],
-    \ })
-endfunction
-
-function! s:ddu_config() abort
-  call ddu#start(#{
-    \   sources: [
-    \     #{ name: 'file_external', params: #{ path: expand('~/.config/vim') },
-    \   }],
-    \ })
-endfunction
-
-function! s:ddu_tree() abort
-  call ddu#start(#{
-    \   ui: 'filer',
-    \   sources: [
-    \     #{ name: 'file', params: #{ path: expand('~') } },
-    \   ],
-    \ })
-endfunction
-
-nnoremap <silent> <leader>ug <cmd>call <SID>ddu_rg()<CR>
-nnoremap <silent> <leader>uf <cmd>call <SID>ddu_file()<CR>
-nnoremap <silent> <leader>uc <cmd>call <SID>ddu_config()<CR>
-nnoremap <silent> <leader>ut <cmd>call <SID>ddu_tree()<CR>
+nnoremap <silent> <leader>uf <cmd>Ddu 
+  \ file_external
+  \ <CR>
+nnoremap <silent> <leader>uc <cmd>Ddu
+  \ file_external
+  \ -source-option-path='`expand('~/.config/vim')`'
+  \ <CR>
+nnoremap <silent> <leader>ug <cmd>Ddu
+  \ rg
+  \ <CR>
+nnoremap <silent> <leader>pu <cmd>Ddu
+  \ dein_update
+  \ -ui-param-startFilter='v:false'
+  \ <CR>
 '''
 hook_source = '''
 call ddu#custom#patch_global(#{
@@ -60,6 +36,9 @@ call ddu#custom#patch_global(#{
   \     file: #{
   \       columns: ['filename'],
   \     },
+  \     dein_update: #{
+  \       matchers: ['matcher_dein_update'],
+  \     },
   \   },
   \   sourceParams: #{
   \     file_external: #{
@@ -73,13 +52,24 @@ call ddu#custom#patch_global(#{
   \     file: #{
   \       defaultAction: 'open',
   \     },
+  \     dein_update: #{
+  \       defaultAction: 'viewDiff',
+  \     },
+  \   },
+  \   actionOptions: #{
+  \     echo: #{
+  \       quit: v:false,
+  \     },
+  \     echoDiff: #{
+  \       quit: v:false,
+  \     },
   \   },
   \ })
 
 if has('nvim')
   call ddu#custom#patch_global(#{
     \   uiParams: #{
-    \     ff: #{
+    \     _: #{
     \       split: 'floating',
     \       filterFloatingPosition: 'top',
     \       filterSplitDirection: 'floating',
@@ -91,15 +81,20 @@ endif
 '''
 
 [[plugins]]
+repo = 'Shougo/ddu-commands.vim'
+depends = 'ddu.vim'
+on_cmd = 'Ddu'
+
+[[plugins]]
 repo = 'Shougo/ddu-ui-ff'
 on_source = 'ddu.vim'
 
 [plugins.ftplugin]
 ddu-ff = '''
-nnoremap <buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-nnoremap <buffer><silent> <Space> <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
-nnoremap <buffer><silent> i <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
-nnoremap <buffer><silent> q <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+nnoremap <buffer><silent> <CR> <Cmd>call ddu#ui#do_action('itemAction')<CR>
+nnoremap <buffer><silent> <Space> <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
+nnoremap <buffer><silent> i <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
+nnoremap <buffer><silent> q <Cmd>call ddu#ui#do_action('quit')<CR>
 '''
 ddu-ff-filter = '''
 inoremap <buffer><silent> <CR> <Esc><Cmd>close<CR>
@@ -109,27 +104,19 @@ nnoremap <buffer><silent> <CR> <Cmd>close<CR>
 [[plugins]]
 repo = 'Shougo/ddu-ui-filer'
 on_source = 'ddu.vim'
-hook_source = '''
-call ddu#custom#patch_global(#{
-    \   uiParams: #{
-    \     filer: #{
-    \       split: 'floating',
-    \     },
-    \   },
-    \ })
-'''
+
 [plugins.ftplugin]
 ddu-filer = '''
 nnoremap <buffer><silent> <CR>
-  \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
 nnoremap <buffer><silent> <Space>
-  \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+  \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 nnoremap <buffer> o
-  \ <Cmd>call ddu#ui#filer#do_action('expandItem', #{
+  \ <Cmd>call ddu#ui#do_action('expandItem', #{
   \   mode: 'toggle',
   \ })<CR>
 nnoremap <buffer><silent> q
-  \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+  \ <Cmd>call ddu#ui#do_action('quit')<CR>
 '''
 
 [[plugins]]
@@ -154,4 +141,8 @@ on_source = 'ddu.vim'
 
 [[plugins]]
 repo = 'shun/ddu-source-rg'
+on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'matsui54/ddu-source-dein_update'
 on_source = 'ddu.vim'

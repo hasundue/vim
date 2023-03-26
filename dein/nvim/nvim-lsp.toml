@@ -11,7 +11,9 @@ depends = 'mason.nvim'
 on_source = 'nvim-lspconfig'
 lua_source = '''
 require("mason-lspconfig").setup({
-  automatic_installation = true,
+  automatic_installation = {
+    exclude = { "zls" },
+  },
 })
 '''
 
@@ -37,13 +39,6 @@ lspconfig.lua_ls.setup({
     },
   },
   autostart = true,
-})
-
-lspconfig.grammarly.setup({
-  init_options = {
-    clientId = 'client_BaDkMgx4X19X9UxxYRCXZo',
-  },
-  filetypes = { "markdown", "gitcommit" },
 })
 
 lspconfig.bashls.setup{}
@@ -88,6 +83,8 @@ lspconfig.yamlls.setup {
 lspconfig.julials.setup({
   autostart = true,
 })
+
+lspconfig.zls.setup({})
 '''
 hook_add = '''
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
