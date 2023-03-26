@@ -1,6 +1,8 @@
 --
 -- Appearance {
 --
+vim.go.cmdheight = 0
+
 vim.go.pumblend = 10
 vim.go.winblend = 10
 
@@ -11,7 +13,7 @@ vim.go.winblend = 10
 --
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
 
-local config_term = function()
+local function config_term()
   vim.opt_local.termguicolors = true
   vim.opt_local.number = false
   vim.opt_local.relativenumber = false
@@ -29,6 +31,20 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     if (bufname == "") then
       vim.api.nvim_command("term")
       config_term()
+    end
+  end
+})
+
+-- update the current working directory accordingly
+vim.api.nvim_create_autocmd({ "TermLeave" }, {
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+    if buftype == 'terminal' then
+      local line = vim.api.nvim_get_current_line()
+      local dir = line:match('.*:(.-)%$.*')
+      dir = vim.fn.expand(dir)
+      vim.api.nvim_command('lcd ' .. vim.fn.fnameescape(dir))
     end
   end
 })

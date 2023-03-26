@@ -1,11 +1,11 @@
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
-nnoremap <leader>gs :Git<CR>
+  nnoremap <leader>gs :Git<CR>
 '''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
+  nnoremap <leader>gu :GitGutterUndoHunk<CR>
 '''

@@ -1,9 +1,0 @@
-[[plugins]]
-repo = 'ellisonleao/glow.nvim'
-on_ft = 'markdown'
-hook_add = 'nnoremap <LocalLeader>p :Glow<CR>'
-
-[[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = 'markdown'
-hook_post_update = 'sh -c "cd app && yarn install"'

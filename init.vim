@@ -22,8 +22,6 @@ set shiftwidth=2
 set mouse=a
 set clipboard+=unnamedplus
 
-set cmdheight=0
-
 " }
 
 
@@ -57,6 +55,7 @@ let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 let s:toml_dir = expand('~/.config/vim/dein')
 let s:toml_dir_vim = expand('~/.config/vim/dein/vim')
 let s:toml_dir_nvim = expand('~/.config/vim/dein/nvim')
+let s:toml_dir_denops = expand('~/.config/vim/dein/denops')
 
 " Install dein if not
 if &runtimepath !~# '/dein.vim'
@@ -82,11 +81,14 @@ if dein#load_state(s:dein_dir)
 
   " List of plugin toml files
   let tomls = glob(s:toml_dir . "/*.toml")
+
   if has('nvim')
     let tomls .= "\n" . glob(s:toml_dir_nvim . "/*.toml")
   else
     let tomls .= "\n" . glob(s:toml_dir_vim . "/*.toml")
   endif
+
+  let tomls .= "\n" . glob(s:toml_dir_denops . "/*toml")
 
   " Load each plugin
   for toml in split(tomls, "\n")

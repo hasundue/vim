@@ -1,4 +1,71 @@
 [[plugins]]
+repo = 'vim-denops/denops.vim'
+on_event = 'CursorHold'
+hook_add = 'let s:deno_bin = exepath("deno")'
+
+# [[plugins]]
+# repo = 'vim-denops/denops-shared-server.vim'
+# hook_add = 'let g:denops_server_addr = "localhost:3456"'
+# hook_done_update = 'call denops_shared_server#install()'
+
+# [[plugins]]
+# repo = 'Shougo/deol.nvim'
+# depends = ['ddu.vim', 'ddc.vim']
+# on_source = ['ddu.vim']
+# hook_add = '''
+#   nnoremap <silent> <leader>to <cmd>Deol -split=floating<CR>
+
+#   nnoremap <silent> <leader>ut <cmd>Ddu -name=deol
+#     \ -ui-param-split=`has('nvim') ? 'floating' : 'horizontal'`
+#     \ -ui-param-winRow=1 -ui-param-autoResize
+#     \ -ui-param-cursorPos=`tabpagenr()-1`
+#     \ deol<CR>
+# '''
+# hook_source = '''
+#   let g:deol#enable_dir_changed = v:true
+#   let g:deol#prompt_pattern = '\w*% \?'
+#   let g:deol#shell_history_path = '~/.bash_history'
+#   let g:deol#extra_options = {
+#       \ 'term_kill': 'kill',
+#       \ }
+#   "let g:deol#enable_ddc_completion = v:true
+#   let g:deol#nvim_server = '~/.cache/nvim/server.pipe'
+
+#   call ddu#custom#patch_global(#{
+#       \   sourceParams: #{
+#       \     deol: #{
+#       \       command: ['bash'],
+#       \     },
+#       \   }
+#       \ })
+# '''
+# [plugins.ftplugin]
+# deol = '''
+#   nnoremap <buffer> <leader>gc
+#   \ <Cmd>call deol#send('git commit')<CR>
+#   nnoremap <buffer> [Space]gs
+#   \ <Cmd>call deol#send('git status')<CR>
+#   nnoremap <buffer> [Space]gA
+#   \ <Cmd>call deol#send('git commit --amend')<CR>
+
+#   nmap <buffer> e <Plug>(deol_edit)
+
+#   tmap <buffer><expr> <CR>
+#     \ (pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '')
+#     \ .. '<Plug>(deol_execute_line)'
+
+#   call ddc#custom#patch_buffer('sourceOptions', #{
+#           \   _: #{
+#           \     converters: [],
+#           \   },
+#           \ })
+# '''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
+depends = 'denops.vim'
+
+[[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
@@ -13,19 +80,6 @@ hook_add = '''
 [[plugins]]
 repo = 'github/copilot.vim'
 on_event = [ 'InsertEnter', 'TextChangedI' ]
-
-[[plugins]]
-repo = 'vim-denops/denops.vim'
-on_event = 'CursorHold'
-hook_add = 'let s:deno_bin = exepath("deno")'
-
-# [[plugins]]
-# repo = 'vim-denops/denops-shared-server.vim'
-# hook_add = 'let g:denops_server_addr = "localhost:3456"'
-# hook_done_update = 'call denops_shared_server#install()'
-
-[[plugins]]
-repo = 'lambdalisue/guise.vim'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'

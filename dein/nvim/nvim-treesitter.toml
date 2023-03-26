@@ -42,6 +42,10 @@ execute 'TSUpdate'
 '''
 
 [[plugins]]
+repo = 'neovim/tree-sitter-vimdoc'
+on_source = 'nvim-treesitter'
+
+[[plugins]]
 repo = 'nvim-treesitter/playground'
 depends = 'nvim-treesitter'
 

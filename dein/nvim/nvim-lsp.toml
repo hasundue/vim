@@ -97,16 +97,3 @@ autocmd Init BufWritePre * silent! lua vim.lsp.buf.format()
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
-
-[[plugins]]
-repo = 'matsui54/denops-signature_help'
-depends = 'denops.vim'
-hook_add = '''
-let g:signature_help_config = {
-  \ 'border': v:false,
-  \ }
-'''
-on_source = 'ddc.vim'
-hook_source = '''
-call signature_help#enable()
-'''
