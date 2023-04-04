@@ -116,13 +116,3 @@ nnoremap <leader>pr :call dein#recache_runtimepath()<CR>
 nnoremap <leader>pi :call dein#install()<CR>
 
 " }
-
-
-"
-" NeoVim {
-"
-if has('nvim')
-  runtime nvim.lua
-endif
-
-" }
