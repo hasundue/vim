@@ -6,6 +6,12 @@ hook_add = 'let s:deno_bin = exepath("deno")'
 [[plugins]]
 repo = 'lambdalisue/guise.vim'
 depends = 'denops.vim'
+on_event = 'TermOpen'
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+depends = 'denops.vim'
+on_post_source = 'denops.vim'
 
 [[plugins]]
 repo = 'github/copilot.vim'
