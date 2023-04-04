@@ -1,14 +1,4 @@
 --
--- Appearance {
---
-vim.go.cmdheight = 0
-
-vim.go.pumblend = 10
-vim.go.winblend = 10
-
--- }
-
---
 -- Terminal {
 --
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
