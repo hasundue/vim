@@ -43,8 +43,12 @@ autocmd QuickFixCmdPost *vimgrep* cwindow
 
 
 "
-" Jetpack {
+" Plugins {
 "
+if has('nvim')
+  silent! packadd nvim-treesitter
+endif
+
 source $VIMHOME/jetpack.vim
 
 " }

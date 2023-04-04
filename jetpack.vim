@@ -8,7 +8,7 @@ if !filereadable(s:jetpackfile)
   call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
 endif
 
-packadd vim-jetpack
+silent! packadd vim-jetpack
 
 " }
 
@@ -55,14 +55,22 @@ call jetpack#add('shun/ddu-source-rg')
 
 Jetpack 'hasundue/ddu-filter-zf', { 'do': 'deno task build' }
 
-
 " ddc.vim
 call jetpack#add('Shougo/ddc.vim')
 
-" Neovim built-in LSP
-call jetpack#add('neovim/nvim-lspconfig')
-call jetpack#add('williamboman/mason.nvim')
-call jetpack#add('williamboman/mason-lspconfig')
+" Neovim
+if has('nvim')
+  call jetpack#add('nvim-lua/plenary.nvim')
+
+  call jetpack#add('neovim/nvim-lspconfig')
+  call jetpack#add('williamboman/mason.nvim')
+  call jetpack#add('williamboman/mason-lspconfig')
+
+  call jetpack#add('nvim-treesitter/nvim-treesitter')
+  call jetpack#add('nvim-treesitter/nvim-treesitter-context')
+  call jetpack#add('neovim/tree-sitter-vimdoc')
+  call jetpack#add('yioneko/nvim-yati')
+endif
 
 call jetpack#end()
 
