@@ -8,12 +8,17 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   indent = {
-    enable = false,
+    enable = true,
+    disable = { 
+      "html", 
+      "javascript",
+      "jsx",
+      "typescript",
+      "tsx",
+    },
   },
   yati = {
     enable = true,
-    default_lazy = true,
-    default_fallback = "auto"
   },
   ensure_installed = {
     "bash",
