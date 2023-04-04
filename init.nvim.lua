@@ -43,8 +43,10 @@ vim.api.nvim_create_autocmd({ "TermLeave" }, {
     if buftype == 'terminal' then
       local line = vim.api.nvim_get_current_line()
       local dir = line:match('.*:(.-)%$.*')
-      dir = vim.fn.expand(dir)
-      vim.api.nvim_command('lcd ' .. vim.fn.fnameescape(dir))
+      if dir then
+        dir = vim.fn.expand(dir)
+        vim.api.nvim_command('lcd ' .. vim.fn.fnameescape(dir))
+      end
     end
   end
 })
