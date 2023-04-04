@@ -66,7 +66,6 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 " Options
-let g:dein#install_check_diff = v:true
 let g:dein#auto_recache = v:true
 
 " Setting up dein
@@ -80,15 +79,11 @@ if dein#load_state(s:dein_dir)
   call dein#local('~/vim-plugins')
 
   " List of plugin toml files
-  let tomls = glob(s:toml_dir . "/*.toml")
-
+  let tomls = glob(s:toml_dir . "/*.toml") . "\n"
+  let tomls .= glob(s:toml_dir_denops . "/*toml") . "\n"
   if has('nvim')
-    let tomls .= "\n" . glob(s:toml_dir_nvim . "/*.toml")
-  else
-    let tomls .= "\n" . glob(s:toml_dir_vim . "/*.toml")
+    let tomls .= glob(s:toml_dir_nvim . "/*.toml") . "\n"
   endif
-
-  let tomls .= "\n" . glob(s:toml_dir_denops . "/*toml")
 
   " Load each plugin
   for toml in split(tomls, "\n")
@@ -127,7 +122,7 @@ nnoremap <leader>pi :call dein#install()<CR>
 " NeoVim {
 "
 if has('nvim')
-  runtime init.nvim.lua
+  runtime nvim.lua
 endif
 
 " }
