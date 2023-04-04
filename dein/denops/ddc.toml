@@ -177,16 +177,3 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'Shougo/ddc-nvim-lsp'
 on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'matsui54/denops-signature_help'
-depends = 'denops.vim'
-on_source = 'ddc.vim'
-hook_add = '''
-  let g:signature_help_config = {
-    \ 'border': v:false,
-    \ }
-'''
-hook_source = '''
-  call signature_help#enable()
-'''
