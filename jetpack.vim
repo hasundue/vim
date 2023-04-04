@@ -1,8 +1,13 @@
 " 
 " Install vim-jetpack if not exists {
 "
-let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if has('nvim')
+  let s:jetpackfile = stdpath('data') .. '/site/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+else
+  let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+endif
 
 if !filereadable(s:jetpackfile)
   call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
@@ -41,22 +46,29 @@ call jetpack#add('lambdalisue/gin.vim')
 " ddu.vim
 call jetpack#add('Shougo/ddu.vim')
 call jetpack#add('Shougo/ddu-commands.vim')
-
 call jetpack#add('Shougo/ddu-ui-ff')
 call jetpack#add('Shougo/ddu-ui-filer')
-
 call jetpack#add('Shougo/ddu-kind-file')
 call jetpack#add('Shougo/ddu-column-filename')
-
 call jetpack#add('Shougo/ddu-source-file')
 call jetpack#add('matsui54/ddu-source-file_external')
 call jetpack#add('matsui54/ddu-source-help')
 call jetpack#add('shun/ddu-source-rg')
-
 Jetpack 'hasundue/ddu-filter-zf', { 'do': 'deno task build' }
 
 " ddc.vim
 call jetpack#add('Shougo/ddc.vim')
+call jetpack#add('Shougo/pum.vim')
+call jetpack#add('Shougo/ddc-ui-pum')
+call jetpack#add('Shougo/ddc-cmdline')
+call jetpack#add('Shougo/ddc-cmdline-history')
+call jetpack#add('LumaKernel/ddc-file')
+call jetpack#add('tani/ddc-fuzzy')
+call jetpack#add('vim-skk/denops-skkeleton.vim')
+
+if has('nvim')
+  call jetpack#add('Shougo/ddc-nvim-lsp')
+endif
 
 " Neovim
 if has('nvim')

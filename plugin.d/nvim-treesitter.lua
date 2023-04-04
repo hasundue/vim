@@ -1,12 +1,16 @@
-require'nvim-treesitter.configs'.setup({
+-- Build cache of parsers outside of the package manager
+local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
+vim.opt.runtimepath:append(parser_install_dir)
+
+require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
     disable = {},
   },
   indent = {
     enable = true,
-    disable = { 
-      "html", 
+    disable = {
+      "html",
       "javascript",
       "jsx",
       "typescript",
@@ -36,6 +40,7 @@ require'nvim-treesitter.configs'.setup({
     "sql",
     "gitattributes",
   },
+  parser_install_dir = parser_install_dir,
 })
 
 require('treesitter-context').setup()

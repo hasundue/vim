@@ -97,12 +97,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = ev.buf,
-      group = 'UserLspConfig',
-      callback = function()
-        vim.lsp.buf.format { async = false, silent = true }
-      end,
-    })
+    -- vim.api.nvim_create_autocmd('BufWritePre', {
+    --   buffer = ev.buf,
+    --   group = 'UserLspConfig',
+    --   callback = function()
+    --     vim.lsp.buf.format { async = false, silent = true }
+    --   end,
+    -- })
   end,
 })

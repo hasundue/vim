@@ -1,43 +1,46 @@
+"
+" lightline.vim {
+"
 set laststatus=2
 set showtabline=2
 
-let g:lightline = {
-  \ 'colorscheme': 'gruvbox_material',
-  \
-  \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-  \
-  \ 'active': {
-  \   'left': [ 
-  \     [ 'mode', 'paste' ],
-  \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-  \   ],
-  \   'right': [
-  \     [ 'lineinfo' ],
-  \     [ 'filetype', 'percent' ]
-  \   ],
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'FugitiveHead'
-  \ },
-  \
-  \ 'tabline': {
-  \   'left': [ ['buffers'] ],
-  \   'right': [],
-  \ },
-  \ 'component_expand': {
-  \   'buffers': 'lightline#bufferline#buffers'
-  \ },
-  \ 'component_type': {
-  \   'buffers': 'tabsel'
-  \ },
-  \ }
-'''
+let g:lightline = #{
+\   colorscheme: 'gruvbox_material',
+\
+\   separator: { 'left': "\ue0b0", 'right': "\ue0b2" },
+\   subseparator: { 'left': "\ue0b1", 'right': "\ue0b3" },
+\
+\   active: {
+\     'left': [ 
+\       [ 'mode', 'paste' ],
+\       [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+\     ],
+\     'right': [
+\       [ 'lineinfo' ],
+\       [ 'filetype', 'percent' ]
+\     ],
+\   },
+\   component_function: {
+\     'gitbranch': 'FugitiveHead'
+\   },
+\
+\   tabline: {
+\     'left': [ ['buffers'] ],
+\     'right': [],
+\   },
+\   component_expand: {
+\     'buffers': 'lightline#bufferline#buffers'
+\   },
+\   component_type: {
+\     'buffers': 'tabsel'
+\   },
+\ }
 
-[[plugins]]
-repo = 'mengelbrecht/lightline-bufferline'
-depends = 'lightline.vim'
-hook_add = '''
+" }
+
+"
+" lightline-bufferline {
+"
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#margin_left = 1
@@ -61,10 +64,12 @@ function! s:close_buf() abort
 endfunction
 
 nnoremap <Leader>- <cmd>call <SID>close_buf()<CR>
-'''
 
-[[plugins]]
-repo = 'vimpostor/vim-tpipeline'
-hook_add = '''
+" }
+
+"
+" vim-tpipeline {
+"
 let g:tpipeline_restore = 1
-'''
+
+" }
