@@ -6,6 +6,7 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
 local function config_term()
   vim.opt_local.termguicolors = true
   vim.opt_local.number = false
+  vim.opt_local.signcolumn = 'no'
   vim.opt_local.relativenumber = false
 end
 

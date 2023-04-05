@@ -1,11 +1,6 @@
-require("mason").setup()
-
-require("mason-lspconfig").setup({
-  automatic_installation = {
-    exclude = { "zls" },
-  },
-})
-
+--
+-- lua_source {
+--
 local lspconfig = require("lspconfig")
 
 lspconfig.vimls.setup({
@@ -106,3 +101,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- })
   end,
 })
+
+-- }

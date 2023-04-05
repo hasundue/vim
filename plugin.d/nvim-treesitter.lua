@@ -1,7 +1,8 @@
--- Build cache of parsers outside of the package manager
-local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
-vim.opt.runtimepath:append(parser_install_dir)
+--
+-- lua_source {
+--
 
+-- Build cache of parsers outside of the package manager
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
@@ -10,7 +11,6 @@ require('nvim-treesitter.configs').setup({
   indent = {
     enable = true,
     disable = {
-      "html",
       "javascript",
       "jsx",
       "typescript",
@@ -24,23 +24,16 @@ require('nvim-treesitter.configs').setup({
     "bash",
     "vim",
     "lua",
-    "regex",
     "javascript",
-    "jsdoc",
     "typescript",
     "tsx",
     "zig",
-    "julia",
     "json",
     "yaml",
-    "toml",
     "markdown",
-    "html",
-    "css",
-    "sql",
-    "gitattributes",
   },
-  parser_install_dir = parser_install_dir,
 })
 
 require('treesitter-context').setup()
+
+-- }

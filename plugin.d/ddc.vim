@@ -4,52 +4,52 @@
 call ddc#custom#patch_global('ui', 'pum')
 
 call ddc#custom#patch_global('autoCompleteEvents', [
-\   'InsertEnter',
-\   'TextChangedI',
-\   'TextChangedP',
-\   'CmdlineEnter',
-\   'CmdlineChanged',
-\ ])
+  \   'InsertEnter',
+  \   'TextChangedI',
+  \   'TextChangedP',
+  \   'CmdlineEnter',
+  \   'CmdlineChanged',
+  \ ])
 
 if has('nvim')
   call ddc#custom#patch_global('sources', [
-  \   'skkeleton',
-  \   'nvim-lsp',
-  \   'file',
-  \ ])
+    \   'skkeleton',
+    \   'nvim-lsp',
+    \   'file',
+    \ ])
 else
   call ddc#custom#patch_global('sources', [
-  \   'skkeleton',
-  \ ])
+    \   'skkeleton',
+    \ ])
 endif
 
 call ddc#custom#patch_global('cmdlineSources',
-\   ['cmdline', 'cmdline-history', 'file']
-\ )
+  \   ['cmdline', 'cmdline-history', 'file']
+  \ )
 
 call ddc#custom#patch_global('sourceOptions', #{
-\   _: #{
-\     matchers: ['matcher_fuzzy'],
-\     sorters: ['sorter_fuzzy'],
-\     converters: ['converter_fuzzy'],
-\   },
-\   nvim-lsp: #{
-\     mark: 'L',
-\     minAutoCompleteLength: 1,
-\     forceCompletionPattern: '\S[\.\[\(\{]\S*'
-\   },
-\   file: #{
-\     mark: 'F',
-\     isVolatile: v:true,
-\     forceCompletionPattern: '\S/\S*'
-\   },
-\   skkeleton: #{
-\     mark: 'S',
-\     matchers: ['skkeleton'],
-\     minAutoCompleteLength: 1,
-\     isVolatile: v:true,
-\   },
-\ })
+  \   _: #{
+  \     matchers: ['matcher_fuzzy'],
+  \     sorters: ['sorter_fuzzy'],
+  \     converters: ['converter_fuzzy'],
+  \   },
+  \   nvim-lsp: #{
+  \     mark: 'L',
+  \     minAutoCompleteLength: 1,
+  \     forceCompletionPattern: '\S[\.\[\(\{]\S*'
+  \   },
+  \   file: #{
+  \     mark: 'F',
+  \     isVolatile: v:true,
+  \     forceCompletionPattern: '\S/\S*'
+  \   },
+  \   skkeleton: #{
+  \     mark: 'S',
+  \     matchers: ['skkeleton'],
+  \     minAutoCompleteLength: 1,
+  \     isVolatile: v:true,
+  \   },
+  \ })
 
 call ddc#enable()
 
@@ -60,7 +60,7 @@ call ddc#enable()
 "
 inoremap <expr> <TAB>
   \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-  \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+  \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '[\s\\]') ?
   \ '<TAB>' : ddc#map#manual_complete()
 
 inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
@@ -130,9 +130,9 @@ imap <C-j> <Plug>(skkeleton-toggle)
 cmap <C-j> <Plug>(skkeleton-toggle)
 
 call skkeleton#config({
-\ 'eggLikeNewline': v:true,
-\ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
-\ 'completionRankFile': '~/.cache/skkeleton/rank.json',
-\ })
+  \ 'eggLikeNewline': v:true,
+  \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
+  \ 'completionRankFile': '~/.cache/skkeleton/rank.json',
+  \ })
 
 " }
