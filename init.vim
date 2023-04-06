@@ -96,10 +96,6 @@ set preserveindent  " Use :retab to clean up whitespace
 "
 " Plugins {
 "
-if has('nvim')
-  silent! packadd nvim-treesitter
-endif
-
 source $VIMHOME/dein.vim
 
 " }

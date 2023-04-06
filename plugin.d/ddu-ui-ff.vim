@@ -1,5 +1,5 @@
 "
-" ftplugin: ddu-ff {
+" ftplugin["ddu-ff"] {
 "
 nnoremap <buffer><silent> <CR>
   \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
@@ -16,7 +16,7 @@ nnoremap <buffer><silent> q
 " }
 
 "
-" ftplugin: ddu-ff-filter {
+" ftplugin["ddu-ff-filter"] {
 "
 inoremap <buffer> <CR>
   \ <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>

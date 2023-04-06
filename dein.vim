@@ -7,6 +7,7 @@ endif
 
 " Repository cache
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_mod_repo_dir = s:dein_dir . '/repos/github.com/hasundue/dein-mod'
 
 " Install dein if not exists
 if &runtimepath !~# '/dein.vim'
@@ -16,7 +17,10 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 
   " Install dein-mod
-  execute 'set runtimepath+=' . expand('~/dein-mod')
+  if !isdirectory(s:dein_mod_repo_dir)
+    execute '!git clone https://github.com/hasundue/dein-mod' s:dein_mod_repo_dir
+  endif
+  execute 'set runtimepath+=' . fnamemodify(s:dein_mod_repo_dir, ':p')
 endif
 
 " Plugin directory (read by dein#mod#add)
@@ -28,14 +32,14 @@ let g:dein#mod#hook_dir = expand('~/.config/vim/plugin.d')
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " Manage dein itself
+  " dein.vim
   call dein#add('Shougo/dein.vim')
 
   " dein-mod
-  call dein#add(expand('~/dein-mod'))
+  call dein#add('hasundue/dein-mod')
 
   " Appearance
-  call dein#mod#add("sainnhe/gruvbox-material")
+  call dein#mod#add('sainnhe/gruvbox-material')
   call dein#mod#add('itchyny/lightline.vim')
   call dein#mod#add('mengelbrecht/lightline-bufferline', #{ on_event: 'BufAdd' })
   call dein#mod#add('vimpostor/vim-tpipeline')
@@ -128,20 +132,20 @@ if dein#load_state(s:dein_dir)
 endif
 
 " Uninstall unused plugins
-let s:removed_plugins = dein#check_clean()
-if len(s:removed_plugins) > 0
-  call map(s:removed_plugins, "delete(v:val, 'rf')")
-endif
+" let s:removed_plugins = dein#check_clean()
+" if len(s:removed_plugins) > 0
+"   call map(s:removed_plugins, "delete(v:val, 'rf')")
+" endif
 
 " Install plugins if not installed
-if dein#check_install()
- call dein#install()
-endif
+" if dein#check_install()
+"  call dein#install()
+" endif
 
-" Required
+" Required for tree-sitter
 filetype plugin indent on
-syntax on
 
 " Keymap
 nnoremap <leader>pr :call dein#recache_runtimepath()<CR>
 nnoremap <leader>pi :call dein#install()<CR>
+nnoremap <leader>pu :call dein#update()<CR>

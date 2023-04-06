@@ -1,5 +1,5 @@
 "
-" Configuration {
+" hook_source {
 "
 call ddc#custom#patch_global('ui', 'pum')
 
@@ -56,7 +56,7 @@ call ddc#enable()
 " }
 
 "
-" Keymappings {
+" hook_add {
 "
 inoremap <expr> <TAB>
   \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
@@ -70,10 +70,8 @@ inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
 inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
 inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
 
-" }
-
 "
-" Commandline completion {
+" Commandline completion
 "
 nnoremap : <Cmd>call CommandlinePre()<CR>:
 
@@ -120,19 +118,5 @@ function! CommandlinePost() abort
     call ddc#custom#set_buffer({})
   endif
 endfunction
-
-" }
-
-"
-" denops-skkeleton {
-"
-imap <C-j> <Plug>(skkeleton-toggle)
-cmap <C-j> <Plug>(skkeleton-toggle)
-
-call skkeleton#config({
-  \ 'eggLikeNewline': v:true,
-  \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
-  \ 'completionRankFile': '~/.cache/skkeleton/rank.json',
-  \ })
 
 " }
