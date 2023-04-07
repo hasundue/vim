@@ -40,13 +40,20 @@ if dein#load_state(s:dein_dir)
 
   " Appearance
   call dein#mod#add('sainnhe/gruvbox-material')
-  call dein#mod#add('itchyny/lightline.vim')
-  call dein#mod#add('mengelbrecht/lightline-bufferline', #{ on_event: 'BufAdd' })
   call dein#mod#add('vimpostor/vim-tpipeline')
+  call dein#mod#add('itchyny/lightline.vim')
+  call dein#mod#add('mengelbrecht/lightline-bufferline', #{ 
+    \   on_event: 'BufAdd',
+    \   on_if: 'bufnr("$") > 1',
+    \ })
 
   " Editing
-  call dein#mod#add('tpope/vim-commentary')
-  call dein#mod#add('machakann/vim-sandwich')
+  call dein#mod#add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
+  call dein#mod#add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
+
+  " Git
+  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
+  call dein#mod#add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " Copilot
   call dein#mod#add('github/copilot.vim', #{ on_event: 'InsertEnter' })
@@ -54,7 +61,6 @@ if dein#load_state(s:dein_dir)
   " Denops
   call dein#mod#add('vim-denops/denops.vim', #{ on_event: 'CursorHold' })
   call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
-  call dein#mod#add('lambdalisue/gin.vim')
 
   " ddu.vim
   call dein#mod#add('Shougo/ddu.vim', #{ 
@@ -81,7 +87,7 @@ if dein#load_state(s:dein_dir)
   " ddc.vim
   call dein#mod#add('Shougo/ddc.vim', #{
     \   depends: ['denops.vim', 'pum.vim'],
-    \   on_source: 'denops.vim',
+    \   on_event: ['InsertEnter', 'CmdlineEnter', 'CursorHold'],
     \ })
   call dein#mod#add('Shougo/pum.vim')
   call dein#mod#add('vim-skk/denops-skkeleton.vim', #{ 

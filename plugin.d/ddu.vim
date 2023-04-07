@@ -1,30 +1,15 @@
 "
-" hook_add {
-"
-nnoremap <silent> <leader>uf <cmd>Ddu 
-  \ -ui=ff file_external<CR>
-nnoremap <silent> <leader>uc <cmd>Ddu
-  \ -ui=ff file_external -source-option-path='`expand('~/.config/vim')`'<CR>
-nnoremap <silent> <leader>ug <cmd>Ddu
-  \ -ui=ff rg<CR>
-nnoremap <silent> <leader>uh <cmd>Ddu
-  \ -ui=ff help<CR>
-nnoremap <silent> <leader>ut <cmd>Ddu
-  \ -name=filer -ui=filer -resume=v:true file<CR>
-
-" }
-
-"
 " hook_source {
 "
 call ddu#custom#patch_global(#{
+  \   ui: 'ff',
   \   uiParams: #{
   \     ff: #{
   \       startFilter: v:true,
   \     },
   \   },
   \   sourceOptions: #{
-  \     file_external: #{
+  \     _: #{
   \       matchers: ['matcher_zf'],
   \     },
   \     rg: #{
@@ -32,9 +17,6 @@ call ddu#custom#patch_global(#{
   \     },
   \     file: #{
   \       columns: ['filename'],
-  \     },
-  \     help: #{
-  \       matchers: ['matcher_zf'],
   \     },
   \   },
   \   sourceParams: #{
@@ -58,6 +40,9 @@ call ddu#custom#patch_global(#{
   \     help: #{
   \       defaultAction: 'open',
   \     },
+  \     dein: #{
+  \       defaultAction: 'open',
+  \     },
   \   },
   \   actionOptions: #{
   \     echo: #{
@@ -79,7 +64,7 @@ if has('nvim')
   \       split: 'floating',
   \       filterFloatingPosition: 'top',
   \       filterSplitDirection: 'floating',
-  \       floatingBorder: 'none',
+  \       floatingBorder: [ '+', '-', '+', '|', '+', '-', '+', '|' ],
   \     },
   \   }
   \ })

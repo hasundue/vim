@@ -20,6 +20,7 @@ if has('nvim')
 else
   call ddc#custom#patch_global('sources', [
     \   'skkeleton',
+    \   'file',
     \ ])
 endif
 

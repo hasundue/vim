@@ -1,15 +1,23 @@
 "
+" hook_add {
+"
+nnoremap <silent> <leader>ut <cmd>Ddu
+  \ -name=filer -ui=filer -resume -sync file<CR>
+
+" }
+
+"
 " ftplugin["ddu-filer"] {
 "
-nnoremap <buffer><expr><silent> <CR>
+nnoremap <buffer><expr> <CR>
   \ ddu#ui#get_item()->get('isTree', v:false) ?
-  \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow'})<CR>" :
-  \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'open'})<CR>"
+  \   "<Cmd>call ddu#ui#do_action('itemAction', #{ name: 'narrow' })<CR>" :
+  \   "<Cmd>call ddu#ui#do_action('itemAction', #{ name: 'open' })<CR>"
 
 nnoremap <buffer><silent> ..
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ 
-  \     name: 'narrow', 
-  \     params: #{ path: '..', }
+  \   name: 'narrow', 
+  \   params: #{ path: '..' }
   \ })<CR>
 
 nnoremap <buffer><expr><silent> <Space>

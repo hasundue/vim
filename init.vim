@@ -34,7 +34,8 @@ endif
 " Interface {
 "
 set number          " show line numbers
-set signcolumn=auto  " always shows signcolumn
+set numberwidth=2   " set width of line number column
+set signcolumn=yes  " always shows signcolumn
 
 set noshowcmd       " do not display incomplete commands on the last line
 set noshowmode      " do not display mode on the last line

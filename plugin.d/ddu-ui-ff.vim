@@ -1,4 +1,20 @@
 "
+" hook_add {
+"
+nnoremap <silent> <leader>uf <cmd>Ddu 
+  \ -ui=ff file_external<CR>
+nnoremap <silent> <leader>uc <cmd>Ddu
+  \ -ui=ff file_external -source-option-path='`expand('~/.config/vim')`'<CR>
+nnoremap <silent> <leader>ug <cmd>Ddu
+  \ -ui=ff rg<CR>
+nnoremap <silent> <leader>uh <cmd>Ddu
+  \ -ui=ff help<CR>
+nnoremap <silent> <leader>up <cmd>Ddu
+  \ -ui=ff dein<CR>
+
+" }
+
+"
 " ftplugin["ddu-ff"] {
 "
 nnoremap <buffer><silent> <CR>
@@ -12,6 +28,20 @@ nnoremap <buffer><silent> i
 
 nnoremap <buffer><silent> q
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
+
+nnoremap <buffer><silent> s
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'split' } })<CR>
+
+nnoremap <buffer><silent> v
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
+
+nnoremap <buffer><silent> R
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
+
+nnoremap <buffer><silent> N
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
 
 " }
 
