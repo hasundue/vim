@@ -26,6 +26,9 @@ endif
 " Plugin directory (read by dein#mod#add)
 let g:dein#mod#hook_dir = expand('~/.config/vim/plugin.d')
 
+" Configurations
+let g:dein#enable_notification = v:true
+
 "
 " Load plugins
 "
@@ -40,19 +43,25 @@ if dein#load_state(s:dein_dir)
 
   " Appearance
   call dein#mod#add('sainnhe/gruvbox-material')
-  call dein#mod#add('vimpostor/vim-tpipeline')
   call dein#mod#add('itchyny/lightline.vim')
+  call dein#mod#add('vimpostor/vim-tpipeline')
   call dein#mod#add('mengelbrecht/lightline-bufferline', #{ 
+    \   depends: 'lightline.vim',
     \   on_event: 'BufAdd',
     \   on_if: 'bufnr("$") > 1',
     \ })
+
+  " UI
+  call dein#mod#add('mattn/vim-notification', #{ if: has('vim') })
+  call dein#mod#add('rcarriga/nvim-notify', #{ if: has('nvim') })
+  call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
 
   " Editing
   call dein#mod#add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
   call dein#mod#add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
 
   " Git
-  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
+  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['G', 'Git'] })
   call dein#mod#add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " Copilot
@@ -60,7 +69,6 @@ if dein#load_state(s:dein_dir)
 
   " Denops
   call dein#mod#add('vim-denops/denops.vim', #{ on_event: 'CursorHold' })
-  call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
 
   " ddu.vim
   call dein#mod#add('Shougo/ddu.vim', #{ 
@@ -138,18 +146,20 @@ if dein#load_state(s:dein_dir)
 endif
 
 " Uninstall unused plugins
-" let s:removed_plugins = dein#check_clean()
-" if len(s:removed_plugins) > 0
-"   call map(s:removed_plugins, "delete(v:val, 'rf')")
-" endif
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+endif
 
 " Install plugins if not installed
-" if dein#check_install()
-"  call dein#install()
-" endif
+if dein#check_install()
+ call dein#install()
+endif
 
 " Required for tree-sitter
-filetype plugin indent on
+if has('nvim')
+  filetype plugin indent on
+endif
 
 " Keymap
 nnoremap <leader>pr :call dein#recache_runtimepath()<CR>

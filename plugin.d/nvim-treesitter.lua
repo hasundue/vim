@@ -15,6 +15,7 @@ require('nvim-treesitter.configs').setup({
       "jsx",
       "typescript",
       "tsx",
+      "lua",
     },
   },
   yati = {

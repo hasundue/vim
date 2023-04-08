@@ -6,7 +6,7 @@ nnoremap <silent> <leader>uf <cmd>Ddu
 nnoremap <silent> <leader>uc <cmd>Ddu
   \ -ui=ff file_external -source-option-path='`expand('~/.config/vim')`'<CR>
 nnoremap <silent> <leader>ug <cmd>Ddu
-  \ -ui=ff rg<CR>
+  \ -name=grep -ui=ff -volatile -resume rg<CR>
 nnoremap <silent> <leader>uh <cmd>Ddu
   \ -ui=ff help<CR>
 nnoremap <silent> <leader>up <cmd>Ddu
@@ -42,6 +42,9 @@ nnoremap <buffer><silent> R
 
 nnoremap <buffer><silent> N
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
+
+nnoremap <buffer><silent> D
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
 
 " }
 

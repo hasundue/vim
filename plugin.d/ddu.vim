@@ -2,10 +2,16 @@
 " hook_source {
 "
 call ddu#custom#patch_global(#{
-  \   ui: 'ff',
   \   uiParams: #{
   \     ff: #{
   \       startFilter: v:true,
+  \       split: has('nvim') ? 'floating' : 'horizontal',
+  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
+  \       filterFloatingPosition: 'top',
+  \       floatingBorder: 'rounded',
+  \       highlights: #{
+  \         floating: 'Normal',
+  \       },
   \     },
   \   },
   \   sourceOptions: #{
@@ -45,29 +51,10 @@ call ddu#custom#patch_global(#{
   \     },
   \   },
   \   actionOptions: #{
-  \     echo: #{
-  \       quit: v:false,
-  \     },
-  \     echoDiff: #{
-  \       quit: v:false,
-  \     },
   \     narrow: #{
   \       quit: v:false,
   \     },
   \   },
   \ })
-
-if has('nvim')
-  call ddu#custom#patch_global(#{
-  \   uiParams: #{
-  \     _: #{
-  \       split: 'floating',
-  \       filterFloatingPosition: 'top',
-  \       filterSplitDirection: 'floating',
-  \       floatingBorder: [ '+', '-', '+', '|', '+', '-', '+', '|' ],
-  \     },
-  \   }
-  \ })
-endif
 
 " }
