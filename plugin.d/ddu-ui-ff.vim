@@ -2,15 +2,15 @@
 " hook_add {
 "
 nnoremap <silent> <leader>uf <cmd>Ddu 
-  \ -ui=ff file_external<CR>
+  \ -ui=ff -resume file_external<CR>
 nnoremap <silent> <leader>uc <cmd>Ddu
-  \ -ui=ff file_external -source-option-path='`expand('~/.config/vim')`'<CR>
+  \ -ui=ff -resume file_external -source-option-path='`expand('~/.config/vim')`'<CR>
 nnoremap <silent> <leader>ug <cmd>Ddu
   \ -name=grep -ui=ff -volatile -resume rg<CR>
 nnoremap <silent> <leader>uh <cmd>Ddu
-  \ -ui=ff help<CR>
+  \ -ui=ff -resume help<CR>
 nnoremap <silent> <leader>up <cmd>Ddu
-  \ -ui=ff dein<CR>
+  \ -ui=ff -resume dein<CR>
 
 " }
 
