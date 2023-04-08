@@ -3,103 +3,127 @@
 --
 local lspconfig = require("lspconfig")
 
-lspconfig.vimls.setup({
-  autostart = true,
-})
+local function preview_location_callback(_, result, _)
+  if result == nil or vim.tbl_isempty(result) then
+    vim.notify('No definition found.')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    vim.lsp.util.preview_location(result[1])
+  else
+    vim.lsp.util.preview_location(result)
+  end
+end
 
-lspconfig.lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-    workspace = {
-      library = vim.api.nvim_get_runtime_file("", true),
-    },
-  },
-  autostart = true,
-})
+local function peek_definition()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
 
-lspconfig.bashls.setup {}
+local function on_attach(client, bufnr)
+  local function cmd(mode, lhs, rhs)
+    vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = true })
+  end
 
-lspconfig.denols.setup({
-  single_file_support = false,
-  root_dir = lspconfig.util.root_pattern(
-    "denops",
-    "deno.json",
-    "deno.jsonc"
-  ),
-  init_options = {
-    lint = false,
-    unstable = true
-  },
-})
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-lspconfig.tsserver.setup {
-  single_file_support = false,
-  root_dir = lspconfig.util.root_pattern("package.json"),
-}
+  cmd('n', 'gd', vim.lsp.buf.definition)
+  cmd('n', 'gD', vim.lsp.buf.declaration)
+  cmd('n', 'gK', peek_definition)
 
-lspconfig.eslint.setup {
-  root_dir = lspconfig.util.root_pattern(".eslintrc*"),
-}
+  cmd('n', '<leader>q', vim.diagnostic.setloclist)
+  cmd('n', '<leader>r', vim.lsp.buf.rename)
+  cmd('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
+  cmd('n', '<leader>n', function() vim.diagnostic.goto_next { float = { header = false } } end)
+  cmd('n', '<leader>N', function() vim.diagnostic.goto_prev { float = { header = false } } end)
 
-lspconfig.cssls.setup {}
+  if client.server_capabilities.hoverProvider then
+    cmd('n', 'K', vim.lsp.buf.hover)
+  end
 
-lspconfig.sqlls.setup {}
-
-lspconfig.jsonls.setup {}
-
-lspconfig.yamlls.setup {
-  settings = {
-    yaml = {
-      schemas = {
-        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-      },
-    },
-  },
-}
-
-lspconfig.julials.setup({
-  autostart = true,
-})
-
-lspconfig.zls.setup({})
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-
-    vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
-
+  if client.server_capabilities.formatProvider then
     vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = { "*.js", "*.ts", "*.zig", "*.md" },
-      group = 'UserLspConfig',
+      buffer = bufnr,
+      group = 'lsp_format',
       callback = function()
         vim.lsp.buf.format { async = false }
       end,
     })
-  end,
-})
+  end
+
+  if client.server_capabilities.codeLensProvider then
+    cmd('n', '<leader>Le', vim.lsp.codelens.display)
+    cmd('n', '<leader>Ln', vim.lsp.codelens.run)
+
+    local augroup = vim.api.nvim_create_augroup("LspCodeLens", {})
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      buffer = bufnr,
+      group = augroup,
+      callback = function()
+        vim.lsp.codelens.refresh()
+        local codelens = vim.lsp.codelens.get(bufnr)
+        if codelens then
+          vim.lsp.codelens.display(codelens, bufnr, client.id)
+        end
+      end,
+    })
+  end
+end
+
+local servers = {
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+    },
+    autostart = true,
+  },
+  denols = {
+    single_file_support = true,
+    root_dir = lspconfig.util.root_pattern(
+      "denops",
+      "deno.json",
+      "deno.jsonc"
+    ),
+    init_options = {
+      lint = true,
+      unstable = true
+    },
+  },
+  tsserver = {
+    single_file_support = false,
+    root_dir = lspconfig.util.root_pattern("package.json"),
+  },
+  eslint = {
+    root_dir = lspconfig.util.root_pattern(".eslintrc*"),
+  },
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        },
+      },
+    },
+  },
+  vimls = {},
+  bashls = {},
+  cssls = {},
+  jsonls = {},
+  julials = {},
+  zls = {},
+}
+
+for server, config in pairs(servers) do
+  lspconfig[server].setup(vim.tbl_extend("force", config, {
+    on_attach = on_attach,
+  }))
+end
 
 -- }

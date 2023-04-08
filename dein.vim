@@ -105,9 +105,11 @@ if dein#load_state(s:dein_dir)
   call dein#mod#add('Shougo/ddc-ui-pum', #{ on_source: 'ddc.vim' })
   call dein#mod#add('Shougo/ddc-cmdline', #{ on_source: 'ddc.vim' })
   call dein#mod#add('Shougo/ddc-cmdline-history', #{ on_source: 'ddc.vim' })
+  call dein#mod#add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
   call dein#mod#add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
   call dein#mod#add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
+  call dein#mod#add('matsui54/denops-signature_help', #{ on_source: 'ddc.vim' })
+  call dein#mod#add('matsui54/denops-popup-preview.vim', #{ on_source: 'ddc.vim' })
 
   " neovim
   call dein#mod#add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
@@ -119,6 +121,10 @@ if dein#load_state(s:dein_dir)
     \   on_event: 'FileType',
     \ })
   call dein#mod#add('nvim-treesitter/nvim-treesitter-context', #{
+    \   if: has('nvim'),
+    \   on_source: 'nvim-treesitter',
+    \ })
+  call dein#mod#add('neovim/tree-sitter-vimdoc', #{ 
     \   if: has('nvim'),
     \   on_source: 'nvim-treesitter',
     \ })
