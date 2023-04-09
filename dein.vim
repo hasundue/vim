@@ -52,8 +52,14 @@ if dein#load_state(s:dein_dir)
     \ })
 
   " UI
-  call dein#mod#add('mattn/vim-notification', #{ if: has('vim') })
-  call dein#mod#add('rcarriga/nvim-notify', #{ if: has('nvim') })
+  call dein#mod#add('mattn/vim-notification', #{ 
+    \   if: has('vim'),
+    \   on_source: 'denops.vim',
+    \ })
+  call dein#mod#add('rcarriga/nvim-notify', #{ 
+    \   if: has('nvim'),
+    \   on_source: 'denops.vim',
+    \ })
   call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
 
   " Editing
@@ -61,14 +67,24 @@ if dein#load_state(s:dein_dir)
   call dein#mod#add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
 
   " Git
-  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['G', 'Git'] })
+  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
   call dein#mod#add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " Copilot
   call dein#mod#add('github/copilot.vim', #{ on_event: 'InsertEnter' })
 
   " Denops
-  call dein#mod#add('vim-denops/denops.vim', #{ on_event: 'CursorHold' })
+  call dein#mod#add('vim-denops/denops.vim', #{ 
+    \   on_event: 'CursorHold'
+    \ })
+  call dein#mod#add('matsui54/denops-popup-preview.vim', #{
+    \   depends: 'denops.vim',
+    \   on_event: 'CompleteChanged',
+    \ })  
+  call dein#mod#add('matsui54/denops-signature_help', #{ 
+    \   depends: 'denops.vim',
+    \   on_event: 'InsertEnter',
+    \ })
 
   " ddu.vim
   call dein#mod#add('Shougo/ddu.vim', #{ 
@@ -108,8 +124,6 @@ if dein#load_state(s:dein_dir)
   call dein#mod#add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
   call dein#mod#add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
   call dein#mod#add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('matsui54/denops-signature_help', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('matsui54/denops-popup-preview.vim', #{ on_source: 'ddc.vim' })
 
   " neovim
   call dein#mod#add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
@@ -143,6 +157,10 @@ if dein#load_state(s:dein_dir)
     \   on_source: 'mason-lspconfig',
     \ })
   call dein#mod#add('williamboman/mason-lspconfig', #{
+    \   if: has('nvim'),
+    \   on_source: 'nvim-lspconfig',
+    \ })
+  call dein#mod#add('lvimuser/lsp-inlayhints.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
     \ })
