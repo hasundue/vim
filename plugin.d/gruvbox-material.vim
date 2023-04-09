@@ -18,21 +18,4 @@ let g:gruvbox_material_transparent_background = 0
 
 colorscheme gruvbox-material
 
-function! s:titlecase(text) abort
-  let l:first_char = toupper(strpart(a:text, 0, 1))
-  let l:rest_of_string = tolower(strpart(a:text, 1))
-  return l:first_char . l:rest_of_string
-endfunction
-
-if has('nvim')
-  " highlight! link NotifyBackground NormalFloat
-  " for level in ['ERROR', 'INFO']
-  "   execute 'highlight! link ' . 'Notify' . level . 'Body ' . s:titlecase(level) . 'Text'
-  " endfor
-  " for level in ['DEBUG', 'TRACE']
-  "   execute 'highlight! link ' . 'Notify' . level . 'Body ' . 'HintText'
-  " endfor
-  " execute 'highlight! link ' . 'NotifyWARNBody ' . 'WarningText'
-endif
-
 " }
