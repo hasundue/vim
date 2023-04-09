@@ -8,6 +8,7 @@ call ddu#custom#patch_global(#{
   \       floatingBorder: 'rounded',
   \       highlights: #{
   \         floating: 'Normal',
+  \         floatingBorder: 'Green',
   \       },
   \     },
   \     ff: #{
