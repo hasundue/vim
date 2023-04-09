@@ -41,7 +41,11 @@ local function on_attach(client, bufnr)
     cmd('n', 'K', vim.lsp.buf.hover)
   end
 
-  if client.server_capabilities.formatProvider then
+  if client.server_capabilities.inlayHintsProvider then
+    require("lsp-inlayhints").on_attach(client, bufnr, false)
+  end
+
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
       group = 'lsp_format',
@@ -82,7 +86,6 @@ local servers = {
         library = vim.api.nvim_get_runtime_file("", true),
       },
     },
-    autostart = true,
   },
   denols = {
     single_file_support = true,
