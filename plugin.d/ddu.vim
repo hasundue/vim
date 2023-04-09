@@ -3,15 +3,17 @@
 "
 call ddu#custom#patch_global(#{
   \   uiParams: #{
-  \     ff: #{
-  \       startFilter: v:true,
+  \     _: #{
   \       split: has('nvim') ? 'floating' : 'horizontal',
-  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
-  \       filterFloatingPosition: 'top',
   \       floatingBorder: 'rounded',
   \       highlights: #{
   \         floating: 'Normal',
   \       },
+  \     },
+  \     ff: #{
+  \       startFilter: v:true,
+  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
+  \       filterFloatingPosition: 'top',
   \     },
   \   },
   \   sourceOptions: #{
