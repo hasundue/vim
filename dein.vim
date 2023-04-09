@@ -54,11 +54,11 @@ if dein#load_state(s:dein_dir)
   " UI
   call dein#mod#add('mattn/vim-notification', #{ 
     \   if: has('vim'),
-    \   on_source: 'denops.vim',
+    \   on_func: 'notification#show',
     \ })
   call dein#mod#add('rcarriga/nvim-notify', #{ 
     \   if: has('nvim'),
-    \   on_source: 'denops.vim',
+    \   on_lua: 'notify',
     \ })
   call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
 
