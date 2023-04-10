@@ -15,9 +15,17 @@ nnoremap <silent> <leader>cp <CMD>Copilot panel<CR>
 " for autocomplete of the commit message
 "
 function s:append_diff() abort
-  let diff = system('git diff --cached')
+  " Get the Git repository root directory
+  let git_dir = FugitiveGitDir()
+  let git_root = fnamemodify(git_dir, ':h')
+
+  " Get the diff of the staged changes relative to the Git repository root
+  let diff = system('git -C ' . git_root . ' diff --cached')
+
+  " Add a comment character to each line of the diff
   let comment_diff = join(map(split(diff, '\n'), {idx, line -> '# ' . line}), "\n")
-  call append(line('$'), '# --- Staged Changes Diffs ---')
+
+  " Append the diff to the commit message
   call append(line('$'), split(comment_diff, '\n'))
 endfunction
 
