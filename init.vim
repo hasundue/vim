@@ -43,6 +43,8 @@ set noshowmode      " do not display mode on the last line
 set laststatus=2    " always shows statusline
 set showtabline=2   " always shows tabline
 
+set pumheight=10    " set height of popup menu
+
 set nowrap          " do not wrap lines
 set breakindent     " every wrapped line will continue visually indented
 
