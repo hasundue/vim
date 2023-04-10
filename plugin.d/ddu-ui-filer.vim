@@ -32,4 +32,22 @@ nnoremap <buffer><expr><silent> <Space>
 nnoremap <buffer><silent> q
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
+nnoremap <buffer><silent> s
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'split' } })<CR>
+
+nnoremap <buffer><silent> v
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
+
+nnoremap <buffer><silent> R
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
+
+cunmap <buffer><silent> N
+nnoremap <buffer><silent> N
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
+
+nnoremap <buffer><silent> D
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
+
 " }
