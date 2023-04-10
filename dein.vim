@@ -61,7 +61,6 @@ if dein#load_state(s:dein_dir)
     \ })
   call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
   call dein#mod#add('vimpostor/vim-tpipeline')
-  call dein#mod#add('christoomey/vim-tmux-navigator')
 
   " Editing
   call dein#mod#add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
@@ -85,6 +84,10 @@ if dein#load_state(s:dein_dir)
   call dein#mod#add('matsui54/denops-signature_help', #{ 
     \   depends: 'denops.vim',
     \   on_event: 'InsertEnter',
+    \ })
+  call dein#mod#add('skanehira/denops-silicon.vim', #{
+    \   depends: 'denops.vim',
+    \   on_cmd: 'Silicon',
     \ })
 
   " ddu.vim
