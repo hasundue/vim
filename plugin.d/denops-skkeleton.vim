@@ -11,7 +11,7 @@ cmap <C-j> <Plug>(skkeleton-toggle)
 "
 call skkeleton#config({
   \ 'eggLikeNewline': v:true,
-  \ 'globalJisyo': expand('~/.cache/skkeleton/SKK-JISYO.L'),
+  \ 'globalJisyo': '~/.cache/skkeleton/SKK-JISYO.L',
   \ 'completionRankFile': '~/.cache/skkeleton/rank.json',
   \ })
 
