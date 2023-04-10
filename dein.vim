@@ -44,7 +44,6 @@ if dein#load_state(s:dein_dir)
   " Appearance
   call dein#mod#add('sainnhe/gruvbox-material')
   call dein#mod#add('itchyny/lightline.vim')
-  call dein#mod#add('vimpostor/vim-tpipeline')
   call dein#mod#add('mengelbrecht/lightline-bufferline', #{ 
     \   depends: 'lightline.vim',
     \   on_event: 'BufAdd',
@@ -61,6 +60,8 @@ if dein#load_state(s:dein_dir)
     \   on_lua: 'notify',
     \ })
   call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
+  call dein#mod#add('vimpostor/vim-tpipeline')
+  call dein#mod#add('christoomey/vim-tmux-navigator')
 
   " Editing
   call dein#mod#add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
