@@ -7,22 +7,14 @@ call ddc#custom#patch_global('autoCompleteEvents', [
   \   'InsertEnter',
   \   'TextChangedI',
   \   'TextChangedP',
-  \   'CmdlineEnter',
-  \   'CmdlineChanged',
   \ ])
 
-if has('nvim')
-  call ddc#custom#patch_global('sources', [
-    \   'skkeleton',
-    \   'nvim-lsp',
-    \   'file',
-    \ ])
-else
-  call ddc#custom#patch_global('sources', [
-    \   'skkeleton',
-    \   'file',
-    \ ])
-endif
+let sources = [
+  \   'skkeleton',
+  \   'file',
+  \ ] + ( has('nvim') ? ['nvim-lsp'] : [] )
+
+call ddc#custom#patch_global('sources', sources)
 
 call ddc#custom#patch_global('cmdlineSources',
   \   ['cmdline', 'cmdline-history', 'file']
@@ -31,26 +23,39 @@ call ddc#custom#patch_global('cmdlineSources',
 call ddc#custom#patch_global('sourceOptions', #{
   \   _: #{
   \     maxItems: 10,
+  \     minAutoCompleteLength: 1,
   \     matchers: ['matcher_fuzzy'],
   \     sorters: ['sorter_fuzzy'],
   \     converters: ['converter_fuzzy'],
   \   },
   \   nvim-lsp: #{
   \     mark: 'L',
-  \     minAutoCompleteLength: 1,
+  \     minAutoCompleteLength: 0,
   \     forceCompletionPattern: '\S[\.\[\(\{]\S*'
   \   },
   \   file: #{
   \     mark: 'F',
   \     isVolatile: v:true,
-  \     forceCompletionPattern: '\S/\S*'
   \   },
   \   skkeleton: #{
   \     mark: 'S',
   \     matchers: ['skkeleton'],
-  \     minAutoCompleteLength: 1,
   \     isVolatile: v:true,
   \   },
+  \   cmdline: #{
+  \     mark: '',
+  \   },
+  \   cmdline-history: #{
+  \     mark: '',
+  \     forceCompletionPattern: '\s+\S*',
+  \     sorters: [],
+  \   },
+  \ })
+
+call ddc#custom#patch_global('filterParams', {
+  \   'matcher_fuzzy': {
+  \   'splitMode': 'word'
+  \   }
   \ })
 
 call ddc#enable()
@@ -60,17 +65,21 @@ call ddc#enable()
 "
 " hook_add {
 "
-inoremap <expr> <TAB>
-  \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-  \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '[\s\\]') ?
-  \ '<TAB>' : ddc#map#manual_complete()
+inoremap <expr> <C-n> pum#map#insert_relative(+1)
+inoremap <expr> <C-p> pum#map#insert_relative(-1)
 
-inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <expr> <TAB> pum#visible()
+  \ ? '<C-n>'
+  \ : getline('.')[0:col('.')] =~# '[\s\\]*' 
+  \   ? '<TAB>' 
+  \   : ddc#map#manual_complete()
 
-inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <expr> <S-Tab> pum#visible()
+  \ ? pum#map#insert_relative(-1)
+  \ : '<C-h>'
+
+inoremap <expr> <C-y> pum#map#confirm()
+inoremap <expr> <C-e> pum#map#cancel()
 
 "
 " Commandline completion
@@ -78,24 +87,31 @@ inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
 nnoremap : <Cmd>call CommandlinePre()<CR>:
 
 function! CommandlinePre() abort
-  cnoremap <expr> <Tab>
-  \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-  \ exists('b:ddc_cmdline_completion') ?
-  \ ddc#map#manual_complete() : &wildcharm->nr2char()
+  cnoremap <expr> <Tab> pum#visible()
+    \ ? '<Cmd>call pum#map#insert_relative(+1)<CR>'
+    \ : exists('b:ddc_cmdline_completion')
+    \   ? ddc#map#manual_complete()
+    \   : &wildcharm->nr2char()
 
-  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-  cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-  cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+  cnoremap <expr> <S-Tab> pum#map#insert_relative(-1)
+  cnoremap <expr> <C-n>   pum#map#insert_relative(+1)
+  cnoremap <expr> <C-p>   pum#map#insert_relative(-1)
+  cnoremap <expr> <C-y>   pum#map#confirm()
+  cnoremap <expr> <C-e>   pum#map#cancel()
 
   " Overwrite sources
   if !exists('b:prev_buffer_config')
     let b:prev_buffer_config = ddc#custom#get_buffer()
   endif
-  call ddc#custom#patch_buffer('cmdlineSources',
-  \ ['cmdline', 'cmdline-history', 'file']
-  \ )
+  call ddc#custom#patch_buffer('cmdlineSources', [
+    \   'file',
+    \   'cmdline',
+    \   'cmdline-history',
+    \ ])
+  call ddc#custom#patch_buffer('autoCompleteEvents', [
+    \   'CmdlineEnter',
+    \   'CmdlineChanged',
+    \ ])
 
   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
   autocmd InsertEnter <buffer> ++once call CommandlinePost()
