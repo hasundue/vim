@@ -8,12 +8,6 @@ let g:copilot_filetypes = #{
   \ ddu-ff-filter: v:false,
   \ }
 
-" Disable tab mapping
-let g:copilot_no_tab_map = v:true
-
-inoremap <silent><script><expr> <M-j> copilot#Accept("\<CR>")
-inoremap <silent><script><expr> <M-k> copilot#Dismiss()
-
-nnoremap <silent> <M-p> <CMD>Copilot panel<CR>
+nnoremap <silent> <leader>cp <CMD>Copilot panel<CR>
 
 " }
