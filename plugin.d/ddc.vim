@@ -30,7 +30,6 @@ call ddc#custom#patch_global('sourceOptions', #{
   \   },
   \   nvim-lsp: #{
   \     mark: 'L',
-  \     minAutoCompleteLength: 0,
   \     forceCompletionPattern: '\S[\.\[\(\{]\S*'
   \   },
   \   file: #{
