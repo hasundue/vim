@@ -43,11 +43,10 @@ nnoremap <buffer><silent> v
 nnoremap <buffer><silent> R
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
 
-cunmap <buffer><silent> N
-nnoremap <buffer><silent> N
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
-
 nnoremap <buffer><silent> D
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
+
+nnoremap <buffer><silent> <leader>n
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
 
 " }
