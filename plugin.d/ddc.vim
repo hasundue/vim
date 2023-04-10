@@ -30,6 +30,7 @@ call ddc#custom#patch_global('cmdlineSources',
 
 call ddc#custom#patch_global('sourceOptions', #{
   \   _: #{
+  \     maxItems: 10,
   \     matchers: ['matcher_fuzzy'],
   \     sorters: ['sorter_fuzzy'],
   \     converters: ['converter_fuzzy'],
