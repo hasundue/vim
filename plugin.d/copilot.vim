@@ -12,7 +12,7 @@ nnoremap <silent> <leader>cp <CMD>Copilot panel<CR>
 
 "
 " Append the diff of the staged changes to the commit message
-" for autocomplete of the commit message
+" for autocompletion of the commit message
 "
 function s:append_diff() abort
   " Get the Git repository root directory
