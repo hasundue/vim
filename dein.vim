@@ -20,7 +20,7 @@ endif
 " Configurations
 let g:dein#enable_notification = v:true
 let g:dein#install_progress_type = "none"
-let g:dein#install_message_type = "none"
+let g:dein#types#git#enable_partial_clone = v:true
 
 " A directory for hooks
 let s:dein_hooks_dir = expand('~/.config/vim/plugin.d')
