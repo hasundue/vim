@@ -33,21 +33,21 @@ call ddu#custom#patch_global(#{
 "
 " ddu-ff {{{
 "
-nnoremap <buffer><silent> <CR>
-  \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
+nnoremap <buffer><expr> <CR> 
+  \ ddu#ui#do_action('itemAction')
 
-nnoremap <buffer><silent> i
-  \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
+nnoremap <buffer><expr> i
+  \ ddu#ui#do_action('openFilterWindow')
 
 " }}}
 
 "
 " ddu-ff-filter {{{
 "
-inoremap <buffer> <CR>
-  \ <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+inoremap <buffer><expr> <CR>
+  \ ddu#ui#do_action('closeFilterWindow')
 
-nnoremap <buffer> <CR>
-  \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+nnoremap <buffer><expr>
+  \ ddu#ui#do_action('closeFilterWindow')
 
 " }}}
