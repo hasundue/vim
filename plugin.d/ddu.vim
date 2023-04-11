@@ -57,7 +57,7 @@ call ddu#custom#patch_global(#{
 "
 " ddu-ff_ddu-filer {{{
 "
-nnoremap <buffer><silent> <S-CR>
+nnoremap <buffer><silent> -
   \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 
 nnoremap <buffer><silent> q
