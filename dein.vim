@@ -28,6 +28,7 @@ let g:dein#mod#hook_dir = expand('~/.config/vim/plugin.d')
 
 " Configurations
 let g:dein#enable_notification = v:true
+let g:dein#install_progress_type = "floating"
 
 "
 " Load plugins
@@ -42,7 +43,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('hasundue/dein-mod')
 
   " Appearance
-  call dein#mod#add('sainnhe/gruvbox-material')
+  silent call dein#mod#add('sainnhe/gruvbox-material')
   call dein#mod#add('itchyny/lightline.vim')
   call dein#mod#add('mengelbrecht/lightline-bufferline', #{ 
     \   depends: 'lightline.vim',
@@ -59,7 +60,10 @@ if dein#load_state(s:dein_dir)
     \   if: has('nvim'),
     \   on_lua: 'notify',
     \ })
-  call dein#mod#add('lambdalisue/guise.vim', #{ on_event: 'TermOpen' })
+  call dein#mod#add('lambdalisue/guise.vim', #{ 
+    \   depends: 'denops.vim',
+    \   on_event: 'TermOpen'
+    \ })
   call dein#mod#add('vimpostor/vim-tpipeline')
 
   " Editing
@@ -104,10 +108,11 @@ if dein#load_state(s:dein_dir)
     \   build: 'deno task build',
     \ })
   call dein#mod#add('Shougo/ddu-ui-ff', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('Shougo/ddu-ui-filer', #{ on_source: 'ddu.vim' })
+  call dein#mod#add('~/ddu-ui-filer', #{ on_source: 'ddu.vim' })
   call dein#mod#add('Shougo/ddu-kind-file', #{ on_source: 'ddu.vim' })
   call dein#mod#add('Shougo/ddu-column-filename', #{ on_source: 'ddu.vim' })
   call dein#mod#add('Shougo/ddu-source-file', #{ on_source: 'ddu.vim' })
+  call dein#mod#add('Shougo/ddu-filter-matcher_hidden', #{ on_source: 'ddu.vim' })
   call dein#mod#add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
   call dein#mod#add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
   call dein#mod#add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
