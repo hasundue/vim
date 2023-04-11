@@ -16,6 +16,21 @@ nnoremap <silent> <leader>fp <cmd>Ddu
 " }
 
 "
+" hook_source {
+"
+call ddu#custom#patch_global(#{
+  \   uiParams: #{
+  \     ff: #{
+  \       startFilter: v:true,
+  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
+  \       filterFloatingPosition: 'top',
+  \     },
+  \   },
+  \ })
+
+" }
+
+"
 " ftplugin["ddu-ff"] {
 "
 nnoremap <buffer><silent> <CR>

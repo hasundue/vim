@@ -10,11 +10,7 @@ call ddu#custom#patch_global(#{
   \         floating: 'Normal',
   \         floatingBorder: 'WinSeparator',
   \       },
-  \     },
-  \     ff: #{
-  \       startFilter: v:true,
-  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
-  \       filterFloatingPosition: 'top',
+  \       statusLine: v:true,
   \     },
   \   },
   \   sourceOptions: #{
@@ -26,6 +22,7 @@ call ddu#custom#patch_global(#{
   \     },
   \     file: #{
   \       columns: ['filename'],
+  \       matchers: ['matcher_hidden'],
   \     },
   \   },
   \   sourceParams: #{
@@ -51,11 +48,6 @@ call ddu#custom#patch_global(#{
   \     },
   \     dein: #{
   \       defaultAction: 'open',
-  \     },
-  \   },
-  \   actionOptions: #{
-  \     narrow: #{
-  \       quit: v:false,
   \     },
   \   },
   \ })
