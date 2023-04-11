@@ -1,16 +1,16 @@
 "
 " hook_add {{{
 "
-nnoremap <silent> <leader>ff <cmd>Ddu 
-  \ -name=ff-file -ui=ff -resume -volatile file_external<CR>
-nnoremap <silent> <leader>fc <cmd>Ddu
-  \ -name=ff-rc -ui=ff -resume -volatile
+nnoremap <silent> <leader>ff <CMD>Ddu 
+  \ -name=ff-file -ui=ff -resume file_external<CR>
+nnoremap <silent> <leader>fc <CMD>Ddu
+  \ -name=ff-rc -ui=ff -resume
   \ -source-option-path='`expand('~/.config/vim')`' file_external<CR>
-nnoremap <silent> <leader>fg <cmd>Ddu
-  \ -name=ff-grep -ui=ff -volatile -resume rg<CR>
-nnoremap <silent> <leader>fh <cmd>Ddu
+nnoremap <silent> <leader>fg <CMD>Ddu
+  \ -name=ff-grep -ui=ff -resume rg<CR>
+nnoremap <silent> <leader>fh <CMD>Ddu
   \ -name=ff-help -ui=ff -resume help<CR>
-nnoremap <silent> <leader>fp <cmd>Ddu
+nnoremap <silent> <leader>fp <CMD>Ddu
   \ -name=ff-plugin -ui=ff -resume dein<CR>
 
 " }}}
@@ -33,21 +33,24 @@ call ddu#custom#patch_global(#{
 "
 " ddu-ff {{{
 "
-nnoremap <buffer><expr> <CR> 
-  \ ddu#ui#do_action('itemAction')
+nnoremap <buffer><silent> <CR> 
+  \ <CMD>call ddu#ui#do_action('itemAction')<CR>
 
-nnoremap <buffer><expr> i
-  \ ddu#ui#do_action('openFilterWindow')
+nnoremap <buffer><silent> i
+  \ <CMD>call ddu#ui#do_action('openFilterWindow')<CR>
 
 " }}}
 
 "
 " ddu-ff-filter {{{
 "
-inoremap <buffer><expr> <CR>
-  \ ddu#ui#do_action('closeFilterWindow')
+inoremap <buffer><silent> <CR>
+  \ <CMD>call ddu#ui#do_action('closeFilterWindow')<CR>
 
-nnoremap <buffer><expr>
-  \ ddu#ui#do_action('closeFilterWindow')
+nnoremap <buffer><silent> <CR>
+  \ <CMD>call ddu#ui#do_action('closeFilterWindow')<CR>
+
+nnoremap <buffer><silent> q
+  \ <CMD>call ddu#ui#do_action('quit')<CR>
 
 " }}}
