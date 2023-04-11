@@ -4,6 +4,7 @@
 let g:copilot_filetypes = #{
   \   gitcommit: v:true,
   \   markdown: v:true,
+  \   yaml: v:true,
   \   text: v:true,
   \   ddu-ff-filter: v:false,
   \ }
