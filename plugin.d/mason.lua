@@ -1,6 +1,6 @@
 --
--- lua_source {
+-- lua_source {{{
 --
 require("mason").setup()
 
--- }
+-- }}}

@@ -1,5 +1,5 @@
 "
-" hook_add {
+" hook_add {{{
 "
 nnoremap <silent> <leader>tf <CMD>Ddu
   \ -name=filer-file -ui=filer -resume -volatile file<CR>
@@ -10,10 +10,10 @@ nnoremap <silent> <leader>tc <CMD>Ddu
   \ -name=filer-rc -ui=filer -resume -volatile
   \ -source-option-path='`expand('~/.config/vim')`' file<CR>
 
-" }
+" }}}
 
 "
-" hook_source {
+" hook_source {{{
 "
 call ddu#custom#patch_global(#{
   \   uiParams: #{
@@ -29,10 +29,10 @@ call ddu#custom#patch_global(#{
   \   },
   \ })
 
-" }
+" }}}
 
 "
-" ftplugin["ddu-filer"] {
+" ddu-filer {{{
 "
 nnoremap <buffer><expr> <leader>.
 	\ ddu#ui#do_action('updateOptions', {
@@ -62,27 +62,4 @@ nnoremap <buffer><expr> ..
   \   params: #{ path: '..' }
   \ })
 
-nnoremap <buffer><expr> <C-CR>
-  \ ddu#ui#do_action('toggleSelectItem')
-
-nnoremap <buffer><expr> q
-  \ ddu#ui#do_action('quit')
-
-nnoremap <buffer><expr> s
-  \ ddu#ui#do_action('itemAction',
-  \   #{ name: 'open', params: #{ command: 'split' } })
-
-nnoremap <buffer><expr> v
-  \ ddu#ui#do_action('itemAction',
-  \   #{ name: 'open', params: #{ command: 'vsplit' } })
-
-nnoremap <buffer><expr> R
-  \ ddu#ui#do_action('itemAction', #{ name: 'rename' })
-
-nnoremap <buffer><expr> D
-  \ ddu#ui#do_action('itemAction', #{ name: 'delete' })
-
-nnoremap <buffer><expr> <leader>n
-  \ ddu#ui#do_action('itemAction', #{ name: 'newFile' })
-
-" }
+" }}}

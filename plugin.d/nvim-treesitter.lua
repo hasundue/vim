@@ -1,5 +1,5 @@
 --
--- lua_source {
+-- lua_source {{{
 --
 
 -- Build cache of parsers outside of the package manager
@@ -37,4 +37,4 @@ require('nvim-treesitter.configs').setup({
 
 require('treesitter-context').setup()
 
--- }
+-- }}}

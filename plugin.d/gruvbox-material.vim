@@ -1,5 +1,5 @@
 "
-" hook_add {
+" hook_add {{{
 " 
 if has('termguicolors')
   set termguicolors
@@ -18,4 +18,4 @@ let g:gruvbox_material_transparent_background = 0
 
 colorscheme gruvbox-material
 
-" }
+" }}}

@@ -15,20 +15,35 @@ if &runtimepath !~# '/dein.vim'
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-
-  " Install dein-mod
-  if !isdirectory(s:dein_mod_repo_dir)
-    execute '!git clone https://github.com/hasundue/dein-mod' s:dein_mod_repo_dir
-  endif
-  execute 'set runtimepath+=' . fnamemodify(s:dein_mod_repo_dir, ':p')
 endif
-
-" Plugin directory (read by dein#mod#add)
-let g:dein#mod#hook_dir = expand('~/.config/vim/plugin.d')
 
 " Configurations
 let g:dein#enable_notification = v:true
-let g:dein#install_progress_type = "floating"
+let g:dein#install_progress_type = "none"
+let g:dein#install_message_type = "none"
+
+" A directory for hooks
+let s:dein_hooks_dir = expand('~/.config/vim/plugin.d')
+
+" A wrapper function for dein#add() to find hooks files
+function! s:add(repo, options = {}) abort
+  let plugin = dein#parse#_dict(dein#parse#_init(a:repo, a:options))
+
+  let plugin_name = fnamemodify(plugin.name, ':r')
+  let filename = fnamemodify(s:dein_hooks_dir . '/' . plugin_name, ':p')
+
+  let filepath = filereadable(filename . '.vim')
+    \ ? filename . '.vim'
+    \ : filereadable(filename . '.lua')
+    \   ? filename . '.lua'
+    \   : ''
+
+  if filepath !=# ''
+    let a:options.hooks_file = filepath
+  endif
+
+  call dein#add(a:repo, a:options)
+endfunction
 
 "
 " Load plugins
@@ -39,137 +54,134 @@ if dein#load_state(s:dein_dir)
   " dein.vim
   call dein#add('Shougo/dein.vim')
 
-  " dein-mod
-  call dein#add('hasundue/dein-mod')
-
   " Appearance
-  silent call dein#mod#add('sainnhe/gruvbox-material')
-  call dein#mod#add('itchyny/lightline.vim')
-  call dein#mod#add('mengelbrecht/lightline-bufferline', #{ 
+  silent call s:add('sainnhe/gruvbox-material')
+  call s:add('itchyny/lightline.vim')
+  call s:add('mengelbrecht/lightline-bufferline', #{ 
     \   depends: 'lightline.vim',
     \   on_event: 'BufAdd',
     \   on_if: 'bufnr("$") > 1',
     \ })
 
   " UI
-  call dein#mod#add('mattn/vim-notification', #{ 
+  call s:add('mattn/vim-notification', #{ 
     \   if: has('vim'),
     \   on_func: 'notification#show',
     \ })
-  call dein#mod#add('rcarriga/nvim-notify', #{ 
+  call s:add('rcarriga/nvim-notify', #{ 
     \   if: has('nvim'),
     \   on_lua: 'notify',
     \ })
-  call dein#mod#add('lambdalisue/guise.vim', #{ 
+  call s:add('lambdalisue/guise.vim', #{ 
     \   depends: 'denops.vim',
     \   on_event: 'TermOpen'
     \ })
-  call dein#mod#add('vimpostor/vim-tpipeline')
+  call s:add('vimpostor/vim-tpipeline')
 
   " Editing
-  call dein#mod#add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
-  call dein#mod#add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
+  call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
+  call s:add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
 
   " Git
-  call dein#mod#add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
-  call dein#mod#add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
+  call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
+  call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " Copilot
-  call dein#mod#add('github/copilot.vim', #{ on_event: 'InsertEnter' })
+  call s:add('github/copilot.vim', #{ on_event: 'InsertEnter' })
 
   " Denops
-  call dein#mod#add('vim-denops/denops.vim', #{ 
+  call s:add('vim-denops/denops.vim', #{ 
     \   on_event: 'CursorHold'
     \ })
-  call dein#mod#add('matsui54/denops-popup-preview.vim', #{
+  call s:add('matsui54/denops-popup-preview.vim', #{
     \   depends: 'denops.vim',
     \   on_event: 'CompleteChanged',
     \ })  
-  call dein#mod#add('matsui54/denops-signature_help', #{ 
+  call s:add('matsui54/denops-signature_help', #{ 
     \   depends: 'denops.vim',
     \   on_event: 'InsertEnter',
     \ })
-  call dein#mod#add('skanehira/denops-silicon.vim', #{
+  call s:add('skanehira/denops-silicon.vim', #{
     \   depends: 'denops.vim',
     \   on_cmd: 'Silicon',
     \ })
 
   " ddu.vim
-  call dein#mod#add('Shougo/ddu.vim', #{ 
+  call s:add('Shougo/ddu.vim', #{ 
     \   depends: 'denops.vim',
     \   on_source: 'denops.vim'
     \ })
-  call dein#mod#add('Shougo/ddu-commands.vim', #{ 
+  call s:add('Shougo/ddu-commands.vim', #{ 
     \   depends: 'ddu.vim',
     \   on_cmd: 'Ddu',
     \ })
-  call dein#mod#add('hasundue/ddu-filter-zf', #{ 
+  call s:add('hasundue/ddu-filter-zf', #{ 
     \   on_source: 'ddu.vim',
     \   build: 'deno task build',
     \ })
-  call dein#mod#add('Shougo/ddu-ui-ff', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('~/ddu-ui-filer', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('Shougo/ddu-kind-file', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('Shougo/ddu-column-filename', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('Shougo/ddu-source-file', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('Shougo/ddu-filter-matcher_hidden', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
-  call dein#mod#add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-ui-ff', #{ on_source: 'ddu.vim' })
+  call s:add('~/ddu-ui-filer', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-kind-file', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-column-filename', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-source-file', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-filter-matcher_hidden', #{ on_source: 'ddu.vim' })
+  call s:add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
+  call s:add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
+  call s:add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
 
   " ddc.vim
-  call dein#mod#add('Shougo/ddc.vim', #{
+  call s:add('Shougo/ddc.vim', #{
     \   depends: ['denops.vim', 'pum.vim'],
     \   on_event: ['InsertEnter', 'CmdlineEnter', 'CursorHold'],
     \ })
-  call dein#mod#add('Shougo/pum.vim')
-  call dein#mod#add('vim-skk/denops-skkeleton.vim', #{ 
+  call s:add('Shougo/pum.vim')
+  call s:add('vim-skk/denops-skkeleton.vim', #{ 
     \   depends: 'denops.vim',
     \   on_source: 'ddc.vim'
     \ })
-  call dein#mod#add('Shougo/ddc-ui-pum', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('Shougo/ddc-cmdline', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('Shougo/ddc-cmdline-history', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
-  call dein#mod#add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
-  call dein#mod#add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
+  call s:add('Shougo/ddc-ui-pum', #{ on_source: 'ddc.vim' })
+  call s:add('Shougo/ddc-cmdline', #{ on_source: 'ddc.vim' })
+  call s:add('Shougo/ddc-cmdline-history', #{ on_source: 'ddc.vim' })
+  call s:add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
+  call s:add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
+  call s:add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
 
   " neovim
-  call dein#mod#add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
+  call s:add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
 
   " tree-sitter (neovim)
-  call dein#mod#add('nvim-treesitter/nvim-treesitter', #{ 
+  call s:add('nvim-treesitter/nvim-treesitter', #{ 
     \   if: has('nvim'),
     \   merged: v:false,
     \   on_event: 'FileType',
     \ })
-  call dein#mod#add('nvim-treesitter/nvim-treesitter-context', #{
+  call s:add('nvim-treesitter/nvim-treesitter-context', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-treesitter',
     \ })
-  call dein#mod#add('neovim/tree-sitter-vimdoc', #{ 
+  call s:add('neovim/tree-sitter-vimdoc', #{ 
     \   if: has('nvim'),
     \   on_source: 'nvim-treesitter',
     \ })
-  call dein#mod#add('yioneko/nvim-yati', #{ 
+  call s:add('yioneko/nvim-yati', #{ 
     \   if: has('nvim'),
     \   on_source: 'nvim-treesitter',
     \ })
 
   " nvim-lsp (neovim)
-  call dein#mod#add('neovim/nvim-lspconfig', #{
+  call s:add('neovim/nvim-lspconfig', #{
     \   if: has('nvim'),
     \   on_event: 'FileType'
     \ })
-  call dein#mod#add('williamboman/mason.nvim', #{
+  call s:add('williamboman/mason.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'mason-lspconfig',
     \ })
-  call dein#mod#add('williamboman/mason-lspconfig', #{
+  call s:add('williamboman/mason-lspconfig', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
     \ })
-  call dein#mod#add('lvimuser/lsp-inlayhints.nvim', #{
+  call s:add('lvimuser/lsp-inlayhints.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
     \ })

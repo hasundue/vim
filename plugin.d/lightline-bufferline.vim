@@ -1,5 +1,5 @@
 "
-" hook_add {
+" hook_add {{{
 "
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#show_number = 2
@@ -24,4 +24,4 @@ function! s:close_buf() abort
 endfunction
 nnoremap <Leader>- <cmd>call <SID>close_buf()<CR>
 
-" }
+" }}}

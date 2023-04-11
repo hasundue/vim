@@ -1,5 +1,5 @@
 "
-" hook_add {
+" hook_add {{{
 "
 let g:copilot_filetypes = #{
   \   gitcommit: v:true,
@@ -32,4 +32,4 @@ endfunction
 
 autocmd BufReadPost COMMIT_EDITMSG call s:append_diff()
 
-" }
+" }}}

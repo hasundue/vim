@@ -1,13 +1,13 @@
 "
-" hook_add {
+" hook_add {{{
 "
 imap <C-j> <Plug>(skkeleton-toggle)
 cmap <C-j> <Plug>(skkeleton-toggle)
 
-" }
+" }}}
 
 "
-" hook_source {
+" hook_source {{{
 "
 call skkeleton#config({
   \ 'eggLikeNewline': v:true,
@@ -15,4 +15,4 @@ call skkeleton#config({
   \ 'completionRankFile': '~/.cache/skkeleton/rank.json',
   \ })
 
-" }
+" }}}

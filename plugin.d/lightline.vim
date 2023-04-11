@@ -1,5 +1,5 @@
 "
-" hook_add {
+" hook_add {{{
 "
 set laststatus=2
 set showtabline=1
@@ -36,4 +36,4 @@ let g:lightline = #{
   \   },
   \ }
 
-" }
+" }}}

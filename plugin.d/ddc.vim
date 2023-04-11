@@ -1,5 +1,5 @@
 "
-" hook_source {
+" hook_source {{{
 "
 call ddc#custom#patch_global('ui', 'pum')
 
@@ -59,10 +59,10 @@ call ddc#custom#patch_global('filterParams', {
 
 call ddc#enable()
 
-" }
+" }}}
 
 "
-" hook_add {
+" hook_add {{{
 "
 inoremap <expr> <C-n> pum#map#insert_relative(+1)
 inoremap <expr> <C-p> pum#map#insert_relative(-1)
@@ -136,4 +136,4 @@ function! CommandlinePost() abort
   endif
 endfunction
 
-" }
+" }}}

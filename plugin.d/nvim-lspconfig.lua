@@ -1,5 +1,5 @@
 --
--- lua_source {
+-- lua_source {{{
 --
 local lspconfig = require("lspconfig")
 
@@ -129,4 +129,4 @@ for server, config in pairs(servers) do
   }))
 end
 
--- }
+-- }}}

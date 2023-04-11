@@ -1,5 +1,5 @@
 "
-" hook_source {
+" hook_source {{{
 "
 call ddu#custom#patch_global(#{
   \   uiParams: #{
@@ -52,4 +52,32 @@ call ddu#custom#patch_global(#{
   \   },
   \ })
 
-" }
+" }}}
+
+"
+" ddu-ff_ddu-filer {{{
+"
+nnoremap <buffer><silent> <S-CR>
+  \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
+
+nnoremap <buffer><silent> q
+  \ <Cmd>call ddu#ui#do_action('quit')<CR>
+
+nnoremap <buffer><silent> s
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'split' } })<CR>
+
+nnoremap <buffer><silent> v
+  \ <Cmd>call ddu#ui#do_action('itemAction',
+  \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
+
+nnoremap <buffer><silent> R
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
+
+nnoremap <buffer><silent> N
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
+
+nnoremap <buffer><silent> D
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
+
+" }}}

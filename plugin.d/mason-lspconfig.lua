@@ -1,5 +1,5 @@
 --
--- lua_source {
+-- lua_source {{{
 --
 require("mason-lspconfig").setup({
   automatic_installation = {
@@ -7,4 +7,4 @@ require("mason-lspconfig").setup({
   },
 })
 
--- }
+-- }}}
