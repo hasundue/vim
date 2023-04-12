@@ -20,59 +20,57 @@ local function peek_definition()
   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
 end
 
-local function on_attach(client, bufnr)
-  local function cmd(mode, lhs, rhs)
-    vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = true })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    vim.api.nvim_buf_set_option(ev.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    local function map(mode, lhs, rhs)
+      vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = ev.buf })
+    end
+
+    map('n', 'gd', vim.lsp.buf.definition)
+    map('n', 'gD', vim.lsp.buf.declaration)
+    map('n', 'gK', peek_definition)
+
+    map('n', '<leader>q', vim.diagnostic.setloclist)
+    map('n', '<leader>r', vim.lsp.buf.rename)
+    map('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
+    map('n', '<leader>n', function() vim.diagnostic.goto_next { float = { header = false } } end)
+    map('n', '<leader>N', function() vim.diagnostic.goto_prev { float = { header = false } } end)
+
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if client.server_capabilities.hoverProvider then
+      map('n', 'K', vim.lsp.buf.hover)
+    end
+
+    if client.server_capabilities.inlayHintsProvider then
+      require("lsp-inlayhints").on_attach(client, ev.buf, false)
+    end
+
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = ev.buf,
+        group = vim.api.nvim_create_augroup("LspFormat", {}),
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end,
+      })
+    end
+
+    if client.server_capabilities.codeLensProvider then
+      map('n', '<leader>lr', vim.lsp.codelens.run)
+
+      vim.api.nvim_create_autocmd({ "CursorHold", "TextChanged", "InsertLeave" }, {
+        buffer = ev.buf,
+        group = vim.api.nvim_create_augroup("LspCodeLens", {}),
+        callback = vim.lsp.codelens.refresh
+      })
+    end
   end
-
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  cmd('n', 'gd', vim.lsp.buf.definition)
-  cmd('n', 'gD', vim.lsp.buf.declaration)
-  cmd('n', 'gK', peek_definition)
-
-  cmd('n', '<leader>q', vim.diagnostic.setloclist)
-  cmd('n', '<leader>r', vim.lsp.buf.rename)
-  cmd('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
-  cmd('n', '<leader>n', function() vim.diagnostic.goto_next { float = { header = false } } end)
-  cmd('n', '<leader>N', function() vim.diagnostic.goto_prev { float = { header = false } } end)
-
-  if client.server_capabilities.hoverProvider then
-    cmd('n', 'K', vim.lsp.buf.hover)
-  end
-
-  if client.server_capabilities.inlayHintsProvider then
-    require("lsp-inlayhints").on_attach(client, bufnr, false)
-  end
-
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = bufnr,
-      group = 'lsp_format',
-      callback = function()
-        vim.lsp.buf.format { async = false }
-      end,
-    })
-  end
-
-  if client.server_capabilities.codeLensProvider then
-    cmd('n', '<leader>Le', vim.lsp.codelens.display)
-    cmd('n', '<leader>Ln', vim.lsp.codelens.run)
-
-    local augroup = vim.api.nvim_create_augroup("LspCodeLens", {})
-    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-      buffer = bufnr,
-      group = augroup,
-      callback = function()
-        vim.lsp.codelens.refresh()
-        local codelens = vim.lsp.codelens.get(bufnr)
-        if codelens then
-          vim.lsp.codelens.display(codelens, bufnr, client.id)
-        end
-      end,
-    })
-  end
-end
+})
 
 local servers = {
   lua_ls = {
@@ -94,9 +92,13 @@ local servers = {
       "deno.json",
       "deno.jsonc"
     ),
-    init_options = {
-      lint = true,
-      unstable = true
+    settings = {
+      deno = {
+        enable = true,
+        codelens = {
+          test = true,
+        },
+      },
     },
   },
   tsserver = {
@@ -125,9 +127,7 @@ local servers = {
 }
 
 for server, config in pairs(servers) do
-  lspconfig[server].setup(vim.tbl_extend("force", config, {
-    on_attach = on_attach,
-  }))
+  lspconfig[server].setup(config)
 end
 
 -- }}}
