@@ -127,7 +127,7 @@ if dein#load_state(s:dein_dir)
   call s:add('Shougo/ddu-filter-matcher_hidden', #{ on_source: 'ddu.vim' })
   call s:add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
   call s:add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
-  call s:add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
+  call s:add('~/ddu-source-rg', #{ on_source: 'ddu.vim' })
 
   " ddc.vim
   call s:add('Shougo/ddc.vim', #{
