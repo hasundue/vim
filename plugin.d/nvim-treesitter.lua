@@ -10,16 +10,6 @@ require('nvim-treesitter.configs').setup({
   },
   indent = {
     enable = true,
-    disable = {
-      "javascript",
-      "jsx",
-      "typescript",
-      "tsx",
-      "lua",
-    },
-  },
-  yati = {
-    enable = true,
   },
   ensure_installed = {
     "bash",
@@ -29,6 +19,7 @@ require('nvim-treesitter.configs').setup({
     "typescript",
     "tsx",
     "zig",
+    "rust",
     "json",
     "yaml",
     "markdown",

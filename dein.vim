@@ -163,10 +163,6 @@ if dein#load_state(s:dein_dir)
     \   if: has('nvim'),
     \   on_source: 'nvim-treesitter',
     \ })
-  call s:add('yioneko/nvim-yati', #{ 
-    \   if: has('nvim'),
-    \   on_source: 'nvim-treesitter',
-    \ })
 
   " nvim-lsp (neovim)
   call s:add('neovim/nvim-lspconfig', #{
