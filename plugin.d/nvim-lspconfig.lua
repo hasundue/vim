@@ -97,6 +97,16 @@ local servers = {
         codelens = {
           test = true,
         },
+        suggest = {
+          autoImports = true,
+          imports = {
+            autoDiscover = true,
+            hosts = {
+              ["https://deno.land"] = true,
+            },
+          },
+        },
+        unstable = true,
       },
     },
   },
