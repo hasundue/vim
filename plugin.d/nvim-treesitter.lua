@@ -6,7 +6,6 @@
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {},
   },
   indent = {
     enable = true,
@@ -18,11 +17,16 @@ require('nvim-treesitter.configs').setup({
     "javascript",
     "typescript",
     "tsx",
+    "graphql",
     "zig",
     "rust",
     "json",
     "yaml",
     "markdown",
+  },
+  graphql_literal = {
+    enable = true,
+    custom_language = "typesript",
   },
 })
 
