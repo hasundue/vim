@@ -121,6 +121,7 @@ local servers = {
   jsonls = {},
   julials = {},
   zls = {},
+  rust_analyzer = {},
 }
 
 for server, config in pairs(servers) do
