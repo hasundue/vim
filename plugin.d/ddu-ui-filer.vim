@@ -2,12 +2,12 @@
 " hook_add {{{
 "
 nnoremap <silent> <leader>tf <CMD>Ddu
-  \ -name=filer-file -ui=filer -resume -volatile file<CR>
+  \ -name=filer-file -ui=filer -resume file<CR>
 nnoremap <silent> <leader>th <CMD>Ddu
-  \ -name=filer-home -ui=filer -resume -volatile
+  \ -name=filer-home -ui=filer -resume
   \ -source-option-path='`expand('~')`' file<CR>
 nnoremap <silent> <leader>tc <CMD>Ddu
-  \ -name=filer-rc -ui=filer -resume -volatile
+  \ -name=filer-rc -ui=filer -resume
   \ -source-option-path='`expand('~/.config/vim')`' file<CR>
 
 " }}}
@@ -38,7 +38,7 @@ nnoremap <buffer><expr> <leader>.
 	\ ddu#ui#do_action('updateOptions', {
 	\   'sourceOptions': {
 	\     'file': {
-	\       'matchers': <SID>ToggleHidden(),
+	\       'matchers': ToggleHidden(),
 	\     },
 	\   },
 	\ })

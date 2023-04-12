@@ -18,9 +18,11 @@ call ddu#custom#patch_global(#{
   \       matchers: ['matcher_zf'],
   \     },
   \     rg: #{
+  \       volatile: v:true,
   \       matchers: [],
   \     },
   \     file: #{
+  \       volatile: v:true,
   \       columns: ['filename'],
   \       matchers: ['matcher_hidden'],
   \     },
@@ -57,8 +59,14 @@ call ddu#custom#patch_global(#{
 "
 " ddu-ff_ddu-filer {{{
 "
+nnoremap <buffer><silent> <C-l>
+  \ <Cmd>call ddu#ui#do_action('refreshItems')<CR>
+
 nnoremap <buffer><silent> -
   \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
+
+nnoremap <buffer><silent> <S-->
+  \ <Cmd>call ddu#ui#do_action('toggleAllItem')<CR>
 
 nnoremap <buffer><silent> q
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
