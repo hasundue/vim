@@ -38,7 +38,7 @@ let s:highlights = #{
   \   FloatBorder: [ g:color#grey, g:color#bg ],
   \   Pmenu: [ g:color#fg_pum, g:color#bg_pum ],
   \   PmenuSbar: [ 'none', g:color#bg_pum ],
-  \   PmenuSel: [ g:color#bg_pum, g:color#grey ],
+  \   PmenuSel: [ 'none', g:color#grey ],
   \
   \   Cursor: [ 'none', 'none', 'reverse' ],
   \   Visual: [ 'none', g:color#grey ],
