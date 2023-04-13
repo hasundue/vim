@@ -4,41 +4,47 @@ if has('termguicolors')
 endif
 
 " gruvbox-material (dark, hard)
-let g:color#fg = '#D4BE98'
-let g:color#red = '#EA6962'
-let g:color#orange = '#E78A4E'
-let g:color#yellow = '#D8A657'
-let g:color#green = '#A9B665'
-let g:color#aqua = '#89B482'
-let g:color#blue = '#7DAEA3'
-let g:color#purple = '#D3869B'
+let g:color#fg = '#d4be98'
+let g:color#fg_pum = '#ddc7a1'
 
+let g:color#red = '#ea6962'
+let g:color#orange = '#e78a4e'
+let g:color#yellow = '#d8a657'
+let g:color#green = '#a9b665'
+let g:color#aqua = '#89b482'
+let g:color#blue = '#7daea3'
+let g:color#purple = '#d3869b'
 let g:color#grey = '#928374'
 
 let g:color#bg = '#1d2021'
-let g:color#bg_red = '#EA6962'
-let g:color#bg_green = '#A9B665'
-let g:color#bg_yellow = '#D8A657'
+let g:color#bg_pum = '#3c3836'
+let g:color#bg_red = '#ea6962'
+let g:color#bg_green = '#a9b665'
+let g:color#bg_yellow = '#d8a657'
 
 let s:highlights = #{
   \   Normal: [ g:color#fg ],
   \
-  \   Gray: [ g:color#grey ],
+  \   Grey: [ g:color#grey ],
   \   Red: [ g:color#red ],
   \   Orange: [ g:color#orange ],
   \   Yellow: [ g:color#yellow ],
   \   Green: [ g:color#green ],
   \   Blue: [ g:color#blue ],
-  \   Aqua: [ g:color#aqua ],
+  \   Cyan: [ g:color#aqua ],
   \   Purple: [ g:color#purple ],
   \   
   \   NormalFloat: [ g:color#fg, g:color#bg ],
   \   FloatBorder: [ g:color#grey, g:color#bg ],
+  \   Pmenu: [ g:color#fg_pum, g:color#bg_pum ],
+  \   PmenuSbar: [ 'none', g:color#bg_pum ],
+  \   PmenuSel: [ g:color#bg_pum, g:color#grey ],
   \
   \   Cursor: [ 'none', 'none', 'reverse' ],
   \   Visual: [ 'none', g:color#grey ],
   \   Search: [ g:color#bg, g:color#bg_green ],
   \   IncSearch: [ g:color#bg, g:color#bg_red ],
+  \   MatchParen: [ 'none', g:color#bg_pum ],
   \
   \   Todo: [ g:color#bg, g:color#yellow, 'bold' ],
   \   Underlined: [ 'none', 'none', 'underline' ],
@@ -66,18 +72,27 @@ endfor
 
 let s:links = #{
   \   SignColumn: 'Normal',
-  \   ToolbarLine: 'Normal',
-  \   LineNr: 'Gray',
-  \   Folded: 'Gray',
-  \   Conceal: 'Gray',
-  \   NonText: 'Gray',
+  \   LineNr: 'Grey',
   \
-  \   Pmenu: 'NormalFloat',
+  \   ToolbarLine: 'Normal',
+  \   StatusLine: 'Grey',
+  \   StatusLineTerm: 'Grey',
+  \   StatusLineNC: 'Grey',
+  \   StatusLineTermNC: 'Grey',
+  \
+  \   Folded: 'Grey',
+  \   Conceal: 'Grey',
+  \   NonText: 'Grey',
+  \   WhiteSpace: 'Grey',
+  \   SpecialKey: 'Grey',
+  \
   \   CurSearch: 'IncSearch',
   \
   \   ErrorMsg: 'Red',
   \   WarningMsg: 'Yellow',
   \   MoreMsg: 'Yellow',
+  \
+  \   Directory: 'Green',
   \
   \   Boolean: 'Purple',
   \   Number: 'Purple',
@@ -107,15 +122,15 @@ let s:links = #{
   \   Function: 'Green',
   \   String: 'Green',
   \   Character: 'Green',
-  \   Constant: 'Aqua',
-  \   Macro: 'Aqua',
+  \   Constant: 'Cyan',
+  \   Macro: 'Cyan',
   \   Identifier: 'Blue',
   \   
-  \   Comment: 'Gray',
-  \   SpecialComment: 'Gray',
+  \   Comment: 'Grey',
+  \   SpecialComment: 'Grey',
   \
   \   Delimiter: 'Normal',
-  \   Ignore: 'Gray',
+  \   Ignore: 'Grey',
   \ }
 
 " execute `highlight link` command for each link
