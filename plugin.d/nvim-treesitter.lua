@@ -14,6 +14,7 @@ require('nvim-treesitter.configs').setup({
     "bash",
     "vim",
     "lua",
+    "diff",
     "javascript",
     "typescript",
     "tsx",

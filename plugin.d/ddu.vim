@@ -6,10 +6,6 @@ call ddu#custom#patch_global(#{
   \     _: #{
   \       split: has('nvim') ? 'floating' : 'horizontal',
   \       floatingBorder: 'rounded',
-  \       highlights: #{
-  \         floating: 'Normal',
-  \         floatingBorder: 'WinSeparator',
-  \       },
   \       statusLine: v:true,
   \     },
   \   },

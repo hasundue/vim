@@ -54,15 +54,6 @@ if dein#load_state(s:dein_dir)
   " dein.vim
   call dein#add('Shougo/dein.vim')
 
-  " Appearance
-  silent call s:add('sainnhe/gruvbox-material')
-  call s:add('itchyny/lightline.vim')
-  call s:add('mengelbrecht/lightline-bufferline', #{ 
-    \   depends: 'lightline.vim',
-    \   on_event: 'BufAdd',
-    \   on_if: 'bufnr("$") > 1',
-    \ })
-
   " UI
   call s:add('mattn/vim-notification', #{ 
     \   if: has('vim'),

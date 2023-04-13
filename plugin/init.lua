@@ -3,7 +3,7 @@
 --
 vim.go.cmdheight = 0
 
-vim.go.pumblend = 10
-vim.go.winblend = 10
+vim.go.pumblend = 15
+vim.go.winblend = 15
 
 -- }
