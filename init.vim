@@ -1,7 +1,7 @@
 let $VIMHOME = expand("~/.config/vim")
 
 "
-" Startup {
+" Startup {{{
 "
 if has('vim_starting')
   set encoding=utf-8
@@ -27,8 +27,7 @@ if has('vim_starting')
   let g:loaded_netrwSettings     = 1
   let g:loaded_netrwFileHandlers = 1
 endif
-
-" }
+" }}}
 
 "
 " Interface {
@@ -41,7 +40,7 @@ set noshowcmd       " do not display incomplete commands on the last line
 set noshowmode      " do not display mode on the last line
 
 set laststatus=2    " always shows statusline
-set showtabline=2   " always shows tabline
+" set showtabline=2   " always shows tabline
 
 set pumheight=10    " set height of popup menu
 
