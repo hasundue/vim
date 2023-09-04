@@ -48,10 +48,6 @@ nnoremap <buffer><silent> <CR>
 nnoremap <buffer><silent> i
   \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
 
-nnoremap <buffer><silent> S
-  \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
-  \ :normal! S
-
 " }}}
 
 "
