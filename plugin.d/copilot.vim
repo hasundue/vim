@@ -14,8 +14,6 @@ let g:copilot_filetypes = #{
 let g:copilot_no_tab_map = v:true
 imap <silent><script><expr> <CR> copilot#Accept("\<CR>")
 
-nnoremap <silent> <leader>cp <CMD>Copilot panel<CR>
-
 "
 " Append the diff of the staged changes to the commit message
 " for autocompletion of the commit message
