@@ -46,6 +46,8 @@ set nowrap          " do not wrap lines
 set breakindent     " every wrapped line will continue visually indented
 
 set mouse=a
+
+set splitright      " open new windows to the right
 " }
 
 "
