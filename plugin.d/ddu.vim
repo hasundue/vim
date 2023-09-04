@@ -4,13 +4,27 @@
 call ddu#custom#patch_global(#{
   \   uiParams: #{
   \     _: #{
-  \       split: has('nvim') ? 'floating' : 'horizontal',
+  \       autoAction: #{
+  \         name: 'preview',
+  \       },
   \       floatingBorder: 'rounded',
   \       highlights: #{
   \         floating: 'Normal',
   \         floatingBorder: 'WinSeparator',
   \       },
+  \       previewFloating: v:true,
+  \       previewFloatingBorder: 'rounded',
+  \       previewCol: "(&columns - eval(uiParams.winWidth)) / 2",
+  \       previewHeight: 10,
+  \       previewRow: &lines / 2 + 12,
+  \       previewWidth: &columns,
+  \       previewWindowOptions: [["&number", v:true]],
+  \       startAutoAction: v:true,
   \       statusLine: v:true,
+  \       winHeight: 10,
+  \       winRow: &lines / 2 - 12,
+  \       winWidth: &columns,
+  \       split: has('nvim') ? 'floating' : 'horizontal',
   \     },
   \   },
   \   sourceOptions: #{
@@ -35,11 +49,6 @@ call ddu#custom#patch_global(#{
   \     },
   \     rg: #{
   \       args: ['--json'],
-  \     },
-  \   },
-  \   filterParams: #{
-  \     matcher_zf: #{
-  \       caseSensitive: v:false,
   \     },
   \   },
   \   kindOptions: #{

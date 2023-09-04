@@ -76,6 +76,7 @@ if dein#load_state(s:dein_dir)
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
   call s:add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
   call s:add('psliwka/vim-dirtytalk', #{ on_ft: 'markdown' })
+  call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
 
   " Git
   call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
@@ -122,6 +123,8 @@ if dein#load_state(s:dein_dir)
   call s:add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
   call s:add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
   call s:add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
+  call s:add('shun/ddu-source-buffer', #{ on_source: 'ddu.vim' })
+  call s:add('kuuote/ddu-source-mr', #{ on_source: 'ddu.vim', depends: 'mr.vim' })
 
   " ddc.vim
   call s:add('Shougo/ddc.vim', #{

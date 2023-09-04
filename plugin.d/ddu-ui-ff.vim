@@ -4,18 +4,24 @@
 nnoremap <silent> <leader>f <Cmd>Ddu file_external
   \ -name=ff-file -ui=ff -resume<CR>
 
-nnoremap <silent> <leader>uc <Cmd>Ddu file_external
+nnoremap <silent> <leader>m <Cmd>Ddu mr
+  \ -name=ff-mr -ui=ff<CR>
+
+nnoremap <silent> <leader>b <Cmd>Ddu buffer
+  \ -name=ff-mr -ui=ff<CR>
+
+nnoremap <silent> <leader>c <Cmd>Ddu file_external
   \ -name=ff-rc -ui=ff -resume
   \ -source-option-file_external-path='`expand('~/.config/vim')`'<CR>
 
-nnoremap <silent> <leader>ug <Cmd>Ddu rg
+nnoremap <silent> <leader>g <Cmd>Ddu rg
   \ -name=ff-grep -ui=ff -resume<CR>
 
-nnoremap <silent> <leader>uh <Cmd>Ddu help
+nnoremap <silent> <leader>h <Cmd>Ddu help
   \ -name=ff-help -ui=ff -resume<CR>
 
-nnoremap <silent> <leader>up <Cmd>Ddu dein
-  \ -name=ff-plugin -ui=ff -resume<CR>
+" nnoremap <silent> <leader>p <Cmd>Ddu dein
+"   \ -name=ff-plugin -ui=ff -resume<CR>
 
 " }}}
 
@@ -25,7 +31,6 @@ nnoremap <silent> <leader>up <Cmd>Ddu dein
 call ddu#custom#patch_global(#{
   \   uiParams: #{
   \     ff: #{
-  \       startFilter: v:true,
   \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
   \       filterFloatingPosition: 'top',
   \     },
@@ -42,6 +47,10 @@ nnoremap <buffer><silent> <CR>
 
 nnoremap <buffer><silent> i
   \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
+
+nnoremap <buffer><silent> S
+  \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
+  \ :normal! S
 
 " }}}
 
