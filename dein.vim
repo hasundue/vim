@@ -54,6 +54,9 @@ if dein#load_state(s:dein_dir)
   " dein.vim
   call dein#add('Shougo/dein.vim')
 
+  " Appearance
+  call s:add('sainnhe/gruvbox-material')
+
   " UI
   call s:add('mattn/vim-notification', #{ 
     \   if: has('vim'),
@@ -72,18 +75,18 @@ if dein#load_state(s:dein_dir)
   " Editing
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
   call s:add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
+  call s:add('psliwka/vim-dirtytalk', #{ on_ft: 'markdown' })
 
   " Git
   call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
   call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
-  " Copilot
+  " AI
   call s:add('github/copilot.vim', #{ on_event: 'InsertEnter' })
+  call s:add('tani/hey.vim', #{ on_event: 'InsertEnter' })
 
   " Denops
-  call s:add('vim-denops/denops.vim', #{ 
-    \   on_event: 'CursorHold'
-    \ })
+  call s:add('vim-denops/denops.vim')
   call s:add('matsui54/denops-popup-preview.vim', #{
     \   depends: 'denops.vim',
     \   on_event: 'CompleteChanged',
@@ -111,7 +114,7 @@ if dein#load_state(s:dein_dir)
     \   build: 'deno task build',
     \ })
   call s:add('Shougo/ddu-ui-ff', #{ on_source: 'ddu.vim' })
-  call s:add('~/ddu-ui-filer', #{ on_source: 'ddu.vim' })
+  call s:add('Shougo/ddu-ui-filer', #{ on_source: 'ddu.vim' })
   call s:add('Shougo/ddu-kind-file', #{ on_source: 'ddu.vim' })
   call s:add('Shougo/ddu-column-filename', #{ on_source: 'ddu.vim' })
   call s:add('Shougo/ddu-source-file', #{ on_source: 'ddu.vim' })
@@ -123,7 +126,7 @@ if dein#load_state(s:dein_dir)
   " ddc.vim
   call s:add('Shougo/ddc.vim', #{
     \   depends: ['denops.vim', 'pum.vim'],
-    \   on_event: ['InsertEnter', 'CmdlineEnter', 'CursorHold'],
+    \   on_event: ['InsertEnter', 'CmdlineEnter'],
     \ })
   call s:add('Shougo/pum.vim')
   call s:add('vim-skk/denops-skkeleton.vim', #{ 
@@ -136,9 +139,15 @@ if dein#load_state(s:dein_dir)
   call s:add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
   call s:add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
   call s:add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
+  call s:add('gamoutatsumi/ddc-emoji', #{ on_source: 'ddc.vim' })
 
   " neovim
   call s:add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
+  call s:add('iamcco/markdown-preview.nvim', #{
+    \   if: has('nvim'),
+    \   on_ft: ['markdown', 'pandoc.markdown', 'rmd'],
+		\   build: 'sh -c "cd app && yarn install"' 
+	  \ })
 
   " tree-sitter (neovim)
   call s:add('nvim-treesitter/nvim-treesitter', #{ 

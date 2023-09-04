@@ -58,16 +58,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end,
       })
     end
-
-    if client.server_capabilities.codeLensProvider then
-      map('n', '<leader>lr', vim.lsp.codelens.run)
-
-      vim.api.nvim_create_autocmd({ "CursorHold", "TextChanged", "InsertLeave" }, {
-        buffer = ev.buf,
-        group = vim.api.nvim_create_augroup("LspCodeLens", {}),
-        callback = vim.lsp.codelens.refresh
-      })
-    end
   end
 })
 
@@ -85,7 +75,8 @@ local servers = {
     },
   },
   denols = {
-    single_file_support = true,
+    cmd = { "deno", "lsp", "--unstable" },
+    single_file_support = false,
     root_dir = lspconfig.util.root_pattern(
       "denops",
       "deno.json",
@@ -94,9 +85,7 @@ local servers = {
     settings = {
       deno = {
         enable = true,
-        codelens = {
-          test = true,
-        },
+        unstable = true,
         suggest = {
           autoImports = true,
           imports = {
@@ -106,7 +95,6 @@ local servers = {
             },
           },
         },
-        unstable = true,
       },
     },
   },
@@ -117,36 +105,16 @@ local servers = {
   eslint = {
     root_dir = lspconfig.util.root_pattern(".eslintrc*"),
   },
-  yamlls = {
-    settings = {
-      yaml = {
-        schemas = {
-          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        },
-      },
-    },
-  },
   vimls = {},
   bashls = {},
   cssls = {},
-  jsonls = {},
-  julials = {},
+  nil_ls = {},
+  pyright = {},
   zls = {},
-  rust_analyzer = {},
 }
 
 for server, config in pairs(servers) do
   lspconfig[server].setup(config)
-end
-
-vim.lsp.commands["deno.test"] = function(args)
-  local file = args.arguments[1]:gsub("file:///", "/")
-  local test_name = "/^" .. args.arguments[2] .. "$/"
-  local maybe_debug = args.title == "Debug" and "--inspect-brk " or ""
-
-  local cmd = "split term://deno test --no-check --unstable -A " ..
-      maybe_debug .. file .. " --filter " .. vim.fn.fnameescape(test_name)
-  vim.cmd(cmd)
 end
 
 -- }}}

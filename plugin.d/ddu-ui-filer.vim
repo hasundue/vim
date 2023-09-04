@@ -34,14 +34,14 @@ call ddu#custom#patch_global(#{
 "
 " ddu-filer {{{
 "
-nnoremap <buffer><expr> <leader>.
-	\ ddu#ui#do_action('updateOptions', {
+nnoremap <buffer> h
+	\ <Cmd>call ddu#ui#do_action('updateOptions', {
 	\   'sourceOptions': {
 	\     'file': {
 	\       'matchers': ToggleHidden(),
 	\     },
 	\   },
-	\ })
+	\ })<CR>
 
 function! ToggleHidden()
 	const current = ddu#custom#get_current(b:ddu_ui_name)
@@ -53,13 +53,22 @@ endfunction
 
 nnoremap <buffer><expr> <CR>
   \ ddu#ui#get_item()->get('isTree', v:false) ?
-  \   ddu#ui#do_action('itemAction', #{ name: 'narrow' }) :
-  \   ddu#ui#do_action('itemAction', #{ name: 'open' })
+  \   "<Cmd>call ddu#ui#do_action('itemAction', #{ name: 'narrow' })<CR>" :
+  \   "<Cmd>call ddu#ui#do_action('itemAction', #{ name: 'open' })<CR>"
 
-nnoremap <buffer><expr> ..
-  \ ddu#ui#do_action('itemAction', #{ 
+nnoremap <buffer> ..
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ 
   \   name: 'narrow', 
   \   params: #{ path: '..' }
-  \ })
+  \ })<CR>
+
+nnoremap <buffer><silent> dd
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'move' })<CR>
+
+nnoremap <buffer><silent> yy
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'copy' })<CR>
+
+nnoremap <buffer><silent> p
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'paste' })<CR>
 
 " }}}

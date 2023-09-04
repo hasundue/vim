@@ -6,12 +6,18 @@ call ddu#custom#patch_global(#{
   \     _: #{
   \       split: has('nvim') ? 'floating' : 'horizontal',
   \       floatingBorder: 'rounded',
+  \       highlights: #{
+  \         floating: 'Normal',
+  \         floatingBorder: 'WinSeparator',
+  \       },
   \       statusLine: v:true,
   \     },
   \   },
   \   sourceOptions: #{
   \     _: #{
   \       matchers: ['matcher_zf'],
+  \       sorters: ['sorter_zf'],
+  \       converters: ['converter_zf'],
   \     },
   \     rg: #{
   \       volatile: v:true,
@@ -28,13 +34,12 @@ call ddu#custom#patch_global(#{
   \       cmd: ['git', 'ls-files', '-co', '--exclude-standard'],
   \     },
   \     rg: #{
-  \       args: ['--column', '--no-heading', '--color', 'never'],
+  \       args: ['--json'],
   \     },
   \   },
   \   filterParams: #{
   \     matcher_zf: #{
   \       caseSensitive: v:false,
-  \       strictPath: v:false,
   \     },
   \   },
   \   kindOptions: #{
@@ -67,11 +72,11 @@ nnoremap <buffer><silent> <S-->
 nnoremap <buffer><silent> q
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
-nnoremap <buffer><silent> s
+nnoremap <buffer><silent> sp
   \ <Cmd>call ddu#ui#do_action('itemAction',
   \   #{ name: 'open', params: #{ command: 'split' } })<CR>
 
-nnoremap <buffer><silent> v
+nnoremap <buffer><silent> vs
   \ <Cmd>call ddu#ui#do_action('itemAction',
   \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
 

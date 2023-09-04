@@ -3,5 +3,4 @@
 "
 let g:tpipeline_restore = 1
 
-
 " }}}

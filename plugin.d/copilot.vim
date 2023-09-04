@@ -6,6 +6,7 @@ let g:copilot_filetypes = #{
   \   markdown: v:true,
   \   yaml: v:true,
   \   text: v:true,
+  \   nix: v:true,
   \   ddu-ff-filter: v:false,
   \ }
 

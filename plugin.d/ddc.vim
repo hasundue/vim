@@ -20,6 +20,14 @@ call ddc#custom#patch_global('cmdlineSources',
   \   ['cmdline', 'cmdline-history', 'file']
   \ )
 
+call ddc#custom#patch_filetype('markdown', 'sources', [
+  \   'skkeleton',
+  \   'emoji',
+  \   'file',
+  \ ])
+
+call ddc#custom#patch_global('keywordPattern', '(\k*)|(:\w*)')
+
 call ddc#custom#patch_global('sourceOptions', #{
   \   _: #{
   \     maxItems: 10,
@@ -35,11 +43,16 @@ call ddc#custom#patch_global('sourceOptions', #{
   \   file: #{
   \     mark: 'F',
   \     isVolatile: v:true,
+  \     forceCompletionPattern: '\S\/\S*'
   \   },
   \   skkeleton: #{
   \     mark: 'S',
   \     matchers: ['skkeleton'],
   \     isVolatile: v:true,
+  \   },
+  \   emoji: #{ 
+  \     mark: 'E',
+  \     matchers: ['emoji'],
   \   },
   \   cmdline: #{
   \     mark: '',

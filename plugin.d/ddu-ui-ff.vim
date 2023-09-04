@@ -1,17 +1,21 @@
 "
 " hook_add {{{
 "
-nnoremap <silent> <leader>ff <Cmd>Ddu 
-  \ -name=ff-file -ui=ff -resume file_external<CR>
-nnoremap <silent> <leader>fc <Cmd>Ddu
+nnoremap <silent> <leader>f <Cmd>Ddu file_external
+  \ -name=ff-file -ui=ff -resume<CR>
+
+nnoremap <silent> <leader>uc <Cmd>Ddu file_external
   \ -name=ff-rc -ui=ff -resume
-  \ -source-option-path='`expand('~/.config/vim')`' file_external<CR>
-nnoremap <silent> <leader>fg <Cmd>Ddu
-  \ -name=ff-grep -ui=ff -resume rg<CR>
-nnoremap <silent> <leader>fh <Cmd>Ddu
-  \ -name=ff-help -ui=ff -resume help<CR>
-nnoremap <silent> <leader>fp <Cmd>Ddu
-  \ -name=ff-plugin -ui=ff -resume dein<CR>
+  \ -source-option-file_external-path='`expand('~/.config/vim')`'<CR>
+
+nnoremap <silent> <leader>ug <Cmd>Ddu rg
+  \ -name=ff-grep -ui=ff -resume<CR>
+
+nnoremap <silent> <leader>uh <Cmd>Ddu help
+  \ -name=ff-help -ui=ff -resume<CR>
+
+nnoremap <silent> <leader>up <Cmd>Ddu dein
+  \ -name=ff-plugin -ui=ff -resume<CR>
 
 " }}}
 
