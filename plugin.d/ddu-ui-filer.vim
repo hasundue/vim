@@ -1,14 +1,8 @@
 "
 " hook_add {{{
 "
-nnoremap <silent> <leader>tf <CMD>Ddu
+nnoremap <silent> <leader>t <CMD>Ddu
   \ -name=filer-file -ui=filer -resume file<CR>
-nnoremap <silent> <leader>th <CMD>Ddu
-  \ -name=filer-home -ui=filer -resume
-  \ -source-option-path='`expand('~')`' file<CR>
-nnoremap <silent> <leader>tc <CMD>Ddu
-  \ -name=filer-rc -ui=filer -resume
-  \ -source-option-path='`expand('~/.config/vim')`' file<CR>
 
 " }}}
 
