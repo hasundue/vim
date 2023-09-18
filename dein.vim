@@ -151,6 +151,10 @@ if dein#load_state(s:dein_dir)
     \   on_ft: ['markdown', 'pandoc.markdown', 'rmd'],
 		\   build: 'sh -c "cd app && yarn install"' 
 	  \ })
+  call s:add('williamboman/mason.nvim', #{
+    \   if: has('nvim'),
+    \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
+    \ })
 
   " tree-sitter (neovim)
   call s:add('nvim-treesitter/nvim-treesitter', #{ 
@@ -172,10 +176,6 @@ if dein#load_state(s:dein_dir)
     \   if: has('nvim'),
     \   on_event: 'FileType'
     \ })
-  call s:add('williamboman/mason.nvim', #{
-    \   if: has('nvim'),
-    \   on_source: 'mason-lspconfig',
-    \ })
   call s:add('williamboman/mason-lspconfig', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
@@ -183,6 +183,16 @@ if dein#load_state(s:dein_dir)
   call s:add('lvimuser/lsp-inlayhints.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
+    \ })
+
+  " nvim-lint (neovim)
+  call s:add('mfussenegger/nvim-lint', #{
+    \   if: has('nvim'),
+    \   on_event: 'FileType',
+    \ })
+  call s:add('rshkarin/mason-nvim-lint', #{
+    \   if: has('nvim'),
+    \   on_source: 'nvim-lint',
     \ })
 
   call dein#end()
