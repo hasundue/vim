@@ -13,7 +13,7 @@ call ddu#custom#patch_global(#{
   \   uiParams: #{
   \     filer: #{
   \       sort: 'filename',
-  \       sortTreeFirst: v:false,
+  \       sortTreesFirst: v:true,
   \     },
   \   },
   \   actionOptions: #{
