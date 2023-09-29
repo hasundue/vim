@@ -100,6 +100,10 @@ if dein#load_state(s:dein_dir)
     \   depends: 'denops.vim',
     \   on_cmd: 'Silicon',
     \ })
+  call s:add('lambdalisue/deno-cache.vim', #{
+    \   depends: 'denops.vim',
+    \   on_ft: 'typescript',
+    \ })
 
   " ddu.vim
   call s:add('Shougo/ddu.vim', #{ 
@@ -177,10 +181,6 @@ if dein#load_state(s:dein_dir)
     \   on_event: 'FileType'
     \ })
   call s:add('williamboman/mason-lspconfig', #{
-    \   if: has('nvim'),
-    \   on_source: 'nvim-lspconfig',
-    \ })
-  call s:add('lvimuser/lsp-inlayhints.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
     \ })
