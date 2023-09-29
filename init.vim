@@ -37,7 +37,9 @@ set signcolumn=yes  " always shows signcolumn
 set noshowcmd       " do not display incomplete commands on the last line
 set noshowmode      " do not display mode on the last line
 
-set laststatus=0    " do not show statusline
+set laststatus=1    " do not show statusline
+set statusline=\ %f " set statusline format
+
 set showtabline=0   " do not show tabline
 
 set pumheight=10    " set height of popup menu
