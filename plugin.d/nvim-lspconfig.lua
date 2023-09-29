@@ -45,8 +45,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       map('n', 'K', vim.lsp.buf.hover)
     end
 
-    if client.server_capabilities.inlayHintsProvider then
-      require("lsp-inlayhints").on_attach(client, ev.buf, false)
+    if client.supports_method(inlay_hint) then
+      vim.cmd('highlight link LspInlayHint Comment')
+      vim.lsp.inlay_hint(ev.buf, true)
     end
 
     if client.server_capabilities.documentFormattingProvider then
@@ -94,6 +95,24 @@ local servers = {
               ["https://deno.land"] = true,
             },
           },
+        },
+        inlayHints = {
+          parameterTypes = {
+            enabled = true,
+          },
+          variableTypes = {
+            enabled = true,
+          },
+          propertyDeclarationTypes = {
+            enabled = true,
+          },
+          functionReturnTypes = {
+            enabled = true,
+          },
+          enumMemberValues = {
+            enabled = true,
+          },
+          enabled = true,
         },
       },
     },
