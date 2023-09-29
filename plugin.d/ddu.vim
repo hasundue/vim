@@ -45,7 +45,7 @@ call ddu#custom#patch_global(#{
   \   },
   \   sourceParams: #{
   \     file_external: #{
-  \       cmd: ['git', 'ls-files', '-co', '--exclude-standard'],
+  \       cmd: ['git', 'ls-files', '-c', '--exclude-standard', '--recurse-submodules'],
   \     },
   \     rg: #{
   \       args: ['--json'],
