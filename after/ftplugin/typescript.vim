@@ -9,7 +9,6 @@ setl expandtab
 setl autoindent
 setl smartindent
 
-set wrap
 nnoremap <buffer> j gj
 nnoremap <buffer> k gk
 
