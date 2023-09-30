@@ -84,22 +84,14 @@ if dein#load_state(s:dein_dir)
 
   " AI
   call s:add('github/copilot.vim', #{ on_event: 'InsertEnter' })
-  call s:add('tani/hey.vim', #{ on_event: 'InsertEnter' })
+  " call s:add('tani/hey.vim', #{ on_event: 'InsertEnter' })
 
   " Denops
   call s:add('vim-denops/denops.vim')
-  call s:add('matsui54/denops-popup-preview.vim', #{
-    \   depends: 'denops.vim',
-    \   on_event: 'CompleteChanged',
-    \ })  
-  call s:add('matsui54/denops-signature_help', #{ 
-    \   depends: 'denops.vim',
-    \   on_event: 'InsertEnter',
-    \ })
-  call s:add('skanehira/denops-silicon.vim', #{
-    \   depends: 'denops.vim',
-    \   on_cmd: 'Silicon',
-    \ })
+  " call s:add('skanehira/denops-silicon.vim', #{
+  "   \   depends: 'denops.vim',
+  "   \   on_cmd: 'Silicon',
+  "   \ })
   call s:add('lambdalisue/deno-cache.vim', #{
     \   depends: 'denops.vim',
     \   on_ft: 'typescript',
@@ -181,6 +173,10 @@ if dein#load_state(s:dein_dir)
     \   on_event: 'FileType'
     \ })
   call s:add('williamboman/mason-lspconfig', #{
+    \   if: has('nvim'),
+    \   on_source: 'nvim-lspconfig',
+    \ })
+  call s:add('ray-x/lsp_signature.nvim', #{
     \   if: has('nvim'),
     \   on_source: 'nvim-lspconfig',
     \ })

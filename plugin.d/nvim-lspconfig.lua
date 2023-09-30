@@ -41,6 +41,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
+    require("lsp_signature").on_attach({
+      bind = true,
+      doc_lines = 0,
+      floating_window = true,
+      floating_window_off_y = 0,
+      handler_opts = {
+        border = "none",
+      },
+      hint_enable = false,
+      padding = ' ',
+      transparency = 30,
+    }, ev.buf)
+
     if client.server_capabilities.hoverProvider then
       map('n', 'K', vim.lsp.buf.hover)
     end
