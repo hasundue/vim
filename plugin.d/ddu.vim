@@ -42,6 +42,10 @@ call ddu#custom#patch_global(#{
   \       columns: ['filename'],
   \       matchers: ['matcher_hidden'],
   \     },
+  \     git_status: #{
+  \       converters: ['converter_git_status'],
+  \       path: expand('%:h'),
+  \     },
   \   },
   \   sourceParams: #{
   \     file_external: #{
@@ -61,25 +65,32 @@ call ddu#custom#patch_global(#{
   \     dein: #{
   \       defaultAction: 'open',
   \     },
+  \     git_status: #{
+  \       defaultAction: 'open',
+  \     },
   \   },
   \ })
+
+call ddu#custom#action('kind', 'git_status', 'commit',
+  \   { args -> execute('!cd ' . expand('%:h') . ' && git commit -m "' . input('Commit message: ') . '"') }
+  \ )
 
 " }}}
 
 "
 " ddu-ff_ddu-filer {{{
 "
-nnoremap <buffer><silent> <C-l>
-  \ <Cmd>call ddu#ui#do_action('refreshItems')<CR>
+nnoremap <buffer><silent> q
+  \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
 nnoremap <buffer><silent> -
   \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 
+nnoremap <buffer><silent> <C-l>
+  \ <Cmd>call ddu#ui#do_action('refreshItems')<CR>
+
 nnoremap <buffer><silent> <S-->
   \ <Cmd>call ddu#ui#do_action('toggleAllItem')<CR>
-
-nnoremap <buffer><silent> q
-  \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
 nnoremap <buffer><silent> sp
   \ <Cmd>call ddu#ui#do_action('itemAction',
@@ -89,13 +100,13 @@ nnoremap <buffer><silent> vs
   \ <Cmd>call ddu#ui#do_action('itemAction',
   \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
 
-nnoremap <buffer><silent> R
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
+nnoremap <buffer><silent> D
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
 
 nnoremap <buffer><silent> N
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'newFile' })<CR>
 
-nnoremap <buffer><silent> D
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
+nnoremap <buffer><silent> R
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
 
 " }}}

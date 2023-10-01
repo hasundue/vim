@@ -76,10 +76,9 @@ if dein#load_state(s:dein_dir)
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
   call s:add('machakann/vim-sandwich', #{ on_event: 'CursorMoved' })
   call s:add('psliwka/vim-dirtytalk', #{ on_ft: 'markdown' })
-  call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
 
   " Git
-  call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
+  " call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
   " call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " AI
@@ -88,108 +87,108 @@ if dein#load_state(s:dein_dir)
 
   " Denops
   call s:add('vim-denops/denops.vim')
-  " call s:add('skanehira/denops-silicon.vim', #{
-  "   \   depends: 'denops.vim',
-  "   \   on_cmd: 'Silicon',
-  "   \ })
-  call s:add('lambdalisue/deno-cache.vim', #{
-    \   depends: 'denops.vim',
+
+  function! s:add_denops(repo, options = {}) abort
+    call s:add(a:repo, extend(a:options, #{ depends: 'denops.vim' }))
+  endfunction
+
+  call s:add_denops('lambdalisue/deno-cache.vim', #{
     \   on_ft: 'typescript',
+    \ })
+  call s:add_denops('lambdalisue/gin.vim', #{
+    \   on_source: 'ddu.vim',
     \ })
 
   " ddu.vim
-  call s:add('Shougo/ddu.vim', #{ 
-    \   depends: 'denops.vim',
+  call s:add_denops('Shougo/ddu.vim', #{ 
     \   on_source: 'denops.vim'
     \ })
+
+  function! s:add_ddu(repo, options = {}) abort
+    call s:add(a:repo, extend(a:options, #{ on_source: 'ddu.vim' }))
+  endfunction
+
   call s:add('Shougo/ddu-commands.vim', #{ 
     \   depends: 'ddu.vim',
     \   on_cmd: 'Ddu',
     \ })
-  call s:add('hasundue/ddu-filter-zf', #{ 
-    \   on_source: 'ddu.vim',
+  call s:add_ddu('hasundue/ddu-filter-zf', #{ 
     \   build: 'deno task build',
     \ })
-  call s:add('Shougo/ddu-ui-ff', #{ on_source: 'ddu.vim' })
-  call s:add('Shougo/ddu-ui-filer', #{ on_source: 'ddu.vim' })
-  call s:add('Shougo/ddu-kind-file', #{ on_source: 'ddu.vim' })
-  call s:add('Shougo/ddu-column-filename', #{ on_source: 'ddu.vim' })
-  call s:add('Shougo/ddu-source-file', #{ on_source: 'ddu.vim' })
-  call s:add('Shougo/ddu-filter-matcher_hidden', #{ on_source: 'ddu.vim' })
-  call s:add('matsui54/ddu-source-file_external', #{ on_source: 'ddu.vim' })
-  call s:add('matsui54/ddu-source-help', #{ on_source: 'ddu.vim' })
-  call s:add('shun/ddu-source-rg', #{ on_source: 'ddu.vim' })
-  call s:add('shun/ddu-source-buffer', #{ on_source: 'ddu.vim' })
-  call s:add('kuuote/ddu-source-mr', #{ on_source: 'ddu.vim', depends: 'mr.vim' })
+  call s:add_ddu('Shougo/ddu-ui-ff')
+  call s:add_ddu('Shougo/ddu-ui-filer')
+  call s:add_ddu('Shougo/ddu-kind-file')
+  call s:add_ddu('Shougo/ddu-column-filename')
+  call s:add_ddu('Shougo/ddu-source-file')
+  call s:add_ddu('Shougo/ddu-filter-matcher_hidden')
+  call s:add_ddu('matsui54/ddu-source-file_external')
+  call s:add_ddu('matsui54/ddu-source-help')
+  call s:add_ddu('shun/ddu-source-rg')
+  call s:add_ddu('shun/ddu-source-buffer')
+  call s:add_ddu('kuuote/ddu-source-git_status')
+  call s:add_ddu('kuuote/ddu-source-mr', #{ depends: 'mr.vim' })
+  call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
 
   " ddc.vim
+  function! s:add_ddc(repo, options = {}) abort
+    call s:add(a:repo, extend(a:options, #{ on_source: 'ddu.vim' }))
+  endfunction
   call s:add('Shougo/ddc.vim', #{
     \   depends: ['denops.vim', 'pum.vim'],
     \   on_event: ['InsertEnter', 'CmdlineEnter'],
     \ })
   call s:add('Shougo/pum.vim')
-  call s:add('vim-skk/denops-skkeleton.vim', #{ 
-    \   depends: 'denops.vim',
-    \   on_source: 'ddc.vim'
-    \ })
-  call s:add('Shougo/ddc-ui-pum', #{ on_source: 'ddc.vim' })
-  call s:add('Shougo/ddc-cmdline', #{ on_source: 'ddc.vim' })
-  call s:add('Shougo/ddc-cmdline-history', #{ on_source: 'ddc.vim' })
-  call s:add('Shougo/ddc-nvim-lsp', #{ on_source: 'ddc.vim', if: has('nvim') })
-  call s:add('LumaKernel/ddc-file', #{ on_source: 'ddc.vim' })
-  call s:add('tani/ddc-fuzzy', #{ on_source: 'ddc.vim' })
-  call s:add('gamoutatsumi/ddc-emoji', #{ on_source: 'ddc.vim' })
+  call s:add_ddc('vim-skk/denops-skkeleton.vim')
+  call s:add_ddc('Shougo/ddc-ui-pum')
+  call s:add_ddc('Shougo/ddc-cmdline')
+  call s:add_ddc('Shougo/ddc-cmdline-history')
+  call s:add_ddc('Shougo/ddc-nvim-lsp', #{ if: has('nvim') })
+  call s:add_ddc('LumaKernel/ddc-file')
+  call s:add_ddc('tani/ddc-fuzzy')
+  call s:add_ddc('gamoutatsumi/ddc-emoji')
 
-  " neovim
-  call s:add('nvim-lua/plenary.nvim', #{ if: has('nvim') })
-  call s:add('iamcco/markdown-preview.nvim', #{
-    \   if: has('nvim'),
-    \   on_ft: ['markdown', 'pandoc.markdown', 'rmd'],
-		\   build: 'sh -c "cd app && yarn install"' 
-	  \ })
-  call s:add('williamboman/mason.nvim', #{
-    \   if: has('nvim'),
-    \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
-    \ })
+  " Neovim
+  if has('nvim')
+    call s:add('nvim-lua/plenary.nvim')
+    call s:add('iamcco/markdown-preview.nvim', #{
+      \   on_ft: ['markdown', 'pandoc.markdown', 'rmd'],
+		  \   build: 'sh -c "cd app && yarn install"' 
+	    \ })
+    call s:add('williamboman/mason.nvim', #{
+      \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
+      \ })
 
-  " tree-sitter (neovim)
-  call s:add('nvim-treesitter/nvim-treesitter', #{ 
-    \   if: has('nvim'),
-    \   merged: v:false,
-    \   on_event: 'FileType',
-    \ })
-  call s:add('nvim-treesitter/nvim-treesitter-context', #{
-    \   if: has('nvim'),
-    \   on_source: 'nvim-treesitter',
-    \ })
-  call s:add('neovim/tree-sitter-vimdoc', #{ 
-    \   if: has('nvim'),
-    \   on_source: 'nvim-treesitter',
-    \ })
+    " tree-sitter
+    call s:add('nvim-treesitter/nvim-treesitter', #{ 
+      \   merged: v:false,
+      \   on_event: 'FileType',
+      \ })
+    call s:add('nvim-treesitter/nvim-treesitter-context', #{
+      \   on_source: 'nvim-treesitter',
+      \ })
+    call s:add('neovim/tree-sitter-vimdoc', #{ 
+      \   on_source: 'nvim-treesitter',
+      \ })
 
-  " nvim-lsp (neovim)
-  call s:add('neovim/nvim-lspconfig', #{
-    \   if: has('nvim'),
-    \   on_event: 'FileType'
-    \ })
-  call s:add('williamboman/mason-lspconfig', #{
-    \   if: has('nvim'),
-    \   on_source: 'nvim-lspconfig',
-    \ })
-  call s:add('ray-x/lsp_signature.nvim', #{
-    \   if: has('nvim'),
-    \   on_source: 'nvim-lspconfig',
-    \ })
+    " nvim-lsp
+    call s:add('neovim/nvim-lspconfig', #{
+      \   on_event: 'FileType'
+      \ })
+    call s:add('williamboman/mason-lspconfig', #{
+      \   on_source: 'nvim-lspconfig',
+      \ })
+    call s:add('ray-x/lsp_signature.nvim', #{
+      \   on_source: 'nvim-lspconfig',
+      \ })
 
-  " nvim-lint (neovim)
-  call s:add('mfussenegger/nvim-lint', #{
-    \   if: has('nvim'),
-    \   on_event: 'FileType',
-    \ })
-  call s:add('rshkarin/mason-nvim-lint', #{
-    \   if: has('nvim'),
-    \   on_source: 'nvim-lint',
-    \ })
+    " nvim-lint
+    call s:add('mfussenegger/nvim-lint', #{
+      \   on_event: 'FileType',
+      \ })
+    call s:add('rshkarin/mason-nvim-lint', #{
+      \   on_source: 'nvim-lint',
+      \ })
+  endif
 
   call dein#end()
   call dein#save_state()
