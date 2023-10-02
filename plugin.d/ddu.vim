@@ -3,6 +3,8 @@
 "
 call ddu#custom#load_config(expand('~/.config/vim/plugin.d/ddu.ts'))
 
+" }}}
+
 "
 " ddu-ff_ddu-filer {{{
 "
