@@ -25,10 +25,11 @@ if has('vim_starting')
   let g:loaded_netrwSettings     = 1
   let g:loaded_netrwFileHandlers = 1
 endif
+
 " }}}
 
 "
-" Interface {
+" Interface {{{
 "
 set number          " show line numbers
 set numberwidth=2   " set width of line number column
@@ -50,7 +51,8 @@ set breakindent     " every wrapped line will continue visually indented
 set mouse=a
 
 set splitright      " open new windows to the right
-" }
+
+" }}}
 
 "
 " Clipboard {{{
@@ -77,7 +79,7 @@ endif
 " }}}
 
 "
-" Language {
+" Languages {{{
 "
 set helplang=en,ja " prefer English help
 
@@ -86,10 +88,10 @@ set nospell
 set spelllang=en_us,cjk
 set fileencodings=ucs-bom,utf-8
 
-" }
+" }}}
 
 "
-" Keymaps {
+" Keymaps {{{
 "
 let mapleader = ' '
 let maplocalleader = ' '
@@ -110,27 +112,26 @@ endfunction
 nnoremap giw *:vimgrep /<C-r>// **/*<CR>
 autocmd QuickFixCmdPost *vimgrep* cwindow
 
-" }
+" }}}
 
 "
-" Editing {
+" Editing {{{
 "
 set noswapfile      " do not create swap files
 set smarttab        " insert blanks according to shiftwidth
 set expandtab       " use spaces instead of TAB
 set shiftround      " round indent to multiple of shiftwidth with > and <
 set textwidth=0     " do not automatically wrap text
-
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set autoindent      " copy indent from current line when starting a new line
 set smartindent     " use smart autoindenting when starting a new line
-set copyindent      " copy the structure of the existing lines indent when
-                    " autoindenting a new line
+set copyindent      " copy the structure of the existing lines indent when autoindenting a new line
 set preserveindent  " Use :retab to clean up whitespace
+set updatetime=100
 
-" }
+" }}}
 
 "
 " Plugins {
