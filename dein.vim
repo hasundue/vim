@@ -23,14 +23,14 @@ let g:dein#install_progress_type = "none"
 let g:dein#types#git#enable_partial_clone = v:true
 
 " A directory for hooks
-let s:dein_hooks_dir = expand('~/.config/vim/plugin.d')
+let g:dein_hooks_dir = expand('~/.config/vim/plugin.d')
 
 " A wrapper function for dein#add() to find hooks files
 function! s:add(repo, options = {}) abort
   let plugin = dein#parse#_dict(dein#parse#_init(a:repo, a:options))
 
   let plugin_name = fnamemodify(plugin.name, ':r')
-  let filename = fnamemodify(s:dein_hooks_dir . '/' . plugin_name, ':p')
+  let filename = fnamemodify(g:dein_hooks_dir . '/' . plugin_name, ':p')
 
   let filepath = filereadable(filename . '.vim')
     \ ? filename . '.vim'

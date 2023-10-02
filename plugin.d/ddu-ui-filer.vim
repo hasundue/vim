@@ -7,25 +7,6 @@ nnoremap <silent> <leader>t <CMD>Ddu file
 " }}}
 
 "
-" hook_source {{{
-"
-call ddu#custom#patch_global(#{
-  \   uiParams: #{
-  \     filer: #{
-  \       sort: 'filename',
-  \       sortTreesFirst: v:true,
-  \     },
-  \   },
-  \   actionOptions: #{
-  \     narrow: #{
-  \       quit: v:false,
-  \     },
-  \   },
-  \ })
-
-" }}}
-
-"
 " ddu-filer {{{
 "
 nnoremap <buffer> h

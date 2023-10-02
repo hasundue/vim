@@ -24,23 +24,6 @@ nnoremap <silent> <leader>g <Cmd>Ddu git_status
   \ -name=ff-git -ui=ff
   \ -source-option-git_status-path='`expand('%:h')`'<CR>
 
-" nnoremap <silent> <leader>p <Cmd>Ddu dein
-"   \ -name=ff-plugin -ui=ff -resume<CR>
-
-" }}}
-
-"
-" hook_source {{{
-"
-call ddu#custom#patch_global(#{
-  \   uiParams: #{
-  \     ff: #{
-  \       filterSplitDirection: has('nvim') ? 'floating' : 'bottomright',
-  \       filterFloatingPosition: 'top',
-  \     },
-  \   },
-  \ })
-
 " }}}
 
 "

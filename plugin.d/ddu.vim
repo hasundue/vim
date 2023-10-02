@@ -1,83 +1,11 @@
 "
 " hook_source {{{
 "
-call ddu#custom#patch_global(#{
-  \   uiParams: #{
-  \     _: #{
-  \       autoAction: #{
-  \         name: 'preview',
-  \       },
-  \       floatingBorder: 'rounded',
-  \       highlights: #{
-  \         floating: 'Normal',
-  \         floatingBorder: 'WinSeparator',
-  \       },
-  \       previewFloating: &lines > 40,
-  \       previewFloatingBorder: 'rounded',
-  \       previewCol: "(&columns - eval(uiParams.winWidth)) / 2",
-  \       previewHeight: &lines / 2 - 2,
-  \       previewRow: &lines / 2 + &lines / 2,
-  \       previewWidth: min([&columns, 80]),
-  \       previewWindowOptions: [["&number", v:true]],
-  \       startAutoAction: v:true,
-  \       statusLine: v:true,
-  \       winHeight: 10,
-  \       winRow: &lines / 2 - 12,
-  \       winWidth: min([&columns, 80]),
-  \       split: has('nvim') ? 'floating' : 'horizontal',
-  \     },
-  \   },
-  \   sourceOptions: #{
-  \     _: #{
-  \       matchers: ['matcher_zf'],
-  \       sorters: ['sorter_zf'],
-  \       converters: ['converter_zf'],
-  \     },
-  \     rg: #{
-  \       volatile: v:true,
-  \       matchers: [],
-  \     },
-  \     file: #{
-  \       volatile: v:true,
-  \       columns: ['filename'],
-  \       matchers: ['matcher_hidden'],
-  \     },
-  \     git_status: #{
-  \       converters: ['converter_git_status'],
-  \       path: expand('%:h'),
-  \     },
-  \   },
-  \   sourceParams: #{
-  \     file_external: #{
-  \       cmd: ['git', 'ls-files', '-co', '--exclude-standard'],
-  \     },
-  \     rg: #{
-  \       args: ['--json'],
-  \     },
-  \     mr: #{
-  \       kind: 'mrw',
-  \     },
-  \   },
-  \   kindOptions: #{
-  \     file: #{
-  \       defaultAction: 'open',
-  \     },
-  \     help: #{
-  \       defaultAction: 'open',
-  \     },
-  \     dein: #{
-  \       defaultAction: 'open',
-  \     },
-  \     git_status: #{
-  \       defaultAction: 'open',
-  \     },
-  \   },
-  \ })
+call ddu#custom#load_config(expand('~/.config/vim/plugin.d/ddu.ts'))
 
 call ddu#custom#action('kind', 'git_status', 'commit',
-  \   { args -> execute('!cd ' . expand('%:h') . ' && git commit -m "' . input('Commit message: ') . '"') }
+  \   { args -> execute('!git commit -m "' . input('Commit message: ') . '"') }
   \ )
-
 " }}}
 
 "
