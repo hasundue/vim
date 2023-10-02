@@ -17,7 +17,7 @@ nnoremap <silent> <leader>c <Cmd>Ddu file_external
 nnoremap <silent> <leader>r <Cmd>Ddu rg
   \ -name=ff-grep -ui=ff -resume<CR>
 
-nnoremap <silent> <leader>h <Cmd>Ddu help
+nnoremap <silent> <leader>d <Cmd>Ddu help
   \ -name=ff-help -ui=ff -resume<CR>
 
 nnoremap <silent> <leader>g <Cmd>Ddu git_status
