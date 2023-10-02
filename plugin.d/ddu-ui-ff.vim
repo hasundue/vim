@@ -39,22 +39,22 @@ nnoremap <buffer><silent> i
 " git_status
 "
 nnoremap <buffer><silent> a
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'add' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'add' })<CR>
 
 nnoremap <buffer><silent> r
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'reset' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'reset' })<CR>
 
 nnoremap <buffer><silent> p
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'patch' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'patch' })<CR>
 
 nnoremap <buffer><silent> cc
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'commit' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'commit' })<CR>
 
 nnoremap <buffer><silent> X
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'restore' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'restore' })<CR>
 
 nnoremap <buffer><silent> P
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'push' })<CR>
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'push' })<CR>
 
 " }}}
 
