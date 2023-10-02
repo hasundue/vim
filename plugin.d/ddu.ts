@@ -47,21 +47,15 @@ export class Config extends BaseConfig {
       },
       sourceOptions: {
         _: {
-          ignoreCase: true,
-          smartCase: true,
-        },
-        file_external: {
-          matchers: ["matcher_zf"],
-          sorters: ["sorter_zf"],
-          converters: ["converter_zf"],
-        },
-        help: {
           matchers: ["matcher_zf"],
           sorters: ["sorter_zf"],
           converters: ["converter_zf"],
         },
         rg: {
           volatile: true,
+          matchers: [],
+          sorters: [],
+          converters: [],
         },
         file: {
           volatile: true,
@@ -69,7 +63,7 @@ export class Config extends BaseConfig {
           matchers: ["matcher_hidden"],
         },
         git_status: {
-          converters: ["converter_git_status"],
+          converters: ["converter_zf", "converter_git_status"],
           path: "expand('%:h')",
           actions: {
             push: ({ items }) => {
@@ -88,7 +82,7 @@ export class Config extends BaseConfig {
           cmd: ["git", "ls-files", "-co", "--exclude-standard"],
         },
         rg: {
-          args: ["--json"],
+          args: ["--json", "--smart-case"],
         },
         mr: {
           kind: "mrw",
