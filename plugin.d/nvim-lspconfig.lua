@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     map('n', '<M-r>', vim.lsp.buf.rename)
+    map('n', '<M-k>', function() vim.diagnostic.open_float { float = { header = false } } end)
     map('n', '<M-n>', function() vim.diagnostic.goto_next { float = { header = false } } end)
     map('n', '<M-N>', function() vim.diagnostic.goto_prev { float = { header = false } } end)
 
@@ -32,7 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         buffer = ev.buf,
         group = vim.api.nvim_create_augroup("LspFormat", {}),
         callback = function()
-          vim.lsp.buf.format({ async = false })
+          vim.cmd('silent! lua vim.lsp.buf.format({ async = false })')
         end,
       })
     end
@@ -53,18 +54,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    },
-  },
+  -- lua_ls = {
+  --   settings = {
+  --     Lua = {
+  --       diagnostics = {
+  --         globals = { "vim" },
+  --       },
+  --     },
+  --     workspace = {
+  --       library = vim.api.nvim_get_runtime_file("", true),
+  --     },
+  --   },
+  -- },
   denols = {
     cmd = { "deno", "lsp", "--unstable" },
     single_file_support = false,
