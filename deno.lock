@@ -1,8 +1,0 @@
-{
-  "version": "3",
-  "redirects": {
-    "https://deno.land/x/std@0.184.0/async/mod.ts": "https://deno.land/std@0.184.0/async/mod.ts",
-    "https://deno.land/x/std@0.184.0/streams/mod.ts": "https://deno.land/std@0.184.0/streams/mod.ts"
-  },
-  "remote": {}
-}
