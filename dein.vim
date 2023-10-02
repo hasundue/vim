@@ -131,13 +131,13 @@ if dein#load_state(s:dein_dir)
 
   " ddc.vim
   function! s:add_ddc(repo, options = {}) abort
-    call s:add(a:repo, extend(a:options, #{ on_source: 'ddu.vim' }))
+    call s:add(a:repo, extend(a:options, #{ on_source: 'ddc.vim' }))
   endfunction
   call s:add('Shougo/ddc.vim', #{
     \   depends: ['denops.vim', 'pum.vim'],
     \   on_event: ['InsertEnter', 'CmdlineEnter'],
     \ })
-  call s:add('Shougo/pum.vim')
+  call s:add_ddc('Shougo/pum.vim')
   call s:add_ddc('vim-skk/denops-skkeleton.vim')
   call s:add_ddc('Shougo/ddc-ui-pum')
   call s:add_ddc('Shougo/ddc-cmdline')
@@ -157,6 +157,9 @@ if dein#load_state(s:dein_dir)
     call s:add('williamboman/mason.nvim', #{
       \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
       \ })
+    " call s:add('subnut/nvim-ghost.nvim', #{
+    "   \   hook_add: 'let g:nvim_ghost_autostart = 0',
+    "   \ })
 
     " tree-sitter
     call s:add('nvim-treesitter/nvim-treesitter', #{ 

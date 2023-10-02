@@ -52,18 +52,17 @@ nnoremap <buffer><silent> <CR>
 nnoremap <buffer><silent> i
   \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
 
+"
+" source-git_status
+"
 nnoremap <buffer><silent> a
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'add' })<CR>
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'add' })<CR>
 
 nnoremap <buffer><silent> cc
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'commit' })<CR>
-
-nnoremap <buffer><silent> A
-  \ <Cmd>call ddu#ui#do_action('itemAction',
-  \   #{ name: 'executeGit', params: #{ command: ['add', '--all'] } })<CR>
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'commit' })<CR>
 
 nnoremap <buffer><silent> x
-  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'reset' })<CR>
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'reset' })<CR>
 
 " }}}
 

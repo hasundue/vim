@@ -89,8 +89,8 @@ nnoremap <buffer><silent> -
 nnoremap <buffer><silent> <C-l>
   \ <Cmd>call ddu#ui#do_action('refreshItems')<CR>
 
-nnoremap <buffer><silent> <S-->
-  \ <Cmd>call ddu#ui#do_action('toggleAllItem')<CR>
+nnoremap <buffer><silent> =
+  \ <Cmd>call ddu#ui#do_action('toggleAllItems')<CR>
 
 nnoremap <buffer><silent> sp
   \ <Cmd>call ddu#ui#do_action('itemAction',
@@ -108,5 +108,14 @@ nnoremap <buffer><silent> N
 
 nnoremap <buffer><silent> R
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'rename' })<CR>
+
+nnoremap <buffer><silent> a
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'add' })<CR>
+
+nnoremap <buffer><silent> cc
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'commit' })<CR>
+
+nnoremap <buffer><silent> x
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'reset' })<CR>
 
 " }}}
