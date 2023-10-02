@@ -2,7 +2,7 @@
 -- lua_source {{{
 --
 require("notify").setup({
-  background_colour = "NormalFloat",
+  background_colour = "Normal",
 })
 
 vim.notify = require("notify")
