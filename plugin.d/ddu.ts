@@ -1,7 +1,11 @@
-import { BaseConfig } from "https://deno.land/x/ddu_vim@v3.6.0/types.ts";
+import {
+  ActionFlags,
+  BaseConfig,
+} from "https://deno.land/x/ddu_vim@v3.6.0/types.ts";
 import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.6.0/base/config.ts";
 import { Params as FfParams } from "https://deno.land/x/ddu_ui_ff@v1.1.0/ff.ts";
 import { Params as FilerParams } from "https://deno.land/x/ddu_ui_filer@v1.1.0/filer.ts";
+import { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
 
 export class Config extends BaseConfig {
   config(args: ConfigArguments) {
@@ -51,6 +55,11 @@ export class Config extends BaseConfig {
           sorters: ["sorter_zf"],
           converters: ["converter_zf"],
         },
+        help: {
+          matchers: ["matcher_zf"],
+          sorters: ["sorter_zf"],
+          converters: ["converter_zf"],
+        },
         rg: {
           volatile: true,
         },
@@ -62,6 +71,16 @@ export class Config extends BaseConfig {
         git_status: {
           converters: ["converter_git_status"],
           path: "expand('%:h')",
+          actions: {
+            push: async ({ items }) => {
+              const action = items[0].action as GitStatusActionData;
+              await new Deno.Command("git", {
+                args: ["push"],
+                cwd: action.worktree,
+              }).output();
+              return ActionFlags.Persist;
+            },
+          },
         },
       },
       sourceParams: {
@@ -78,6 +97,28 @@ export class Config extends BaseConfig {
       kindOptions: {
         _: {
           defaultAction: "open",
+        },
+        git_status: {
+          actions: {
+            commit: async ({ items, denops }) => {
+              const action = items[0].action as GitStatusActionData;
+              await denops.cmd(
+                `execute '!cd ${action.worktree} && git commit -m "' . input('Commit message: ') . '"'`,
+              );
+              return ActionFlags.RefreshItems;
+            },
+            patch: async ({ items, denops }) => {
+              for (const item of items) {
+                const action = item.action as GitStatusActionData;
+                await denops.batch([
+                  "new",
+                  "tcd " + action.worktree,
+                  "GinPatch ++no-head " + action.path,
+                ]);
+              }
+              return ActionFlags.RefreshItems;
+            },
+          },
         },
       },
     });

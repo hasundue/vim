@@ -41,14 +41,20 @@ nnoremap <buffer><silent> i
 nnoremap <buffer><silent> a
   \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'add' })<CR>
 
-nnoremap <buffer><silent> cc
-  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'commit' })<CR>
-
 nnoremap <buffer><silent> r
   \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'reset' })<CR>
 
+nnoremap <buffer><silent> p
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'patch' })<CR>
+
+nnoremap <buffer><silent> cc
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'commit' })<CR>
+
 nnoremap <buffer><silent> X
   \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'restore' })<CR>
+
+nnoremap <buffer><silent> P
+  \ <Cmd>call ddu#ui#async_action('sourceAction', #{ name: 'push' })<CR>
 
 " }}}
 

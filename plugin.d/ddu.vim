@@ -3,11 +3,6 @@
 "
 call ddu#custom#load_config(expand('~/.config/vim/plugin.d/ddu.ts'))
 
-call ddu#custom#action('kind', 'git_status', 'commit',
-  \   { args -> execute('!git commit -m "' . input('Commit message: ') . '"') }
-  \ )
-" }}}
-
 "
 " ddu-ff_ddu-filer {{{
 "
