@@ -79,7 +79,7 @@ if dein#load_state(s:dein_dir)
 
   " Git
   " call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
-  " call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
+  call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " AI
   call s:add('github/copilot.vim', #{ on_event: 'InsertEnter' })
