@@ -54,7 +54,7 @@ nnoremap <buffer><silent> X
   \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'restore' })<CR>
 
 nnoremap <buffer><silent> P
-  \ <Cmd>call ddu#ui#async_action('sourceAction', #{ name: 'push' })<CR>
+  \ <Cmd>call ddu#ui#async_action('itemAction', #{ name: 'push' })<CR>
 
 " }}}
 

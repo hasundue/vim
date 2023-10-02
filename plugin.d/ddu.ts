@@ -72,13 +72,18 @@ export class Config extends BaseConfig {
           converters: ["converter_git_status"],
           path: "expand('%:h')",
           actions: {
-            push: async ({ items }) => {
+            push: async ({ items, denops }) => {
               const action = items[0].action as GitStatusActionData;
-              await new Deno.Command("git", {
+              const { code, stderr } = await new Deno.Command("git", {
                 args: ["push"],
                 cwd: action.worktree,
               }).output();
-              return ActionFlags.Persist;
+              if (code !== 0) {
+                await denops.cmd(
+                  `echohl Error | echo '${stderr}' | echohl None`,
+                );
+              }
+              return ActionFlags.None;
             },
           },
         },
