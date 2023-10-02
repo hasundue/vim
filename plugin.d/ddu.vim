@@ -54,6 +54,9 @@ call ddu#custom#patch_global(#{
   \     rg: #{
   \       args: ['--json'],
   \     },
+  \     mr: #{
+  \       kind: 'mrw',
+  \     },
   \   },
   \   kindOptions: #{
   \     file: #{
