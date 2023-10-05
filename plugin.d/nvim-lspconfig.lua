@@ -19,16 +19,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-    if client.supports_method(hover) then
+    if client.supports_method("hover") then
       map('n', 'K', vim.lsp.buf.hover)
     end
 
-    if client.supports_method(inlay_hint) then
+    if client.supports_method("inlay_hint") then
       vim.cmd('highlight link LspInlayHint Comment')
       vim.lsp.inlay_hint(ev.buf, true)
     end
 
-    if client.supports_method(format) then
+    if client.supports_method("format") then
       vim.api.nvim_create_autocmd('BufWritePre', {
         buffer = ev.buf,
         group = vim.api.nvim_create_augroup("LspFormat", {}),
@@ -54,18 +54,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local servers = {
-  -- lua_ls = {
-  --   settings = {
-  --     Lua = {
-  --       diagnostics = {
-  --         globals = { "vim" },
-  --       },
-  --     },
-  --     workspace = {
-  --       library = vim.api.nvim_get_runtime_file("", true),
-  --     },
-  --   },
-  -- },
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+    },
+  },
   denols = {
     cmd = { "deno", "lsp", "--unstable" },
     single_file_support = false,

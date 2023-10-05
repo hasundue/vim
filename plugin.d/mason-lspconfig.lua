@@ -3,7 +3,7 @@
 --
 require("mason-lspconfig").setup({
   automatic_installation = {
-    exclude = { "denols", "zls", "nil_ls" },
+    exclude = { "lua_ls", "denols", "zls", "nil_ls" },
   },
 })
 -- }}}
