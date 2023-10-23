@@ -65,16 +65,6 @@ export class Config extends BaseConfig {
         git_status: {
           converters: ["converter_zf", "converter_git_status"],
           path: "expand('%:h')",
-          actions: {
-            push: ({ items }) => {
-              const action = items[0].action as GitStatusActionData;
-              new Deno.Command("git", {
-                args: ["push"],
-                cwd: action.worktree,
-              }).output();
-              return ActionFlags.None;
-            },
-          },
         },
       },
       sourceParams: {
@@ -97,18 +87,25 @@ export class Config extends BaseConfig {
             commit: async ({ items, denops }) => {
               const action = items[0].action as GitStatusActionData;
               await denops.cmd(
-                `execute '!cd ${action.worktree} && git commit -m "' . input('Commit message: ') . '"'`,
+                `execute '!cd ${action.worktree} && git commit'`,
+              );
+              return ActionFlags.RefreshItems;
+            },
+            commit_amend: async ({ items, denops }) => {
+              const action = items[0].action as GitStatusActionData;
+              await denops.cmd(
+                `execute '!cd ${action.worktree} && git commit --amend'`,
               );
               return ActionFlags.RefreshItems;
             },
             patch: async ({ items, denops }) => {
               for (const item of items) {
                 const action = item.action as GitStatusActionData;
-                await denops.batch([
-                  "new",
-                  "tcd " + action.worktree,
-                  "GinPatch ++no-head " + action.path,
-                ]);
+                await denops.batch(
+                  ["new"],
+                  ["tcd", action.worktree],
+                  ["GinPatch", "++no-head", action.path],
+                );
               }
               return ActionFlags.RefreshItems;
             },

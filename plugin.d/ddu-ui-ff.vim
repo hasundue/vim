@@ -24,6 +24,12 @@ nnoremap <silent> <leader>g <Cmd>Ddu git_status
   \ -name=ff-git -ui=ff
   \ -source-option-git_status-path='`expand('%:h')`'<CR>
 
+nnoremap <silent> <leader>i <Cmd>Ddu github_repo_issue
+  \ -name=ff-gh-issue -ui=ff -resume<CR>
+
+nnoremap <silent> <leader>p <Cmd>Ddu github_repo_pull
+  \ -name=ff-gh-pr -ui=ff -resume<CR>
+
 " }}}
 
 "
@@ -49,6 +55,9 @@ nnoremap <buffer><silent> p
 
 nnoremap <buffer><silent> cc
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'commit' })<CR>
+
+nnoremap <buffer><silent> ca
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'commit_amend' })<CR>
 
 nnoremap <buffer><silent> X
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'restore' })<CR>

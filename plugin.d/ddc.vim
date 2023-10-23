@@ -1,24 +1,23 @@
 "
 " hook_source {{{
 "
-call ddc#custom#patch_global('ui', 'pum')
-
-call ddc#custom#patch_global('autoCompleteEvents', [
-  \   'InsertEnter',
-  \   'TextChangedI',
-  \   'TextChangedP',
-  \ ])
-
-let sources = [
-  \   'skkeleton',
-  \   'file',
-  \ ] + ( has('nvim') ? ['nvim-lsp'] : [] )
-
-call ddc#custom#patch_global('sources', sources)
-
-call ddc#custom#patch_global('cmdlineSources',
-  \   ['cmdline', 'cmdline-history', 'file']
-  \ )
+call ddc#custom#patch_global(#{
+  \   autoCompleteEvents: [
+  \     'InsertEnter',
+  \     'TextChangedI',
+  \     'TextChangedP',
+  \   ],
+  \   backspaceCompletion: v:true,
+  \   cmdlineSources: [
+  \     'cmdline',
+  \     'cmdline-history',
+  \     'file',
+  \   ],
+  \   sources: [
+  \     'file',
+  \   ] + ( has('nvim') ? ['nvim-lsp'] : [] ),
+  \   ui: 'pum',
+  \ })
 
 call ddc#custom#patch_filetype('markdown', 'sources', [
   \   'skkeleton',
@@ -53,6 +52,8 @@ call ddc#custom#patch_global('sourceOptions', #{
   \   emoji: #{ 
   \     mark: 'E',
   \     matchers: ['emoji'],
+  \     sorters: [],
+  \     converters: [],
   \   },
   \   cmdline: #{
   \     mark: '',

@@ -28,6 +28,9 @@ nnoremap <buffer><silent> vs
   \ <Cmd>call ddu#ui#do_action('itemAction',
   \   #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
 
+nnoremap <buffer><silent> e
+  \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'edit' })<CR>
+
 nnoremap <buffer><silent> D
   \ <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'delete' })<CR>
 

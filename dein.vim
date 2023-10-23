@@ -7,7 +7,6 @@ endif
 
 " Repository cache
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-let s:dein_mod_repo_dir = s:dein_dir . '/repos/github.com/hasundue/dein-mod'
 
 " Install dein if not exists
 if &runtimepath !~# '/dein.vim'
@@ -70,7 +69,6 @@ if dein#load_state(s:dein_dir)
     \   depends: 'denops.vim',
     \   on_event: 'TermOpen'
     \ })
-  call s:add('vimpostor/vim-tpipeline')
 
   " Editing
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
@@ -78,7 +76,6 @@ if dein#load_state(s:dein_dir)
   call s:add('psliwka/vim-dirtytalk', #{ on_ft: 'markdown' })
 
   " Git
-  " call s:add('tpope/vim-fugitive', #{ on_cmd: ['Git'] })
   call s:add('airblade/vim-gitgutter', #{ on_event: 'FileType' })
 
   " AI
@@ -128,6 +125,7 @@ if dein#load_state(s:dein_dir)
   call s:add_ddu('kuuote/ddu-source-git_status')
   call s:add_ddu('kuuote/ddu-source-mr', #{ depends: 'mr.vim' })
   call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
+  call s:add_ddu('kyoh86/ddu-source-github')
 
   " ddc.vim
   function! s:add_ddc(repo, options = {}) abort
@@ -157,9 +155,6 @@ if dein#load_state(s:dein_dir)
     call s:add('williamboman/mason.nvim', #{
       \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
       \ })
-    " call s:add('subnut/nvim-ghost.nvim', #{
-    "   \   hook_add: 'let g:nvim_ghost_autostart = 0',
-    "   \ })
 
     " tree-sitter
     call s:add('nvim-treesitter/nvim-treesitter', #{ 

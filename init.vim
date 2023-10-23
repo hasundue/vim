@@ -45,7 +45,7 @@ set showtabline=0   " do not show tabline
 
 set pumheight=10    " set height of popup menu
 
-set nowrap          " do not wrap lines
+set wrap          " do not wrap lines
 set breakindent     " every wrapped line will continue visually indented
 
 set mouse=a
