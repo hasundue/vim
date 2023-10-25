@@ -2,11 +2,11 @@
 " hook_add {{{
 "
 function! FloatermOpen(name, cmd)
-  let bufdir = expand('%:h')
-  if bufdir ==# ''
+  let dir_buf = expand('%:h')
+  if dir_buf ==# ''
     let dir = getcwd()
   else
-    let dir = bufdir
+    let dir = dir_buf
   endif
   let name = a:name . ':///' . dir
   let bufnr = floaterm#terminal#get_bufnr(name)
