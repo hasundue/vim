@@ -1,7 +1,7 @@
 "
 " hook_add {{{
 "
-nnoremap <silent> <leader>t <CMD>Ddu file
+nnoremap <silent> <leader>e <CMD>Ddu file
   \ -name=filer-file -ui=filer -resume<CR>
 
 " }}}

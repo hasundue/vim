@@ -69,6 +69,9 @@ if dein#load_state(s:dein_dir)
     \   depends: 'denops.vim',
     \   on_event: 'TermOpen'
     \ })
+  call s:add('voldikss/vim-floaterm', #{
+    \   on_cmd: 'Floaterm*',
+    \ })
 
   " Editing
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })

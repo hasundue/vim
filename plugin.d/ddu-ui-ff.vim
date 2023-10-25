@@ -20,9 +20,9 @@ nnoremap <silent> <leader>r <Cmd>Ddu rg
 nnoremap <silent> <leader>d <Cmd>Ddu help
   \ -name=ff-help -ui=ff -resume<CR>
 
-nnoremap <silent> <leader>g <Cmd>Ddu git_status
-  \ -name=ff-git -ui=ff
-  \ -source-option-git_status-path='`expand('%:h')`'<CR>
+" nnoremap <silent> <leader>g <Cmd>Ddu git_status
+"   \ -name=ff-git -ui=ff
+"   \ -source-option-git_status-path='`expand('%:h')`'<CR>
 
 nnoremap <silent> <leader>i <Cmd>Ddu github_repo_issue
   \ -name=ff-gh-issue -ui=ff -resume<CR>
