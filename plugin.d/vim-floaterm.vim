@@ -11,10 +11,8 @@ function! FloatermOpen(name, cmd)
   let name = a:name . ':///' . dir
   let bufnr = floaterm#terminal#get_bufnr(name)
   if bufnr < 0
-    " execute 'silent FloatermNew! --name=' . name . ' --cwd=' . dir . ' ' . a:cmd
     call floaterm#new(v:true, a:cmd, #{}, #{ name: name, cwd: dir })
   else
-    " execute 'silent FloatermToggle ' . name
     call floaterm#show(v:false, bufnr, name)
   endif
 endfunction
