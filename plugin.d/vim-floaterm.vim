@@ -2,16 +2,12 @@
 " hook_add {{{
 "
 function! FloatermOpen(name, cmd)
-  let dir_buf = expand('%:h')
-  if dir_buf ==# ''
-    let dir = getcwd()
-  else
-    let dir = dir_buf
-  endif
-  let name = a:name . ':///' . dir
+  let buf = expand('%:p:h')
+  let root = floaterm#path#get_root(buf)
+  let name = a:name . ':///' . root
   let bufnr = floaterm#terminal#get_bufnr(name)
   if bufnr < 0
-    call floaterm#new(v:true, a:cmd, #{}, #{ name: name, cwd: dir })
+    call floaterm#new(v:true, a:cmd, #{}, #{ name: name, cwd: root })
   else
     call floaterm#show(v:false, bufnr, name)
   endif
@@ -26,7 +22,6 @@ nnoremap <silent> <leader>4 :FloatermToggle term-4<CR>
 nnoremap <silent> <leader>5 :FloatermToggle term-5<CR>
 
 nnoremap <silent> <C-[> :FloatermHide<CR>
-nnoremap <silent> q :FloatermHide<CR>
 
 " }}}
 

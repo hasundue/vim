@@ -8,7 +8,7 @@ call ddu#custom#load_config(expand('~/.config/vim/plugin.d/ddu.ts'))
 "
 " ddu-ff_ddu-filer {{{
 "
-nnoremap <buffer><silent> q
+nnoremap <buffer><silent> <C-[>
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
 nnoremap <buffer><silent> -

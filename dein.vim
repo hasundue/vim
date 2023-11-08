@@ -69,7 +69,7 @@ if dein#load_state(s:dein_dir)
     \   depends: 'denops.vim',
     \   on_event: 'TermOpen'
     \ })
-  call s:add('voldikss/vim-floaterm', #{
+  call s:add('~/vim-floaterm', #{
     \   on_cmd: 'Floaterm*',
     \ })
 

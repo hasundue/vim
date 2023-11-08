@@ -76,7 +76,7 @@ inoremap <buffer><silent> <CR>
 nnoremap <buffer><silent> <CR>
   \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 
-nnoremap <buffer><silent> q
+nnoremap <buffer><silent> <C-[>
   \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
 " }}}
