@@ -189,6 +189,8 @@ if dein#load_state(s:dein_dir)
     call s:add('rshkarin/mason-nvim-lint', #{
       \   on_source: 'nvim-lint',
       \ })
+
+    call s:add('glacambre/firenvim')
   endif
 
   call dein#end()
