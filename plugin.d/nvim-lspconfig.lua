@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<M-r>', vim.lsp.buf.rename)
     map('n', '<M-k>', function() vim.diagnostic.open_float { float = { header = false } } end)
     map('n', '<M-n>', function() vim.diagnostic.goto_next { float = { header = false } } end)
-    map('n', '<M-N>', function() vim.diagnostic.goto_prev { float = { header = false } } end)
+    map('n', '<M-p>', function() vim.diagnostic.goto_prev { float = { header = false } } end)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
