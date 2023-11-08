@@ -19,6 +19,7 @@ require('nvim-treesitter.configs').setup({
     "yaml",
     "markdown",
     "nix",
+    "ron",
     "zig",
     "rust",
     "haskell",
