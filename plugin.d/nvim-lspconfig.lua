@@ -88,6 +88,15 @@ local servers = {
           },
         },
         inlayHints = {
+          enumMemberValues = {
+            enabled = true,
+          },
+          functionLikeReturnTypes = {
+            enabled = true,
+          },
+          parameterNames = {
+            enabled = "all",
+          },
           parameterTypes = {
             enabled = true,
           },
@@ -97,13 +106,7 @@ local servers = {
           propertyDeclarationTypes = {
             enabled = true,
           },
-          functionReturnTypes = {
-            enabled = true,
-          },
-          enumMemberValues = {
-            enabled = true,
-          },
-          enabled = true,
+          enabled = "on",
         },
       },
     },
