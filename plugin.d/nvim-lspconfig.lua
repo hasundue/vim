@@ -54,63 +54,63 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    },
-  },
-  denols = {
-    cmd = { "deno", "lsp", "--unstable" },
-    single_file_support = false,
-    root_dir = lspconfig.util.root_pattern(
-      "denops",
-      "deno.json",
-      "deno.jsonc"
-    ),
-    settings = {
-      deno = {
-        enable = true,
-        unstable = true,
-        suggest = {
-          autoImports = true,
-          imports = {
-            autoDiscover = true,
-            hosts = {
-              ["https://deno.land"] = true,
-            },
-          },
-        },
-        inlayHints = {
-          enumMemberValues = {
-            enabled = true,
-          },
-          functionLikeReturnTypes = {
-            enabled = true,
-          },
-          parameterNames = {
-            enabled = "all",
-          },
-          parameterTypes = {
-            enabled = true,
-          },
-          variableTypes = {
-            enabled = true,
-          },
-          propertyDeclarationTypes = {
-            enabled = true,
-          },
-          enabled = "on",
-        },
-      },
-    },
-  },
+  -- lua_ls = {
+  --   settings = {
+  --     Lua = {
+  --       diagnostics = {
+  --         globals = { "vim" },
+  --       },
+  --     },
+  --     workspace = {
+  --       library = vim.api.nvim_get_runtime_file("", true),
+  --     },
+  --   },
+  -- },
+  -- denols = {
+  --   cmd = { "deno", "lsp", "--unstable" },
+  --   single_file_support = false,
+  --   root_dir = lspconfig.util.root_pattern(
+  --     "denops",
+  --     "deno.json",
+  --     "deno.jsonc"
+  --   ),
+  --   settings = {
+  --     deno = {
+  --       enable = true,
+  --       unstable = true,
+  --       suggest = {
+  --         autoImports = true,
+  --         imports = {
+  --           autoDiscover = true,
+  --           hosts = {
+  --             ["https://deno.land"] = true,
+  --           },
+  --         },
+  --       },
+  --       inlayHints = {
+  --         enumMemberValues = {
+  --           enabled = true,
+  --         },
+  --         functionLikeReturnTypes = {
+  --           enabled = true,
+  --         },
+  --         parameterNames = {
+  --           enabled = "all",
+  --         },
+  --         parameterTypes = {
+  --           enabled = true,
+  --         },
+  --         variableTypes = {
+  --           enabled = true,
+  --         },
+  --         propertyDeclarationTypes = {
+  --           enabled = true,
+  --         },
+  --         enabled = "on",
+  --       },
+  --     },
+  --   },
+  -- },
   tsserver = {
     single_file_support = false,
     root_dir = lspconfig.util.root_pattern("package.json"),

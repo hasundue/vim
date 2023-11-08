@@ -85,7 +85,9 @@ if dein#load_state(s:dein_dir)
   call s:add('github/copilot.vim', #{ on_event: 'InsertEnter' })
   " call s:add('tani/hey.vim', #{ on_event: 'InsertEnter' })
 
+  "
   " Denops
+  "
   call s:add('vim-denops/denops.vim')
 
   function! s:add_denops(repo, options = {}) abort
@@ -95,14 +97,16 @@ if dein#load_state(s:dein_dir)
   call s:add_denops('lambdalisue/deno-cache.vim', #{
     \   on_ft: 'typescript',
     \ })
-  call s:add_denops('lambdalisue/gin.vim', #{
-    \   on_source: 'ddu.vim',
-    \ })
 
+  "
+  " lspoints
+  "
+  call s:add_denops('kuuote/lspoints', #{ on_source: 'denops.vim', })
+  call s:add_denops('Warashi/lspoints-hover', #{ on_source: 'lspoints' })
+
+  "
   " ddu.vim
-  call s:add_denops('Shougo/ddu.vim', #{ 
-    \   on_source: 'denops.vim'
-    \ })
+  call s:add_denops('Shougo/ddu.vim', #{ on_source: 'denops.vim' })
 
   function! s:add_ddu(repo, options = {}) abort
     call s:add(a:repo, extend(a:options, #{ on_source: 'ddu.vim' }))
@@ -130,7 +134,9 @@ if dein#load_state(s:dein_dir)
   call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
   call s:add_ddu('kyoh86/ddu-source-github')
 
+  "
   " ddc.vim
+  "
   function! s:add_ddc(repo, options = {}) abort
     call s:add(a:repo, extend(a:options, #{ on_source: 'ddc.vim' }))
   endfunction
@@ -148,7 +154,9 @@ if dein#load_state(s:dein_dir)
   call s:add_ddc('tani/ddc-fuzzy')
   call s:add_ddc('gamoutatsumi/ddc-emoji')
 
+  "
   " Neovim
+  "
   if has('nvim')
     call s:add('nvim-lua/plenary.nvim')
     call s:add('iamcco/markdown-preview.nvim', #{
