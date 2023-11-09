@@ -2,33 +2,29 @@
 " hook_add {{{
 "
 nnoremap <silent> <leader>f <Cmd>Ddu file_external
-  \ -name=ff-file -ui=ff -resume<CR>
+  \ -name=file -ui=ff -resume<CR>
 
 nnoremap <silent> <leader>m <Cmd>Ddu mr
-  \ -name=ff-mr -ui=ff<CR>
+  \ -name=mr -ui=ff<CR>
 
 nnoremap <silent> <leader>b <Cmd>Ddu buffer
-  \ -name=ff-mr -ui=ff<CR>
+  \ -name=buffer -ui=ff<CR>
 
 nnoremap <silent> <leader>c <Cmd>Ddu file_external
-  \ -name=ff-rc -ui=ff -resume
+  \ -name=rc -ui=ff -resume
   \ -source-option-file_external-path='`expand('~/.config/vim')`'<CR>
 
 nnoremap <silent> <leader>r <Cmd>Ddu rg
-  \ -name=ff-grep -ui=ff -resume<CR>
+  \ -name=grep -ui=ff -resume<CR>
 
 nnoremap <silent> <leader>d <Cmd>Ddu help
-  \ -name=ff-help -ui=ff -resume<CR>
-
-" nnoremap <silent> <leader>g <Cmd>Ddu git_status
-"   \ -name=ff-git -ui=ff
-"   \ -source-option-git_status-path='`expand('%:h')`'<CR>
+  \ -name=help -ui=ff -resume<CR>
 
 nnoremap <silent> <leader>i <Cmd>Ddu github_repo_issue
-  \ -name=ff-gh-issue -ui=ff -resume<CR>
+  \ -name=gh-issue -ui=ff -resume<CR>
 
 nnoremap <silent> <leader>p <Cmd>Ddu github_repo_pull
-  \ -name=ff-gh-pr -ui=ff -resume<CR>
+  \ -name=gh-pr -ui=ff -resume<CR>
 
 " }}}
 
