@@ -12,36 +12,40 @@ export class Extension extends BaseExtension {
           cmd: ["deno", "lsp"],
           initializationOptions: {
             enable: true,
+            lint: true,
             unstable: true,
             suggest: {
               autoImports: true,
+              completeFunctionCalls: true,
+              names: true,
+              paths: true,
               imports: {
                 autoDiscover: true,
                 hosts: {
-                  ["https://deno.land"]: true,
+                  "https://deno.land": true,
                 },
               },
-              inlayHints: {
-                enumMemberValues: {
-                  enabled: true,
-                },
-                functionLikeReturnTypes: {
-                  enabled: true,
-                },
-                parameterNames: {
-                  enabled: "all",
-                },
-                parameterTypes: {
-                  enabled: true,
-                },
-                variableTypes: {
-                  enabled: true,
-                },
-                propertyDeclarationTypes: {
-                  enabled: true,
-                },
-                enabled: "on",
+            },
+            inlayHints: {
+              enumMemberValues: {
+                enabled: true,
               },
+              functionLikeReturnTypes: {
+                enabled: true,
+              },
+              parameterNames: {
+                enabled: "all",
+              },
+              parameterTypes: {
+                enabled: true,
+              },
+              variableTypes: {
+                enabled: true,
+              },
+              propertyDeclarationTypes: {
+                enabled: true,
+              },
+              enabled: "on",
             },
           },
         },

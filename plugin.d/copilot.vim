@@ -2,13 +2,14 @@
 " hook_add {{{
 "
 let g:copilot_filetypes = #{
-  \   gitcommit: v:true,
-  \   markdown: v:true,
-  \   yaml: v:true,
-  \   text: v:true,
-  \   nix: v:true,
-  \   lua: v:true,
   \   ddu-ff-filter: v:false,
+  \   gitcommit: v:true,
+  \   lua: v:true,
+  \   markdown: v:true,
+  \   nix: v:true,
+  \   text: v:true,
+  \   typescript: v:true,
+  \   yaml: v:true,
   \ }
 
 let g:copilot_no_tab_map = v:true

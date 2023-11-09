@@ -101,7 +101,7 @@ if dein#load_state(s:dein_dir)
   "
   " lspoints
   "
-  call s:add_denops('kuuote/lspoints', #{ on_source: 'denops.vim', })
+  call s:add_denops('kuuote/lspoints', #{ on_source: 'denops.vim', merged: '0' })
   call s:add_denops('Warashi/lspoints-hover', #{ on_source: 'lspoints' })
 
   "
@@ -164,7 +164,7 @@ if dein#load_state(s:dein_dir)
 		  \   build: 'sh -c "cd app && yarn install"' 
 	    \ })
     call s:add('williamboman/mason.nvim', #{
-      \   on_source: ['mason-lspconfig', 'mason-nvim-lint'],
+      \   on_source: ['mason-nvim-lint'],
       \ })
 
     " tree-sitter
@@ -177,17 +177,6 @@ if dein#load_state(s:dein_dir)
       \ })
     call s:add('neovim/tree-sitter-vimdoc', #{ 
       \   on_source: 'nvim-treesitter',
-      \ })
-
-    " nvim-lsp
-    call s:add('neovim/nvim-lspconfig', #{
-      \   on_event: 'FileType'
-      \ })
-    call s:add('williamboman/mason-lspconfig', #{
-      \   on_source: 'nvim-lspconfig',
-      \ })
-    call s:add('ray-x/lsp_signature.nvim', #{
-      \   on_source: 'nvim-lspconfig',
       \ })
 
     " nvim-lint

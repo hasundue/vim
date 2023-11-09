@@ -14,15 +14,16 @@ call ddc#custom#patch_global(#{
   \     'file',
   \   ],
   \   sources: [
-  \     'file',
-  \   ] + ( has('nvim') ? ['nvim-lsp'] : [] ),
+  \     'emoji',
+  \     'nvim-lsp',
+  \   ],
   \   ui: 'pum',
   \ })
 
 call ddc#custom#patch_filetype('markdown', 'sources', [
-  \   'skkeleton',
   \   'emoji',
   \   'file',
+  \   'skkeleton',
   \ ])
 
 call ddc#custom#patch_global('keywordPattern', '(\k*)|(:\w*)')
@@ -51,6 +52,7 @@ call ddc#custom#patch_global('sourceOptions', #{
   \   },
   \   emoji: #{ 
   \     mark: 'E',
+  \     minAutoCompleteLength: 2,
   \     matchers: ['emoji'],
   \     sorters: [],
   \     converters: [],
@@ -62,6 +64,12 @@ call ddc#custom#patch_global('sourceOptions', #{
   \     mark: '',
   \     forceCompletionPattern: '\s+\S*',
   \     sorters: [],
+  \   },
+  \ })
+
+call ddc#custom#patch_global('sourceParams', #{
+  \   nvim-lsp: #{
+  \     lspEngine: 'lspoints',
   \   },
   \ })
 
@@ -78,7 +86,10 @@ call ddc#enable()
 "
 " hook_add {{{
 "
-inoremap <expr> <C-n> pum#map#insert_relative(+1)
+inoremap <expr> <C-n> pum#visible()
+  \ ? pum#map#insert_relative(+1)
+  \ : ddc#map#manual_complete()
+
 inoremap <expr> <C-p> pum#map#insert_relative(-1)
 
 inoremap <expr> <TAB> pum#visible()
