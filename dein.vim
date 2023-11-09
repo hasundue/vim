@@ -101,21 +101,28 @@ if dein#load_state(s:dein_dir)
   "
   " lspoints
   "
-  call s:add_denops('kuuote/lspoints', #{ on_source: 'denops.vim', merged: '0' })
+  call s:add_denops('kuuote/lspoints', #{ 
+    \   on_ft: [
+    \     'lua',
+    \     'typescript',
+    \     'typescriptreact',
+    \   ],
+    \ })
   call s:add_denops('Warashi/lspoints-hover', #{ on_source: 'lspoints' })
 
   "
   " ddu.vim
-  call s:add_denops('Shougo/ddu.vim', #{ on_source: 'denops.vim' })
+  call s:add_denops('Shougo/ddu.vim', #{ on_source: 'ddu-commands' })
+
+  call s:add_denops('Shougo/ddu-commands.vim', #{ 
+    \   depends: 'ddu.vim',
+    \   on_cmd: 'Ddu',
+    \ })
 
   function! s:add_ddu(repo, options = {}) abort
     call s:add(a:repo, extend(a:options, #{ on_source: 'ddu.vim' }))
   endfunction
 
-  call s:add('Shougo/ddu-commands.vim', #{ 
-    \   depends: 'ddu.vim',
-    \   on_cmd: 'Ddu',
-    \ })
   call s:add_ddu('hasundue/ddu-filter-zf', #{ 
     \   build: 'deno task build',
     \ })
@@ -129,7 +136,6 @@ if dein#load_state(s:dein_dir)
   call s:add_ddu('matsui54/ddu-source-help')
   call s:add_ddu('shun/ddu-source-rg')
   call s:add_ddu('shun/ddu-source-buffer')
-  call s:add_ddu('kuuote/ddu-source-git_status')
   call s:add_ddu('kuuote/ddu-source-mr', #{ depends: 'mr.vim' })
   call s:add('lambdalisue/mr.vim', #{ on_source: 'ddu-source-mr' })
   call s:add_ddu('kyoh86/ddu-source-github')
@@ -159,13 +165,11 @@ if dein#load_state(s:dein_dir)
   "
   if has('nvim')
     call s:add('nvim-lua/plenary.nvim')
+
     call s:add('iamcco/markdown-preview.nvim', #{
       \   on_ft: ['markdown', 'pandoc.markdown', 'rmd'],
 		  \   build: 'sh -c "cd app && yarn install"' 
 	    \ })
-    call s:add('williamboman/mason.nvim', #{
-      \   on_source: ['mason-nvim-lint'],
-      \ })
 
     " tree-sitter
     call s:add('nvim-treesitter/nvim-treesitter', #{ 
@@ -185,6 +189,9 @@ if dein#load_state(s:dein_dir)
       \ })
     call s:add('rshkarin/mason-nvim-lint', #{
       \   on_source: 'nvim-lint',
+      \ })
+    call s:add('williamboman/mason.nvim', #{
+      \   on_source: ['mason-nvim-lint'],
       \ })
 
     call s:add('glacambre/firenvim')
