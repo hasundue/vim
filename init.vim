@@ -48,38 +48,18 @@ set pumheight=10    " set height of popup menu
 set wrap          " do not wrap lines
 set breakindent     " every wrapped line will continue visually indented
 
-set mouse=a
-
 set splitright      " open new windows to the right
 
 " }}}
 
 "
-" Clipboard {{{
+" Desktop integration
 "
-if has("unix")
-  let s:clipman = system("command -v clipman")
-  if !empty(s:clipman)
-    set clipboard+=unnamedplus
-    let g:clipboard = {
-      \   'name': 'clipman',
-      \   'copy': {
-      \      '+': 'clipman store',
-      \      '*': 'clipman store',
-      \    },
-      \   'paste': {
-      \      '+': 'clipman pick --paste',
-      \      '*': 'clipman pick --paste',
-      \   },
-      \   'cache_enabled': 0,
-      \ }
-  endif
-endif
-
-" }}}
+set mouse=a
+set clipboard+=unnamedplus
 
 "
-" Languages {{{
+" Languages
 "
 set helplang=en,ja " prefer English help
 
