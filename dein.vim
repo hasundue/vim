@@ -191,7 +191,7 @@ if dein#load_state(s:dein_dir)
       \   on_source: 'nvim-lint',
       \ })
     call s:add('williamboman/mason.nvim', #{
-      \   on_source: ['mason-nvim-lint'],
+      \   on_source: 'mason-nvim-lint',
       \ })
 
     call s:add('glacambre/firenvim')
