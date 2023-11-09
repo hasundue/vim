@@ -29,7 +29,7 @@ endif
 " }}}
 
 "
-" Interface {{{
+" UI {{{
 "
 set number          " show line numbers
 set numberwidth=2   " set width of line number column
@@ -38,8 +38,8 @@ set signcolumn=yes  " always shows signcolumn
 set noshowcmd       " do not display incomplete commands on the last line
 set noshowmode      " do not display mode on the last line
 
-set laststatus=1    " do not show statusline
-set statusline=\ %f " set statusline format
+set laststatus=1    " do not show statusline if there is only one window
+set statusline=\ %f " show filename in statusline
 
 set showtabline=0   " do not show tabline
 
@@ -68,7 +68,7 @@ set nospell
 set spelllang=en_us,cjk
 set fileencodings=ucs-bom,utf-8
 
-" }}}
+" set ambiwidth=single
 
 "
 " Keymaps {{{
@@ -114,9 +114,7 @@ set updatetime=100
 " }}}
 
 "
-" Plugins {
+" Plugins
 "
 let $VIMHOME = expand("~/.config/vim")
 source $VIMHOME/dein.vim
-
-" }
