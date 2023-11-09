@@ -13,12 +13,12 @@ call ddc#custom#patch_global(#{
   \     'cmdline-history',
   \     'file',
   \   ],
-  \   sources: [
-  \     'emoji',
-  \     'nvim-lsp',
-  \   ],
   \   ui: 'pum',
   \ })
+
+call ddc#custom#patch_filetype('typescript', 'sources', [
+  \   'nvim-lsp',
+  \ ])
 
 call ddc#custom#patch_filetype('markdown', 'sources', [
   \   'emoji',
