@@ -7,6 +7,7 @@ call lspoints#load_extensions([
 \   'nvim_diagnostics',
 \   'hover',
 \ ])
+
 call lspoints#settings#patch(#{
 \   tracePath: '/tmp/lspoints',
 \ })
@@ -29,7 +30,7 @@ function s:on_attach() abort
     \     },
     \   ],
     \ )<CR>
-  augroup lspoints
+  augroup lspoints_on_attach
     autocmd!
     autocmd BufWritePre <buffer> call denops#request(
       \   'lspoints',
@@ -44,6 +45,12 @@ function s:on_attach() abort
 endfunction
 autocmd User LspointsAttach:* call s:on_attach()
 
-autocmd FileType typescript,typescriptreact call lspoints#attach('denols')
+augroup lspoints_attach
+  autocmd!
+  autocmd BufRead *.ts,*.tsx
+    \ if match(expand('%:t'), 'ddu-ff:') != 0 |
+    \   call lspoints#attach('denols') |
+    \ endif
+augroup END
 
 " }}}
