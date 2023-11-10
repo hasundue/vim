@@ -68,7 +68,7 @@ set nospell
 set spelllang=en_us,cjk
 set fileencodings=ucs-bom,utf-8
 
-" set ambiwidth=single
+set ambiwidth=single
 
 "
 " Keymaps {{{

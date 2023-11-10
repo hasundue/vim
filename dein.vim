@@ -72,6 +72,7 @@ if dein#load_state(s:dein_dir)
   call s:add('~/vim-floaterm', #{
     \   on_cmd: 'Floaterm*',
     \ })
+  call s:add('rbtnn/vim-ambiwidth')
 
   " Editing
   call s:add('tpope/vim-commentary', #{ on_event: 'CursorMoved' })
