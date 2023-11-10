@@ -26,6 +26,11 @@ call ddc#custom#patch_filetype('markdown', 'sources', [
   \   'skkeleton',
   \ ])
 
+call ddc#custom#patch_filetype('nix', 'sources', [
+  \   'nvim-lsp',
+  \   'file',
+  \ ])
+
 call ddc#custom#patch_global('keywordPattern', '(\k*)|(:\w*)')
 
 call ddc#custom#patch_global('sourceOptions', #{

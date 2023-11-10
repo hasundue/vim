@@ -104,6 +104,7 @@ if dein#load_state(s:dein_dir)
   "
   call s:add_denops('kuuote/lspoints', #{ 
     \   on_ft: [
+    \     'nix',
     \     'lua',
     \     'typescript',
     \     'typescriptreact',
